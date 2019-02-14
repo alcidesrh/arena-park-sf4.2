@@ -1,0 +1,17 @@
+
+//@import "node_modules/materialize-css/sass/materialize.scss";
+
+@import '~material-icons/iconfont/material-icons.scss';
+
+//require
+@import "node_modules/materialize-css/sass/components/color-variables.scss";
+@import "node_modules/materialize-css/sass/components/color-classes.scss";
+@import "node_modules/materialize-css/sass/components/variables.scss";
+@import "node_modules/materialize-css/sass/components/global.scss";
+
+////opcional
+@import "node_modules/materialize-css/sass/components/typography.scss";
+@import "node_modules/materialize-css/sass/components/grid.scss";
+@import "node_modules/materialize-css/sass/components/navbar.scss";
+@import "node_modules/materialize-css/sass/components/sidenav.scss";
+@import "node_modules/materialize-css/sass/components/cards.scss";

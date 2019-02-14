@@ -1,0 +1,65 @@
+@import "app.scss";
+//
+//@import "node_modules/materialize-css/sass/components/buttons.scss";
+//@import "node_modules/materialize-css/sass/components/dropdown.scss";
+//@import "node_modules/materialize-css/sass/components/modal.scss";
+//@import "node_modules/materialize-css/sass/components/forms/forms.scss";
+//@import "node_modules/materialize-css/sass/components/toast.scss";
+//@import "node_modules/materialize-css/sass/components/datepicker.scss";
+//@import "node_modules/materialize-css/sass/components/timepicker.scss";
+//@import "node_modules/materialize-css/sass/materialize.scss";
+//@import '~material-icons/iconfont/material-icons.scss';
+@import "style.scss";
+
+.theme--light.application{
+  background: white;
+}
+.v-date-picker-table tr, .v-time-picker-table tr{
+  border: 0px;
+}
+.v-date-picker-table td, .v-time-picker-table td {
+  padding: 0px;
+}
+.material-icons{
+  color: $primary-color !important;
+}
+.section h6{
+  font-weight: 500;
+}
+
+.small_car, .middle_car, .big_car{
+  color: teal;
+}
+i.small_car{
+  font-size: 1.5rem;
+}
+i.middle_car{
+  font-size: 2rem;
+}
+i.big_car{
+  font-size: 2.5rem;
+}
+
+@media only screen and (max-width : 650px) {
+  .v-radio .v-input--selection-controls__input{
+    margin: 0px;
+  }
+}
+.v-card{
+  padding: 20px !important;
+}
+.v-divider{
+  margin-bottom: 20px;
+}
+.loading-div{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left:0px;
+  z-index: 9999;
+}
+.v-list.user-list{
+  max-height: 400px;
+  overflow-y: auto;
+}

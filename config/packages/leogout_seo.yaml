@@ -1,0 +1,17 @@
+leogout_seo:
+    # By default, the SEO generators services are not loaded if you don't configure them. The following default configuration
+    # loads the services but they won't render anything.
+    # See https://github.com/leogout/SeoBundle#configuration-reference to configure them.
+    # See https://github.com/leogout/SeoBundle#setting-values-dynamically to use them directly in your controller.
+    general:
+            title: arena-park.ch - Parking Aéroport Genève Cointrin
+            description: 'Arena-park Sàrl vous propose toutes les solutions pour garer, gardienner votre véhicule dans notre parking privé Couverts & Sécurisés pas cher avec voiturier Réservation & Service : 7/7Jrs - 24/24h Rapide - Simple et Pratique. Une image et une expérience reconnues dans le domaine de Service de Parking Aéroport Genève'
+            image: http://images.com/poneys/12/large # This one is shared by open graph and twitter only
+    basic:
+            keywords: 'genève, parking, aéroport, voiture, véhicule, automobile, réservation'
+    og:
+            type: website
+            url: https://www.arena-park.ch
+    twitter:
+            card: summary
+            site: '@arenapark'

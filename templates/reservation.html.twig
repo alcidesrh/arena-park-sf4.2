@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('css/vuetify') }}
+    {{ encore_entry_link_tags('css/reservation') }}
+{% endblock %}
+{% block title %}{% endblock %}
+
+
+{% block body %}
+    {#<div class="card">#}
+    {#<div class="card-content">#}
+    <div id="reservation">
+    </div>
+    {#</div>#}
+    {#</div>#}
+{% endblock %}
+{% block javascripts %}
+    <script>
+                {% if errorPayment is defined %}var errorPayment = '{{ errorPayment }}'{% endif %}
+                {% if reservationConfirmed is defined %}var reservationConfirmed = true{% endif %}
+    </script>
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/reservation') }}
+{% endblock %}

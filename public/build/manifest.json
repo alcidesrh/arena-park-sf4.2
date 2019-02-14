@@ -1,0 +1,23 @@
+{
+  "build/css/admin.css": "http://localhost:8181/build/css/admin.css",
+  "build/css/contact.css": "http://localhost:8181/build/css/contact.css",
+  "build/css/faq.css": "http://localhost:8181/build/css/faq.css",
+  "build/css/home.css": "http://localhost:8181/build/css/home.css",
+  "build/css/reservation.css": "http://localhost:8181/build/css/reservation.css",
+  "build/css/services.css": "http://localhost:8181/build/css/services.css",
+  "build/css/tarif.css": "http://localhost:8181/build/css/tarif.css",
+  "build/css/vuetify.css": "http://localhost:8181/build/css/vuetify.css",
+  "build/js/admin.css": "http://localhost:8181/build/js/admin.css",
+  "build/js/admin.js": "http://localhost:8181/build/js/admin.js",
+  "build/js/app.js": "http://localhost:8181/build/js/app.js",
+  "build/js/base.js": "http://localhost:8181/build/js/base.js",
+  "build/js/contact.js": "http://localhost:8181/build/js/contact.js",
+  "build/js/faq.js": "http://localhost:8181/build/js/faq.js",
+  "build/js/home.js": "http://localhost:8181/build/js/home.js",
+  "build/js/reservation.js": "http://localhost:8181/build/js/reservation.js",
+  "build/runtime.js": "http://localhost:8181/build/runtime.js",
+  "build/fonts/MaterialIcons-Regular.woff": "http://localhost:8181/build/fonts/MaterialIcons-Regular.012cf6a1.woff",
+  "build/fonts/MaterialIcons-Regular.woff2": "http://localhost:8181/build/fonts/MaterialIcons-Regular.570eb838.woff2",
+  "build/fonts/MaterialIcons-Regular.ttf": "http://localhost:8181/build/fonts/MaterialIcons-Regular.a37b0c01.ttf",
+  "build/fonts/MaterialIcons-Regular.eot": "http://localhost:8181/build/fonts/MaterialIcons-Regular.e79bfd88.eot"
+}

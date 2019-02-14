@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('css/contact') }}
+{% endblock %}
+{% block title %}{% endblock %}
+
+
+{% block body %}
+    <div class="section  no-pad-bot">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                {% for section in sections %}
+                                    <p>
+                                        {{ section.content | raw }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col s12 l6">
+                                {% if contact.address %}
+                                <p class="mb-1"><strong>Adresse:</strong> {{ contact.address }}</p>
+                                {% endif %}
+                                {% if contact.phone %}
+                                    <p class="mb-1"><strong>Tél. Fixe:</strong> {{ contact.phone }}</p>
+                                {% endif %}
+                                {% if contact.movil %}
+                                    <p class="mb-1"><strong>Tél. Voiturier:</strong> {{ contact.movil }}</p>
+                                {% endif %}
+                                {% if contact.phoneUrgence %}
+                                    <p class="mb-1"><strong>Tél. Urgences:</strong> {{ contact.phoneUrgence }}</p>
+                                {% endif %}
+                                {% if contact.email %}
+                                    <p class="mb-1"><strong>E-mail:</strong> {{ contact.email }}</p>
+                                {% endif %}
+                                {% if contact.registre %}
+                                    <p><strong>Registre du commerce:</strong> {{ contact.registre }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="col s12 l6">
+                                <form id="contact">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">email</i>
+                                            <input id="email" type="email" name="email" class="validate" v-model="contact.email" v-validate="'required|email'">
+                                            <label for="email">Votre email</label>
+                                            <span class="red-text">${ errors.first('email') }</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">subject</i>
+                                            <input id="sujet" type="text" class="validate" v-model="contact.subject">
+                                            <label for="sujet">Sujet</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">message</i>
+                                            <textarea class="materialize-textarea" v-model="contact.message" v-validate="'required'" name="message"></textarea>
+                                            <label for="Message">Message</label>
+                                            <span class="red-text">${ errors.first('message') }</span>
+                                        </div>
+                                    </div>
+                                    <a class="teal btn-small btn-card waves-effect waves-light right" @click="send">envoyer
+                                        <i class="material-icons right" style="color: white">send</i>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/contact') }}
+{% endblock %}

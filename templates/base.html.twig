@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{ leogout_seo() }}
+    {% block stylesheets %}
+
+    {% endblock %}
+
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+
+{% block header %}
+    <header>
+        <div class="navbar-fixed">
+        <nav class="teal" role="navigation">
+            <div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo">
+                    <img id="logo" src="{{ asset('img/Logo.png') }}" />
+                </a>
+                <ul class="right hide-on-med-and-down menu-tab">
+                    <li {% if home is defined %}class="active"{% endif %}><a href="/">Accueil</a></li>
+                    <li {% if services is defined %}class="active"{% endif %}><a href="{{ path('service') }}">Services</a></li>
+                    <li {% if tarif is defined %}class="active"{% endif %}><a href="{{ path('tarifs') }}">Tarifs</a></li>
+                    <li {% if faq is defined %}class="active"{% endif %}><a href="{{ path('faq') }}">F.A.Q</a></li>
+                    <li {% if contact is defined %}class="active"{% endif %}><a href="{{ path('contact') }}">Contact</a></li>
+                    <li {% if reservation is defined %}class="active"{% endif %}><a href="{{ path('reservation') }}">Réservation</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons" style="color: white !important;">menu</i></a>
+            </div>
+        </nav>
+        </div>
+    </header>
+{% endblock %}
+
+<main class="container">
+
+
+    <ul id="nav-mobile" class="sidenav">
+        <li {% if home is defined %}class="active"{% endif %}><a href="/">Accueil</a></li>
+        <li {% if services is defined %}class="active"{% endif %}><a href="{{ path('service') }}">Services</a></li>
+        <li {% if tarif is defined %}class="active"{% endif %}><a href="{{ path('tarifs') }}">Tarifs</a></li>
+        <li {% if faq is defined %}class="active"{% endif %}><a href="{{ path('faq') }}">F.A.Q</a></li>
+        <li {% if contact is defined %}class="active"{% endif %}><a href="{{ path('contact') }}">Contact</a></li>
+        <li {% if reservation is defined %}class="active"{% endif %}><a href="{{ path('reservation') }}">Réservation</a></li>
+    </ul>
+    {% block body %}
+
+    {% endblock %}
+</main>
+
+{% block footer %}
+    <footer class="page-footer teal">
+        <div class="footer-copyright">
+            <div class="container center-align">
+                <h6>arena-park.ch | Copyright © 2014 | <a href="{{ path('conditions') }}" style="text-decoration: none; font-weight: bold   ">Conditions Générales</a></h6>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/base') }}
+{% endblock %}
+    <script>
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.3&appId=347019838836163";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>
+

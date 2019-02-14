@@ -1,0 +1,14 @@
+@import "app.scss";
+
+@import "node_modules/materialize-css/sass/components/buttons.scss";
+@import "node_modules/materialize-css/sass/components/forms/forms.scss";
+@import "node_modules/materialize-css/sass/components/toast.scss";
+
+@import "style.scss";
+
+.material-icons{
+  color: $primary-color;
+}
+.input-field label{
+  pointer-events: all !important;
+}

@@ -1,0 +1,21 @@
+
+//@import "node_modules/materialize-css/sass/materialize.scss";
+
+@import '~material-icons/iconfont/material-icons.scss';
+
+.section-focus{
+  background: teal;
+  color: aliceblue;
+}
+.section-focus i{
+  color: aliceblue !important;
+}
+button.teal{
+  color: white !important;
+}
+.v-expansion-panel--popout .v-expansion-panel__container, .v-expansion-panel--inset .v-expansion-panel__container{
+  max-width: 100%;
+}
+.valing{
+  align-self: center;
+}

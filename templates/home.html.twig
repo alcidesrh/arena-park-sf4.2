@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('css/home') }}
+{% endblock %}
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="section  no-pad-bot">
+        <div class="row">
+            <div class="col s12 l3">
+                {% if tarifs.descount and tarifs.activeDescount %}
+                    <a class="btn-floating btn-large pulse lime">{{ tarifs.descount ~ '% Descount' }}</a>
+                {% endif %}
+                <div id="tarif-card" class="card purple darken-1 small z-depth-3">
+                    <div class="card-content white-text">
+                        <span class="card-title">Testez nos tarifs!</span>
+                        <a class="teal btn-small btn-card waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12 m-0">
+                                        <i class="material-icons prefix small">event</i>
+                                        <input type="text" class="datepicker start-date" placeholder="Départ le">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12 m-0">
+                                        <i class="tiny material-icons prefix ">event</i>
+                                        <input id="end-date" type="text" class="datepicker end-date" placeholder="Retour le">
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="tarif-card-price col s12">
+                                <span>Jours</span><span class="right">{{ tarifs.day }} CHF/J</span>
+                            </div>
+                            <div class="tarif-card-price col s12">
+                                <span>Prise en charge</span><span class="right">{{ tarifs.priceCharge }} CHF</span>
+                            </div>
+                            <div class="tarif-card-price col s12">
+                                <span>Assur. annulation vol</span><span class="right">{{ tarifs.annulation }} CHF</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-reveal purple darken-1 white-text">
+                        <span class="card-title"><i class="material-icons right">close</i></span>
+                        <div class="row">
+                            <div class="col s12">
+                                <a class="teal btn-small btn-card waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
+                                <p class="center-align" v-if="descount">sous-total: <strike><span v-html="total"></span> CHF</strike></p>
+                                <p class="center-align" v-if="descount">rabais -<span v-html="descount">10</span>%</p>
+                                    <p class="center-align">total à payer: <span v-html="realTotal"></span> CHF</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l9">
+                <div class="row ">
+                    <div class="col s12 l6">
+                        <div class="card blue-grey darken-1 small z-depth-3 card-2">
+                            <div class="card-content white-text">
+                                <span class="card-title">{{ sections['section1'].title }}</span>
+                                <a class="teal btn-small btn-card waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
+                                {{ sections['section1'].content | raw}}
+                                <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 l6">
+                        <div class="card deep-orange darken-1 small z-depth-3">
+                            <div class="card-content white-text">
+                                <span class="card-title">{{ sections['section2'].title }}</span>
+                                    {{ sections['section2'].content | raw}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section  no-pad-bot">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">{{ sections['section3'].title }}</span><br>
+                        <p>
+                            {{ sections['section3'].content | raw}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section  no-pad-bot">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">{{ sections['section4'].title }}</span><br>
+                        <p>
+                            {{ sections['section4'].content | raw}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var day = "{{ tarifs.day }}";
+        var price = "{{ tarifs.priceCharge }}";
+        var annulation = "{{ tarifs.annulation }}";
+        {% if tarifs.descount and tarifs.activeDescount %}
+        var descount = "{{ tarifs.descount }}";
+        {% endif %}
+    </script>
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('js/home') }}
+{% endblock %}

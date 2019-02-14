@@ -1,0 +1,15 @@
+@import "app.scss";
+@import "style.scss";
+
+.small_car, .middle_car, .big_car{
+  color: teal;
+}
+i.small_car{
+  font-size: 1.5rem;
+}
+i.middle_car{
+  font-size: 2rem;
+}
+i.big_car{
+  font-size: 2.5rem;
+}

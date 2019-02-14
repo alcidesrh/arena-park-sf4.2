@@ -1,0 +1,29 @@
+index:
+    path: /
+    controller: App\Controller\ArenaParkController::index
+
+
+
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
+admin_reload:
+    path: /api/{any}
+    controller: App\Controller\AdminController::index
+admin_reload_level_1:
+    path: /api/{any}/create
+    controller: App\Controller\AdminController::index
+admin_reload_level_2:
+    path: /api/{any}/{any2}/{id}
+    controller: App\Controller\AdminController::index
+
+
+admin_redirect:
+    path: /admin/{any}
+    controller: App\Controller\AdminController::index
+admin_redirect2:
+    path: /admin/{any}/{any2}
+    controller: App\Controller\AdminController::index
+admin_redirect3:
+    path: /admin/{any}/{any2}/{any3}
+    controller: App\Controller\AdminController::index

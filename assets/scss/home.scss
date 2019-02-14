@@ -1,0 +1,51 @@
+@import "app.scss";
+
+@import "node_modules/materialize-css/sass/components/buttons.scss";
+@import "node_modules/materialize-css/sass/components/dropdown.scss";
+@import "node_modules/materialize-css/sass/components/modal.scss";
+@import "node_modules/materialize-css/sass/components/forms/forms.scss";
+@import "node_modules/materialize-css/sass/components/datepicker.scss";
+@import "node_modules/materialize-css/sass/components/pulse.scss";
+@import "node_modules/materialize-css/sass/components/toast.scss";
+
+@import "style.scss";
+
+
+.white-text .datepicker-controls input{
+  color: black !important;
+}
+.datepicker-day-button{
+  color: black;
+}
+.card.small .card-content, .card.medium .card-content, .card.large .card-content{
+  overflow-y: visible;
+}
+.material-icons.home{
+  font-size: 20px;
+}
+.btn-card{
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+#tarif-card input{
+  height: 25px;
+  margin-left: 30px;
+  font-size: 14px;
+}
+.card .input-field .prefix{
+  font-size: 20px;
+}
+.tarif-card-price{
+  font-size: 0.8em;
+}
+.btn-floating.btn-large.pulse{
+  position: absolute;
+  width: 130px;
+  height: auto;
+  top: 8%;
+  z-index: 998;
+}
+.card-2 ul i{
+  margin-right: 5px;
+}

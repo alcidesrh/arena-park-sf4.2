@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}" />
+    {{ encore_entry_link_tags('css/vuetify') }}
+    {{ encore_entry_link_tags('css/admin') }}
+
+</head>
+<body>
+<div id="app"></div>
+{% if route_reload is defined %}
+    <script>
+        var route_reload = '{{ route_reload }}';
+        route_reload = route_reload.split(',');
+    </script>
+{% endif %}
+{{ encore_entry_script_tags('js/admin') }}
+</body>
+</html>
