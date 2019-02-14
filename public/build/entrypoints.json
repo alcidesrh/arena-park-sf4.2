@@ -2,111 +2,111 @@
   "entrypoints": {
     "css/admin": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/admin.css"
-      ]
-    },
-    "js/app": {
-      "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/app.js"
-      ]
-    },
-    "js/base": {
-      "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/base.js"
-      ]
-    },
-    "js/home": {
-      "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/home.js"
-      ]
-    },
-    "js/faq": {
-      "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/faq.js"
-      ]
-    },
-    "js/contact": {
-      "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/contact.js"
-      ]
-    },
-    "js/reservation": {
-      "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/reservation.js"
+        "/build/css/admin.77a212af.css"
       ]
     },
     "js/admin": {
       "js": [
-        "http://localhost:8181/build/runtime.js",
-        "http://localhost:8181/build/js/admin.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/admin.a677a26e.js"
       ],
       "css": [
-        "http://localhost:8181/build/js/admin.css"
+        "/build/js/admin.9f91b3e8.css"
+      ]
+    },
+    "js/base": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/base.87da4760.js"
+      ]
+    },
+    "js/home": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/home.bd09ed31.js"
+      ]
+    },
+    "js/faq": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/faq.56e918db.js"
+      ]
+    },
+    "js/contact": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/contact.26cd1aea.js"
+      ]
+    },
+    "js/reservation": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/reservation.9c89eede.js"
+      ]
+    },
+    "js/app": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/app.dbf04637.js"
       ]
     },
     "css/vuetify": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/vuetify.css"
+        "/build/css/vuetify.e3f85be7.css"
       ]
     },
     "css/home": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/home.css"
+        "/build/css/home.b1eb1eaa.css"
       ]
     },
     "css/services": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/services.css"
+        "/build/css/services.fd0f6212.css"
       ]
     },
     "css/faq": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/faq.css"
+        "/build/css/faq.c16114aa.css"
       ]
     },
     "css/tarif": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/tarif.css"
+        "/build/css/tarif.6fdae5fe.css"
       ]
     },
     "css/contact": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/contact.css"
+        "/build/css/contact.2ccb782e.css"
       ]
     },
     "css/reservation": {
       "js": [
-        "http://localhost:8181/build/runtime.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "http://localhost:8181/build/css/reservation.css"
+        "/build/css/reservation.81a2424e.css"
       ]
     }
   }
