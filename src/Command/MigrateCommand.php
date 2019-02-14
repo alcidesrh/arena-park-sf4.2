@@ -45,6 +45,8 @@ class MigrateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->deleteOldReservation();
+        return;
         //Insert Users
 //        $this->insertUsers();
 //Insert Reservation
@@ -221,5 +223,16 @@ class MigrateCommand extends Command
         $data = $query->getResult();
 
         return $data[0];
+    }
+
+    public function deleteOldReservation(){
+        $now = new \DateTime();
+        $now->setTime(0,0);
+        $reservations = $this->em->getRepository('App:Reservation')->findAll();
+        foreach ($reservations as $reservation){
+            if($reservation->getDateCarIn() < $now)
+                $this->em->remove();
+        }
+        $this->em->flush();
     }
 }

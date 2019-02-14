@@ -272,7 +272,19 @@ class ArenaParkController extends AbstractController
             $message = (new \Swift_Message('Bienvenue chez Arena-Park'))
                 ->setFrom('noreply@arena-park.ch')
                 ->setTo($user->getEmail())
-                ->addBcc('reservation@arena-park.ch')
+                ->setBody(
+                    $this->renderView(
+                        'emails/reservation.html.twig',
+                        array('user' => $user->getName())
+                    ),
+                    'text/html'
+                )->attach(\Swift_Attachment::fromPath($contract->getPath()));
+
+            $mailer->send($message);
+
+            $message = (new \Swift_Message('Bienvenue chez Arena-Park'))
+                ->setFrom($user->getEmail())
+                ->setTo('reservation@arena-park.ch')
                 ->setBody(
                     $this->renderView(
                         'emails/reservation.html.twig',

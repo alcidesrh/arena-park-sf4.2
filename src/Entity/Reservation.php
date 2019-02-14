@@ -171,7 +171,7 @@ class Reservation implements \JsonSerializable
         return $this;
     }
 
-    public function getDateCarIn(): ?\DateTimeInterface
+    public function getDateCarIn()
     {
         return $this->dateCarIn;
     }
@@ -183,7 +183,7 @@ class Reservation implements \JsonSerializable
         return $this;
     }
 
-    public function getDateCarOut(): ?\DateTimeInterface
+    public function getDateCarOut()
     {
         return $this->dateCarOut;
     }
