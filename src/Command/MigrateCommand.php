@@ -231,7 +231,7 @@ class MigrateCommand extends Command
         $reservations = $this->em->getRepository('App:Reservation')->findAll();
         foreach ($reservations as $reservation){
             if($reservation->getDateCarIn() < $now)
-                $this->em->remove();
+                $this->em->remove($reservation);
         }
         $this->em->flush();
     }
