@@ -78,7 +78,7 @@
                             <v-layout row wrap>
                                 <v-flex xs12>
                                     <v-radio-group v-model="user.sex" row>
-                                        <v-radio label="Mme" @click="alert('aaa')"
+                                        <v-radio label="Mme"
                                                  :value="false"></v-radio>
                                         <v-radio label="Mr"
                                                  :value="true"></v-radio>
