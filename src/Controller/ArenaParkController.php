@@ -282,7 +282,7 @@ class ArenaParkController extends AbstractController
 
             $mailer->send($message);
 
-            $message = (new \Swift_Message('Reserva para:'. $reservation->getDateCarIn()->format('d-m-Y H:i'))
+            $message = (new \Swift_Message('Reserva para:'. $reservation->getDateCarIn()->format('d-m-Y H:i')))
                 ->setFrom($user->getEmail())
                 ->setTo('reservation@arena-park.ch')
                 ->setBody(
