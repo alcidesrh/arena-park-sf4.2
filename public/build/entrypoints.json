@@ -1,0 +1,113 @@
+{
+  "entrypoints": {
+    "css/admin": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/admin.77a212af.css"
+      ]
+    },
+    "js/admin": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/admin.60d78e8e.js"
+      ],
+      "css": [
+        "/build/js/admin.9f91b3e8.css"
+      ]
+    },
+    "js/base": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/base.87da4760.js"
+      ]
+    },
+    "js/home": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/home.bd09ed31.js"
+      ]
+    },
+    "js/faq": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/faq.56e918db.js"
+      ]
+    },
+    "js/contact": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/contact.26cd1aea.js"
+      ]
+    },
+    "js/reservation": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/reservation.3a2b1b8d.js"
+      ]
+    },
+    "js/app": {
+      "js": [
+        "/build/runtime.6cf710cd.js",
+        "/build/js/app.dbf04637.js"
+      ]
+    },
+    "css/vuetify": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/vuetify.e3f85be7.css"
+      ]
+    },
+    "css/home": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/home.b1eb1eaa.css"
+      ]
+    },
+    "css/services": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/services.fd0f6212.css"
+      ]
+    },
+    "css/faq": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/faq.c16114aa.css"
+      ]
+    },
+    "css/tarif": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/tarif.6fdae5fe.css"
+      ]
+    },
+    "css/contact": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/contact.2ccb782e.css"
+      ]
+    },
+    "css/reservation": {
+      "js": [
+        "/build/runtime.6cf710cd.js"
+      ],
+      "css": [
+        "/build/css/reservation.81a2424e.css"
+      ]
+    }
+  }
+}
