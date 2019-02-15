@@ -82,7 +82,6 @@
         },
 
         created() {
-            if (!this.items.length)
                 this.$store.dispatch('service/list/getItems');
 
         },

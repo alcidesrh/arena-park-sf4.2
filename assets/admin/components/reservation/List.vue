@@ -8,22 +8,6 @@
                                    :indeterminate="true"></v-progress-linear>
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
-                <v-menu v-model="menuSearchUser" bottom offset-y :open-on-click="false"
-                        style="max-width: 350px">
-                    <v-text-field
-                            slot="activator"
-                            label="Buscar por email"
-                            prepend-icon="person"
-                            v-model="user.email"
-                            v-on:keyup="searchUser"
-                    ></v-text-field>
-                    <v-list>
-                        <v-list-tile v-for="(item, index) in users" :key="index"
-                                     @click="setUser(item)">
-                            <v-list-tile-title>{{item.email}}</v-list-tile-title>
-                        </v-list-tile>
-                    </v-list>
-                </v-menu>
 
                 <v-menu
                         ref="menu"
@@ -38,7 +22,7 @@
                         min-width="290px"
                 >
                     <v-text-field
-                            style="max-width: 140px"
+                            style="max-width: 170px"
                             slot="activator"
                             v-model="dateStart"
                             label="A partir de"
@@ -61,7 +45,7 @@
                         min-width="290px"
                 >
                     <v-text-field
-                            style="max-width: 140px"
+                            style="max-width: 170px"
                             slot="activator"
                             v-model="dateEnd"
                             label="Antes de"
@@ -200,8 +184,6 @@
             reservation: null,
             dialog: false,
             pagination: {},
-            menuSearchUser: false,
-            searchUserLoading: false,
             emailLength: 0,
             menu: false,
             dateStart: null,
@@ -239,31 +221,6 @@
                 this.$store.dispatch('reservation/list/getItems', this.getQuery());
 
             },
-            searchUser() {
-                if (!this.searchUserLoading && this.user.email.length >= 4 && this.emailLength < this.user.email.length) {
-                    this.searchUserLoading = true;
-                    fetch('/users?email=' + this.user.email)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
-                                this.users = data['hydra:member'];
-                                this.menuSearchUser = true;
-                                this.searchUserLoading = false;
-                            }
-                        })
-                        .catch(e => {
-                            this.searchUserLoading = false;
-                            console.log(e);
-                        });
-                }
-                else if (this.emailLength > this.user.email.length && typeof this.user.id != typeof undefined) {
-                    this.user = {email: this.user.email};
-                    this.car = {};
-                }
-                this.menuSearchUser = false;
-                this.emailLength = this.user.email.length;
-
-            },
             downloadContract(contract) {
                 window.location.href = API_HOST + '/' + contract.path;
 
@@ -287,7 +244,7 @@
                 return service[0].name + ': <span class="right">' + service[0].prices[data.price].price + ' CHF</span>';
             },
             getDate(date, time = null) {
-                return time ? moment(date).format('DD/MM/YYYY HH:mm a') : moment(date).format('DD/MM/YYYY');
+                return time ? moment(date).format('DD/MM/YYYY hh:mm a') : moment(date).format('DD/MM/YYYY');
             },
             del(item) {
                 if (window.confirm('Seguro quiere eliminar la reservación')){

@@ -8,12 +8,44 @@
                                    :indeterminate="true"></v-progress-linear>
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
+                <v-menu v-model="menuSearchUserPhone" bottom offset-y :open-on-click="false"
+                        style="max-width: 350px">
+                    <v-text-field
+                            slot="activator"
+                            label="Buscar por teléfono"
+                            prepend-icon="phone"
+                            v-model="user.phone"
+                            v-on:keyup="searchUserPhone"
+                    ></v-text-field>
+                    <v-list>
+                        <v-list-tile v-for="(item, index) in users" :key="index"
+                                     @click="setUser(item)">
+                            <v-list-tile-title>{{item.phone}}</v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
+                <v-menu v-model="menuSearchUserName" bottom offset-y :open-on-click="false"
+                        style="max-width: 350px">
+                    <v-text-field
+                            slot="activator"
+                            label="Buscar por nombre"
+                            prepend-icon="person"
+                            v-model="user.name"
+                            v-on:keyup="searchUserName"
+                    ></v-text-field>
+                    <v-list>
+                        <v-list-tile v-for="(item, index) in users" :key="index"
+                                     @click="setUser(item)">
+                            <v-list-tile-title>{{item.name}}</v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
                 <v-menu v-model="menuSearchUser" bottom offset-y :open-on-click="false"
                         style="max-width: 350px">
                     <v-text-field
                             slot="activator"
                             label="Buscar por email"
-                            prepend-icon="person"
+                            prepend-icon="email"
                             v-model="user.email"
                             v-on:keyup="searchUser"
                     ></v-text-field>
@@ -168,6 +200,8 @@
             user: {},
             users: [],
             menuSearchUser: false,
+            menuSearchUserName: false,
+            menuSearchUserPhone: false,
             searchUserLoading: false,
             emailLength: 0,
             valid: false,
@@ -242,6 +276,56 @@
                 }
                 this.menuSearchUser = false;
                 this.emailLength = this.user.email.length;
+
+            },
+            searchUserName() {
+                if (!this.searchUserLoading && this.user.name.length >= 4 && this.emailLength < this.user.name.length) {
+                    this.searchUserLoading = true;
+                    fetch('/users?name=' + this.user.name)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
+                                this.users = data['hydra:member'];
+                                this.menuSearchUserName = true;
+                                this.searchUserLoading = false;
+                            }
+                        })
+                        .catch(e => {
+                            this.searchUserLoading = false;
+                            console.log(e);
+                        });
+                }
+                else if (this.emailLength > this.user.name.length && typeof this.user.id != typeof undefined) {
+                    this.user = {name: this.user.name};
+                    this.car = {};
+                }
+                this.menuSearchUserName = false;
+                this.emailLength = this.user.name.length;
+
+            },
+            searchUserPhone() {
+                if (!this.searchUserLoading && this.user.phone.length >= 4 && this.emailLength < this.user.phone.length) {
+                    this.searchUserLoading = true;
+                    fetch('/users?phone=' + this.user.phone)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
+                                this.users = data['hydra:member'];
+                                this.menuSearchUserPhone = true;
+                                this.searchUserLoading = false;
+                            }
+                        })
+                        .catch(e => {
+                            this.searchUserLoading = false;
+                            console.log(e);
+                        });
+                }
+                else if (this.emailLength > this.user.phone.length && typeof this.user.id != typeof undefined) {
+                    this.user = {phone: this.user.phone};
+                    this.car = {};
+                }
+                this.menuSearchUserPhone = false;
+                this.emailLength = this.user.phone.length;
 
             },
             resetPagination() {

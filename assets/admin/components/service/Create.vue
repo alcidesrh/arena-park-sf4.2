@@ -38,7 +38,6 @@
         watch: {
             created: function (created) {
                 this.$router.push({name: 'ServiceList'});
-                this.$store.dispatch('service/list/getItems');
             }
         }
     }

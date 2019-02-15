@@ -69,7 +69,7 @@
                     </v-flex>
                     <v-flex xs8 md3>
                         <label>{{textCarType(price.type)}}</label>
-                        <v-btn icon class="mx-0" @click="deletePrice(item)">
+                        <v-btn icon class="mx-0" @click="deletePrice(price)">
                             <v-icon color="red">delete</v-icon>
                         </v-btn>
                     </v-flex>
@@ -115,8 +115,7 @@
         }),
         methods: {
             deletePrice(item) {
-                this.services.splice(this.item.prices.indexOf(item), 1);
-                this.item.prices.splice(this.item.prices.indexOf(item), 1);
+                this.services.splice(this.services.indexOf(item), 1);
             },
             textCarType(value) {
                 let type = this.cars.filter(item => value == item.value);
@@ -126,7 +125,7 @@
                 if (typeof this.item.prices == typeof undefined)
                     this.item.prices = [];
                 this.services.push({price: this.priceService, type: this.carType});
-                this.item.prices.push({price: this.priceService, type: this.carType});
+                // this.item.prices.push({price: this.priceService, type: this.carType});
                 if (this.carType == 0) {
                     this.disabledPrice = true;
                 }
@@ -153,7 +152,8 @@
         computed: {
             item: function () {
                 if(this.initialValues && typeof this.initialValues.prices != typeof undefined){
-                    Object.assign(this.services, this.initialValues.prices);
+                    this.services = this.initialValues.prices;
+                    // Object.assign(this.services, this.initialValues.prices);
                 }
                 return this.initialValues ? this.initialValues : this.values;
             }

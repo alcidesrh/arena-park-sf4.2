@@ -662,7 +662,7 @@
                 else
                     this.serviceRadio3 = null;
             },
-            searchUser() {
+            searchUser(val) {
                 if (!this.searchUserLoading && this.user.email.length >= 6 && this.emailLength < this.user.email.length) {
                     let $this = this;
                     this.searchUserLoading = true;

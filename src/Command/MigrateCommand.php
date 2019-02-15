@@ -14,6 +14,7 @@ use App\Entity\Reservation;
 use App\Entity\User;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -45,13 +46,12 @@ class MigrateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->deleteOldReservation();
-        return;
+//        $this->deleteOldReservation();
+//        return;
         //Insert Users
 //        $this->insertUsers();
 //Insert Reservation
         $this->insertReservation();
-
 
 //        $query = $entityManager2->createNativeQuery('SELECT DISTINCT u.name, u.last_name, u.email, u.phone_movil, u.email, c.mark, c.plate, c.color, r.day_date_car_in, r.hour_car_in FROM user u INNER JOIN car c ON u.userid = c.userid INNER JOIN reservation r ON u.userid = r.userid AND c.idcar = r.idcar', $rsm);
 
@@ -119,14 +119,16 @@ class MigrateCommand extends Command
         $data = $query->getResult();
 
         $car_user = [];
+        $now = new \DateTime();
+        $now->setTime(0, 0);
         foreach ($data as $value) {
 
             try {
-                if ($value['dateCarIn'] == 2) {
-                    $break = 1;
-                }
                 $dateCarIn = new \DateTime($value['dateCarIn']);
-                list($hour, $minute) = explode(':',$value['hour_car_in']);
+                if ($dateCarIn > $now) {
+                    continue;
+                }
+                list($hour, $minute) = explode(':', $value['hour_car_in']);
                 $dateCarIn->setTime($hour, $minute);
                 $dateCarOut = new \DateTime($value['dateCarOut']);
                 list($hour, $minute) = explode(':', $value['hour_car_out']);
@@ -141,7 +143,7 @@ class MigrateCommand extends Command
                 continue;
             }
             $userOld = $this->getUserOld($value['user']);
-            if(!($user = $this->getUser($userOld['email']))){
+            if (!($user = $this->getUser($userOld['email']))) {
                 $user = new User();
                 $user->setName($userOld['name'].' '.$userOld['last_name'])
                     ->setEmail($userOld['email'])
@@ -160,21 +162,23 @@ class MigrateCommand extends Command
             $car = $this->getCar($value['car']);
             $newCar->setMark($car[0]['mark'])->setPlate($car[0]['plate'])->setColor($car[0]['color']);
             $this->em->persist($newCar);
+
             $reservation = new Reservation();
+
             $reservation->setUser($user)
                 ->setCar($newCar)
+                ->setCreateAt($dateCarIn)
                 ->setDateCarIn($dateCarIn)
                 ->setDateCarOut($dateCarOut)
                 ->setPayment($value['payment'])
                 ->setFly($value['fly_number_back'])
                 ->setAirport($airport)
-                ->setPaymentType(
-                    is_null(
-                        $value['paymentType']
-                    ) || $value['paymentType'] == 'cash' ? 1 : $value['paymentType'] == 'visa' ? 2 : 3
-                )
                 ->setBaggage($value['baggage'])
                 ->setMessage($value['message']);
+            $paymentType = (is_null($value['paymentType']) || $value['paymentType'] == 'cash') ? 1 : false;
+            if(!$paymentType)
+                $paymentType = $value['paymentType'] == 'visa' ? 2 : 3;
+            $reservation->setPaymentType($paymentType);
             $this->em->persist($reservation);
         }
         $this->em->flush();
@@ -225,13 +229,15 @@ class MigrateCommand extends Command
         return $data[0];
     }
 
-    public function deleteOldReservation(){
+    public function deleteOldReservation()
+    {
         $now = new \DateTime();
-        $now->setTime(0,0);
+        $now->setTime(0, 0);
         $reservations = $this->em->getRepository('App:Reservation')->findAll();
-        foreach ($reservations as $reservation){
-            if($reservation->getDateCarIn() < $now)
+        foreach ($reservations as $reservation) {
+            if ($reservation->getDateCarIn() < $now) {
                 $this->em->remove($reservation);
+            }
         }
         $this->em->flush();
     }

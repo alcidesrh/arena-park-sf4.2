@@ -51,7 +51,6 @@
         watch: {
             updated() {
                 this.$router.push({name: 'ServiceList'});
-                this.$store.dispatch('service/list/getItems');
             },
             retrieveError(val) {
                 alert('Error: ' + val)

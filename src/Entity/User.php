@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(attributes={"order"={"name": "ASC"}, "pagination_client_items_per_page"=true}, normalizationContext={"groups"={"read_user"}})
- * @ApiFilter(SearchFilter::class, properties={"email": "partial", "name": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"email": "partial", "name": "partial", "phone": "partial"})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements \JsonSerializable
