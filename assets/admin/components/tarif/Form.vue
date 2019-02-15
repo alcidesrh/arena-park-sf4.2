@@ -34,6 +34,16 @@
       <v-layout wrap>
         <v-flex xs6 md2>
           <v-text-field
+                  v-model="item.tva"
+                  label="TVA"
+                  type="number"
+                  required
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
+      <v-layout wrap>
+        <v-flex xs6 md2>
+          <v-text-field
                   v-model="item.descount"
                   label="Descuento en %"
                   type="number"

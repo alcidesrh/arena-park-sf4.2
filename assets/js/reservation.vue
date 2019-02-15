@@ -524,6 +524,9 @@
                                     <div v-if="tarif.activeDescount" class="text-xs-right" style="color: red;">
                                         {{'-'+tarif.descount+'%'}}
                                     </div>
+                                    <div v-if="payment > 1" class="text-xs-right" style="color: red;">
+                                        TVA +{{tarif.tva+'%'}}
+                                    </div>
                                     <div>TOTAL À PAYER:<span class="right">{{reservation.total}} CHF</span></div>
                                 </div>
                             </v-card-title>
@@ -706,6 +709,10 @@
 
                 if (this.tarif.activeDescount)
                     this.reservation.total = this.reservation.total - (this.reservation.total * (this.tarif.descount / 100));
+                if(this.payment > 1)
+                    this.reservation.total = parseFloat(this.reservation.total + (this.reservation.total * (parseFloat(this.tarif.tva) / 100))).toFixed(2);
+
+
 
             },
             getEndPoint(resource) {

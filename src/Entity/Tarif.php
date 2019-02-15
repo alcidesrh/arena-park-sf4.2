@@ -43,6 +43,11 @@ class Tarif
      */
     private $activeDescount;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $tva;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,6 +116,24 @@ class Tarif
     {
         $this->activeDescount = $activeDescount;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTva()
+    {
+        return $this->tva;
+    }
+
+    /**
+     * @param mixed $tva
+     */
+    public function setTva($tva): void
+    {
+        $this->tva = $tva;
+    }
+
+
 
 
 }

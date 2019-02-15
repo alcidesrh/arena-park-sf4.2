@@ -44,6 +44,7 @@
                 values.annulation = parseInt(values.annulation);
                 values.descount = parseInt(values.descount);
                 values.priceCharge = parseInt(values.priceCharge);
+                values.tva = parseFloat(values.tva);
                 this.$store.dispatch('tarif/update/update', {item: this.retrieved, values: values});
             },
             reset() {
