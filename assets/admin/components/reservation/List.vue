@@ -233,6 +233,10 @@
                         return 'visa';
                     case 3:
                         return 'mastercard';
+                    case 4:
+                        return 'PostFinance card';
+                    case 5:
+                        return 'PostFinance e-finance';
                 }
             },
             show(item) {

@@ -406,6 +406,8 @@
                                         <v-radio label="Cash" :value="1"></v-radio>
                                         <v-radio label="Visa" :value="2"></v-radio>
                                         <v-radio label="MasterCard" :value="3"></v-radio>
+                                        <v-radio label="PostFinance card" :value="4"></v-radio>
+                                        <v-radio label="PostFinance e-finance" :value="5"></v-radio>
                                     </v-radio-group>
                                 </v-flex>
                             </v-layout>

@@ -41,6 +41,8 @@
                             <v-chip color="green" text-color="white">Cash {{numbers.cash}}</v-chip>
                             <v-chip color="green" text-color="white">Visa {{numbers.visa}}</v-chip>
                             <v-chip color="green" text-color="white">MasterCard {{numbers.mastercard}}</v-chip>
+                            <v-chip color="green" text-color="white">PostFinance card {{numbers.postFinanceCard}}</v-chip>
+                            <v-chip color="green" text-color="white">PostFinance e-finance {{numbers.postFinanceEfinance}}</v-chip>
                         </v-chip>
                     </v-layout>
 
@@ -150,8 +152,7 @@
                             users.push({user: item.user.sex? 'Sr '+item.user.name:'Sra '+item.user.name, date: moment(item.date).format('DD')});
                             $this.dayReservations.push(moment(item.date).format('YYYY-MM-DD'));
                         });
-                        this.monthData = {cant: data.length || 0, total: total, users: users};
-                        // console.log(this.monthData);
+                        this.monthData = {cant: data.length || 0, total: parseFloat(total).toFixed(2), users: users};
                     })
                     .catch(e => {
                         this.loading = false;
@@ -173,7 +174,7 @@
                             total = total + item.payment;
                             users.push(item.user.sex? 'Sr '+item.user.name:'Sra '+item.user.name);
                         });
-                        this.dayData = {cant: data.length || 0, total: total, users: users};
+                        this.dayData = {cant: data.length || 0, total: parseFloat(total).toFixed(2), users: users};
                     })
                     .catch(e => {
                         this.loading = false;

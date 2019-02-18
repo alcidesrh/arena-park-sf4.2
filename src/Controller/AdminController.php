@@ -144,6 +144,12 @@ class AdminController extends AbstractController
         $return['mastercard'] = $entityManager->createQuery(
             'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 3'
         )->getSingleScalarResult();
+        $return['postFinanceCard'] = $entityManager->createQuery(
+            'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 3'
+        )->getSingleScalarResult();
+        $return['postFinanceEfinance'] = $entityManager->createQuery(
+            'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 3'
+        )->getSingleScalarResult();
 
         return new JsonResponse($return);
 
