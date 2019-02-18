@@ -125,7 +125,7 @@ class AdminController extends AbstractController
      */
     public function statistics(EntityManagerInterface $entityManager)
     {
-        $return['users'] = $entityManager->createQuery('SELECT COUNT(u.id) FROM App:User u')->getSingleScalarResult();
+//        $return['users'] = $entityManager->createQuery('SELECT COUNT(u.id) FROM App:User u')->getSingleScalarResult();
 //        $return['usersR'] = $entityManager->createQuery(
 //            'SELECT u, COUNT(r.user) FROM App:User u JOIN App:Reservation r WHERE r.user = u.id GROUP BY u ORDER BY COUNT(r.user) DESC'
 //        )->setMaxResults(10)->getResult();
@@ -145,10 +145,10 @@ class AdminController extends AbstractController
             'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 3'
         )->getSingleScalarResult();
         $return['postFinanceCard'] = $entityManager->createQuery(
-            'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 3'
+            'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 4'
         )->getSingleScalarResult();
         $return['postFinanceEfinance'] = $entityManager->createQuery(
-            'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 3'
+            'SELECT COUNT(r.id) FROM App:Reservation r WHERE r.paymentType = 5'
         )->getSingleScalarResult();
 
         return new JsonResponse($return);
