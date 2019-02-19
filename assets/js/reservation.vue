@@ -10,7 +10,7 @@
                     Remplissez toutes les informations requises
                 </v-alert>
             </div>
-            <v-alert
+            <v-alert class="white-text reservation-success"
                     v-if="success"
                     :value="true"
                     type="success"
@@ -403,11 +403,21 @@
                             <v-layout row wrap>
                                 <v-flex xs12>
                                     <v-radio-group v-model="payment" row>
+                                        <v-flex xs12>
                                         <v-radio label="Cash" :value="1"></v-radio>
+                                        </v-flex>
+                                        <v-flex xs12>
                                         <v-radio label="Visa" :value="2"></v-radio>
+                                        </v-flex>
+                                        <v-flex xs12>
                                         <v-radio label="MasterCard" :value="3"></v-radio>
+                                        </v-flex>
+                                        <v-flex xs12>
                                         <v-radio label="PostFinance card" :value="4"></v-radio>
+                                        </v-flex>
+                                        <v-flex xs12>
                                         <v-radio label="PostFinance e-finance" :value="5"></v-radio>
+                                        </v-flex>
                                     </v-radio-group>
                                 </v-flex>
                             </v-layout>

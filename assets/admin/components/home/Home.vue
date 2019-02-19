@@ -24,11 +24,11 @@
                 <v-container pa-0>
 
                     <v-layout justify-end row>
-                        <v-chip outline>
-                            <v-icon left>person</v-icon>
-                            Usuarios
-                            <v-chip color="green" text-color="white">{{numbers.users}}</v-chip>
-                        </v-chip>
+                        <!--<v-chip outline>-->
+                            <!--<v-icon left>person</v-icon>-->
+                            <!--Usuarios-->
+                            <!--<v-chip color="green" text-color="white">{{numbers.users}}</v-chip>-->
+                        <!--</v-chip>-->
                         <v-chip outline>
                             <v-icon left>time_to_leave</v-icon>
                             Reservaciones
