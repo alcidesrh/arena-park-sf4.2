@@ -175,6 +175,8 @@
                                         <v-time-picker
                                                 v-if="hourCarInDialog"
                                                 v-model="reservation.hourCarIn"
+                                                :allowed-hours="allowedHours"
+                                                format="24hr"
                                                 full-width
                                         >
                                             <v-spacer></v-spacer>
@@ -238,6 +240,8 @@
                                         <v-time-picker
                                                 v-if="hourCarOutDialog"
                                                 v-model="reservation.hourCarOut"
+                                                :allowed-hours="allowedHours"
+                                                format="24hr"
                                                 full-width
                                         >
                                             <v-spacer></v-spacer>
@@ -614,6 +618,7 @@
         }),
 
         methods: {
+            allowedHours: val => [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].includes(val),
             sendReservation() {
                 this.reservation.payment = this.payment;
                 let data = new FormData(), $this = this;
