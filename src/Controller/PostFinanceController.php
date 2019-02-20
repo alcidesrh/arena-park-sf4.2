@@ -146,7 +146,6 @@ class PostFinanceController extends AbstractController
             $message = (new \Swift_Message('Bienvenue chez Arena-Park'))
                 ->setFrom('noreply@arena-park.ch')
                 ->setTo($user->getEmail())
-                ->addBcc('reservation@arena-park.ch')
                 ->setBody(
                     $this->renderView(
                         'emails/reservation.html.twig',
@@ -156,6 +155,20 @@ class PostFinanceController extends AbstractController
                 )->attach(\Swift_Attachment::fromPath($contract->getPath()));
 
             $mailer->send($message);
+
+            $message = (new \Swift_Message('Reserva para:'. $reservation->getDateCarIn()->format('d-m-Y H:i')))
+                ->setFrom($user->getEmail())
+                ->setTo('reservation@arena-park.ch')
+                ->setBody(
+                    $this->renderView(
+                        'emails/reservation.html.twig',
+                        array('user' => $user->getName())
+                    ),
+                    'text/html'
+                )->attach(\Swift_Attachment::fromPath($contract->getPath()));
+
+            $mailer->send($message);
+
             return $this->redirectToRoute('reservation', ['reservationConfirmed' => true]);
         }
         $message = (new \Swift_Message('Problema con la reservación'))
