@@ -259,6 +259,9 @@ class ArenaParkController extends AbstractController
             $key = $paymentTypes[$reservationData['payment'] - 1];
             if (array_key_exists($key, $psp_methods)) {
 
+                $session = $this->get('session');
+                $session->getFlashBag()->add('orderID', $reservation->getId());
+
                 return $this->forward(
                     'App\Controller\PostFinanceController::getUrlRedirect',
                     [

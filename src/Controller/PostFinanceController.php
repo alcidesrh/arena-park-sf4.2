@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
-use App\Repository\ReservationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PostFinanceController extends AbstractController
@@ -14,39 +13,39 @@ class PostFinanceController extends AbstractController
     public $postFinance = 'e-payment.postfinance.ch';
 
     // Host used
-    public		$host = 'secure.ogone.com';
+    public $host = 'secure.ogone.com';
 
     // Ogone identifier
-    public		$pspid = 'arenapark';
+    public $pspid = 'arenapark';
 
     // Secret SHA1 to encrypt data sent to Ogone (DO NOT MODIFY)
-    public		$in_secret = 'arRd2$2239sadm!!d';
+    public $in_secret = 'arRd2$2239sadm!!d';
 
     // Secret SHA1 To decrypt data sent by Ogone (DO NOT MODIFY)
-    public		$out_secret = 'arRd2$2239sadm!!d';
+    public $out_secret = 'arRd2$2239sadm!!d';
 
     // Code ISO a 3 CURRENCY CODE
-    public		$currency_iso = 'CHF';
+    public $currency_iso = 'CHF';
 
     // Langue
-    public		$language_iso = 'fr_FR';
+    public $language_iso = 'fr_FR';
 
     // template url
-    public		$template_url;
+    public $template_url;
 
     // URL used when the user click on the button BACK TO MERCHANT
-    public		$home_url = 'https://www.arena-park.ch/';
+    public $home_url = 'https://www.arena-park.ch/';
 
     // URL used when the user click on the button  "back to catalog"
-    public		$catalog_url = 'https://www.arena-park.ch/reservation-park.php';
+    public $catalog_url = 'https://www.arena-park.ch/reservation-park.php';
 
     // URL used when the user has paid with Ogone
-    public		$accept_url = 'https://www.arena-park.ch/phpFiles/psp/post_payment.php';
+    public $accept_url = 'https://www.arena-park.ch/phpFiles/psp/post_payment.php';
 
     // Environment used (test ou prod)
-    public		$env = 'prod';
+    public $env = 'prod';
 
-    static public	$human_status = array(
+    static public $human_status = array(
         0 => "Incomplet ou invalide",
         1 => "Annulé par client",
         2 => "Autorisation refusée",
@@ -85,11 +84,12 @@ class PostFinanceController extends AbstractController
         94 => "Remb. Refusé par l'acquéreur",
         95 => "Paiement traité par le marchand",
         96 => "",
-        99 => "En cours de traitement"
+        99 => "En cours de traitement",
     );
 
 
-    public function getUrlRedirect(Reservation $reservation, $paymentData){
+    public function getUrlRedirect(Reservation $reservation, $paymentData)
+    {
 
         $this->host = $this->postFinance;
         // todo: REPLACE WITH THE TOTAL AMOUNT OF THE ORDER (ex: 120.50)
@@ -97,17 +97,27 @@ class PostFinanceController extends AbstractController
 //        $amount = $_REQUEST['totalreal'];// with 10%
 //        $amount = $amount * 0.077 + $amount;
 //        $amount = round($amount, 2);
-        $url = $this->GetInitPaymentURL($reservation->getId(), $reservation->getPayment(), array_merge($paymentData, array(
-            'ECOM_BILLTO_POSTAL_NAME_FIRST' => $reservation->getUser()->getName(), // Optional customer first name
+        $url = $this->GetInitPaymentURL(
+            $reservation->getId(),
+            $reservation->getPayment(),
+            array_merge(
+                $paymentData,
+                array(
+                    'ECOM_BILLTO_POSTAL_NAME_FIRST' => $reservation->getUser()->getName(),
+                    // Optional customer first name
 //            'ECOM_BILLTO_POSTAL_NAME_LAST' => utf8_decode($user['last_name']), // Optional customer last name
-            'EMAIL' => $reservation->getUser()->getEmail(), // Optional customer email
-            //'OWNERZIP' => $user['postal_code'], // Optional customer ZIP code
+                    'EMAIL' => $reservation->getUser()->getEmail(),
+                    // Optional customer email
+                    //'OWNERZIP' => $user['postal_code'], // Optional customer ZIP code
 //            'OWNERADDRESS' => utf8_decode($user['address']), // Optional customer address
-            //'OWNERTOWN' => null, // Optional customer city
-            //'OWNERCTY' => $user['country'], // Optional customer country (Format AN)
+                    //'OWNERTOWN' => null, // Optional customer city
+                    //'OWNERCTY' => $user['country'], // Optional customer country (Format AN)
 //            'OWNERTELNO' => utf8_decode($user['phone_movil']), // Optional customer's phone number.
-            //'PARAMPLUS' => 'userid=' . $user['userid'] // Params that are returned during the POSTSALE request after the payment at the PSP (ex: myparam1=123&myparam2=456)
-        )));
+                    //'PARAMPLUS' => 'userid=' . $user['userid'] // Params that are returned during the POSTSALE request after the payment at the PSP (ex: myparam1=123&myparam2=456)
+                )
+            )
+        );
+
         return new JsonResponse(['urlRedirect' => $url]);
 
     }
@@ -115,7 +125,9 @@ class PostFinanceController extends AbstractController
     /**
      * @Route("/phpFiles/psp/post_payment.php", name="postfinance_response")
      */
-    public function postfinanceResponse(ReservationRepository $entityManager, \Swift_Mailer $mailer){
+    public function postfinanceResponse(EntityManagerInterface $entityManager, \Swift_Mailer $mailer)
+    {
+
 
         // Définit l'environnement comme test (ne rien définir pour utiliser l'environnement de production)
 //$ogone->env = 'test';
@@ -127,11 +139,13 @@ class PostFinanceController extends AbstractController
 //echo "<p>Signature => " . $signature . "</p>"; echo '<p>GET => <pre>'; print_r($_GET); echo '</pre></p>'; exit;
 
 // Erreur, les parametres on ete alteres
-        if ( $_GET['STATUS'] == 9 )
-        {
+        if ($_GET['STATUS'] == 9) {
 
             // Get reservation and user data
-            $reservation = $entityManager->find($_GET['orderID']);//$dataset->get_record_by_ID('reservation', 'reservation_number', $_GET['orderID']);
+            $reservation = $entityManager->find(
+                'App:Reservation',
+                $_GET['orderID']
+            );//$dataset->get_record_by_ID('reservation', 'reservation_number', $_GET['orderID']);
             $user = $reservation->getUser();
             $contract = $reservation->getContract();
 
@@ -156,7 +170,7 @@ class PostFinanceController extends AbstractController
 
             $mailer->send($message);
 
-            $message = (new \Swift_Message('Reserva para:'. $reservation->getDateCarIn()->format('d-m-Y H:i')))
+            $message = (new \Swift_Message('Reserva para:'.$reservation->getDateCarIn()->format('d-m-Y H:i')))
                 ->setFrom($user->getEmail())
                 ->setTo('reservation@arena-park.ch')
                 ->setBody(
@@ -171,14 +185,27 @@ class PostFinanceController extends AbstractController
 
             return $this->redirectToRoute('reservation', ['reservationConfirmed' => true]);
         }
-        $message = (new \Swift_Message('Problema con la reservación'))
-            ->setFrom('noreply@arena-park.ch')
-            ->setTo('reservation@arena-park.ch')
-            ->setBody(
-                "Problema en el pago con postfinance de esta reservación, el contrato adjunto no se envió al cliente.",
-                'text/html'
-            );
-        $mailer->send($message);
+
+        $session = $this->get('session');
+        $reservation = false;
+        foreach ($session->getFlashBag()->get('orderID', []) as $id) {
+            $reservation = $entityManager->find('App:Reservation', $id);
+        }
+        if ($reservation) {
+            $user = $reservation->getUser();
+            $contract = $reservation->getContract();
+
+            $message = (new \Swift_Message('Problema con la reservación'))
+                ->setFrom('noreply@arena-park.ch')
+                ->setTo('reservation@arena-park.ch')
+                ->setBody(
+                    "Problema en el pago con postfinance de esta reservación, el contrato adjunto no se envió al cliente y la reserva fue borrada. <br> Datos del usuario: <br> Nombre: {$user->getName()}<br>Email: {$user->getEmail()}<br>Teléfono: {$user->getPhone()}",
+                    'text/html'
+                )->attach(\Swift_Attachment::fromPath($contract->getPath()));
+            $mailer->send($message);
+            $entityManager->remove($reservation);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute('reservation', ['errorPayment' => 'Erreur durant la requete post sale.']);
 //        if ( $signature != $_GET['SHASIGN'] )
 //        {
@@ -215,16 +242,24 @@ class PostFinanceController extends AbstractController
             'HOMEURL' => $this->home_url,
             'CATALOGURL' => $this->catalog_url,
             'ACCEPTURL' => $this->accept_url,
-            'CN' => null, // Optional customer name
-            'EMAIL' => null, // Optional customer email
-            'OWNERZIP' => null, // Optional customer ZIP code
-            'OWNERADDRESS' => null, // Optional customer address
-            'OWNERTOWN' => null, // Optional customer city
-            'OWNERCTY' => null, // Optional customer country
-            'OWNERTELNO' => null, // Optional customer's phone number.
+            'CN' => null,
+            // Optional customer name
+            'EMAIL' => null,
+            // Optional customer email
+            'OWNERZIP' => null,
+            // Optional customer ZIP code
+            'OWNERADDRESS' => null,
+            // Optional customer address
+            'OWNERTOWN' => null,
+            // Optional customer city
+            'OWNERCTY' => null,
+            // Optional customer country
+            'OWNERTELNO' => null,
+            // Optional customer's phone number.
 
             // Combinaisons permettant de pré-sélectionner une méthode de paiement dans le formulaire d'Ogone
-            'PM' => null, 'BRAND' => null,
+            'PM' => null,
+            'BRAND' => null,
             //'PM' => 'CreditCard', 'BRAND' => 'visa', // Visa
             //'PM' => 'CreditCard', 'BRAND' => 'eurocard', // MasterCard
             //'PM' => 'debit direct', 'BRAND' => '', // PostFinance card
@@ -247,11 +282,9 @@ class PostFinanceController extends AbstractController
         ksort($ogone_params, SORT_STRING);
 
         $encoded_params = "";
-        foreach ( $ogone_params as $key => $value )
-        {
-            if ( strlen($value) )
-            {
-                $encoded_params .= $key . '=' . rawurlencode($value) . '&';
+        foreach ($ogone_params as $key => $value) {
+            if (strlen($value)) {
+                $encoded_params .= $key.'='.rawurlencode($value).'&';
             }
         }
         $encoded_params = preg_replace('/&$/', null, $encoded_params);
@@ -269,11 +302,9 @@ class PostFinanceController extends AbstractController
         ksort($ogone_params, SORT_STRING);
 
         $params_string = "";
-        foreach ( $ogone_params as $key => $value )
-        {
-            if ( strlen($value) )
-            {
-                $params_string .= $key . '=' . $value . $this->in_secret;
+        foreach ($ogone_params as $key => $value) {
+            if (strlen($value)) {
+                $params_string .= $key.'='.$value.$this->in_secret;
             }
         }
 
@@ -334,7 +365,7 @@ class PostFinanceController extends AbstractController
             'SUBBRAND',
             'SUBSCRIPTION_ID',
             'TRXDATE',
-            'VC'
+            'VC',
         );
 
         // Uppercase all array keys
@@ -344,11 +375,9 @@ class PostFinanceController extends AbstractController
         ksort($ogone_params, SORT_STRING);
 
         $params_string = "";
-        foreach ( $ogone_params as $key => $value )
-        {
-            if ( in_array($key, $included) && strlen($value) )
-            {
-                $params_string .= $key . '=' . $value . $this->out_secret;
+        foreach ($ogone_params as $key => $value) {
+            if (in_array($key, $included) && strlen($value)) {
+                $params_string .= $key.'='.$value.$this->out_secret;
             }
         }
 
@@ -361,13 +390,15 @@ class PostFinanceController extends AbstractController
         $ogone_params['SHASIGN'] = $this->SignParamsIn($ogone_params);
 
         // Redirect user to Ogone
-        return 'https://' . $this->host . '/ncol/' . $this->env . '/orderstandard.asp?' . $this->EncodeParams($ogone_params);
+        return 'https://'.$this->host.'/ncol/'.$this->env.'/orderstandard.asp?'.$this->EncodeParams($ogone_params);
     }
 
 
     public function GetInitPaymentURL($order_id, $amount, $custom_params = null)
     {
-        if ( !is_array($custom_params) ) $custom_params = array();
+        if (!is_array($custom_params)) {
+            $custom_params = array();
+        }
 
         $ogone_params = $this->GetDefaultParams();
 
@@ -377,8 +408,7 @@ class PostFinanceController extends AbstractController
         $ogone_params['AMOUNT'] = $amount * 100;
 
         // Add custom params
-        foreach ( $custom_params as $key => $value )
-        {
+        foreach ($custom_params as $key => $value) {
             $ogone_params[$key] = $value;
         }
 
@@ -388,7 +418,9 @@ class PostFinanceController extends AbstractController
 
     public function GetInitSubscriptionURL($order_id, $amount, $custom_params = null)
     {
-        if ( !is_array($custom_params) ) $custom_params = array();
+        if (!is_array($custom_params)) {
+            $custom_params = array();
+        }
 
         $ogone_params = $this->GetDefaultParams();
 
@@ -400,8 +432,7 @@ class PostFinanceController extends AbstractController
         $ogone_params['SUB_AMOUNT'] = $amount * 100;
 
         // Add custom params
-        foreach ( $custom_params as $key => $value )
-        {
+        foreach ($custom_params as $key => $value) {
             $ogone_params[$key] = $value;
         }
 
@@ -413,13 +444,17 @@ class PostFinanceController extends AbstractController
     {
         return self::$human_status[intval($status)];
     }
+
     /**
      * @Route("/post/finance", name="post_finance")
      */
     public function index()
     {
-        return $this->render('post_finance/index.html.twig', [
-            'controller_name' => 'PostFinanceController',
-        ]);
+        return $this->render(
+            'post_finance/index.html.twig',
+            [
+                'controller_name' => 'PostFinanceController',
+            ]
+        );
     }
 }
