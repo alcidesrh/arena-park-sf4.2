@@ -130,6 +130,9 @@
                                 <div class="tarif-card-price col s12">
                                     <span>Assur. annulation vol</span><span class="right">{{ tarifs.annulation }} CHF</span>
                                 </div>
+                                <div class="col s12">
+                                    <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
+                                </div>
                             </div>
                         </div>
                         <div class="card-reveal purple darken-1 white-text">
@@ -153,7 +156,6 @@
                                     <span class="card-title">{{ sections['section1'].title }}</span>
                                     <a class="teal btn-small btn-card waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
                                     {{ sections['section1'].content | raw}}
-                                    <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
                                 </div>
                             </div>
                         </div>
