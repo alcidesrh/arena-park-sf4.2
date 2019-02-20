@@ -177,7 +177,7 @@ class PostFinanceController extends AbstractController
             ->setBody(
                 "Problema en el pago con postfinance de esta reservación, el contrato adjunto no se envió al cliente.",
                 'text/html'
-            )->attach(\Swift_Attachment::fromPath($contract->getPath()));
+            );
         $mailer->send($message);
         return $this->redirectToRoute('reservation', ['errorPayment' => 'Erreur durant la requete post sale.']);
 //        if ( $signature != $_GET['SHASIGN'] )
