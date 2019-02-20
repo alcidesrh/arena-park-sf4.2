@@ -101,7 +101,7 @@
                     {% if tarifs.descount and tarifs.activeDescount %}
                         <a class="btn-floating btn-large pulse lime">{{ tarifs.descount ~ '% Descount' }}</a>
                     {% endif %}
-                    <div id="tarif-card" class="card purple darken-1 small z-depth-3">
+                    <div id="tarif-card-movil" class="card purple darken-1 small z-depth-3">
                         <div class="card-content white-text">
                             <span class="card-title">Testez nos tarifs!</span>
                             <a class="teal btn-small btn-card waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
@@ -110,13 +110,13 @@
                                     <div class="row">
                                         <div class="input-field col s12 m-0">
                                             <i class="material-icons prefix small">event</i>
-                                            <input type="text" class="datepicker start-date" placeholder="Départ le">
+                                            <input type="text" class="datepicker start-date-movil" placeholder="Départ le">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12 m-0">
                                             <i class="tiny material-icons prefix ">event</i>
-                                            <input id="end-date" type="text" class="datepicker end-date" placeholder="Retour le">
+                                            <input id="end-date-movil" type="text" class="datepicker end-date-movil" placeholder="Retour le">
                                         </div>
                                     </div>
                                 </form>
