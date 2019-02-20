@@ -166,7 +166,7 @@
                                         <v-text-field
                                                 slot="activator"
                                                 v-model="reservation.hourCarIn"
-                                                label="Las heure"
+                                                label="Heure"
                                                 prepend-icon="access_time"
                                                 readonly
                                                 :rules="requireRules"
@@ -231,7 +231,7 @@
                                         <v-text-field
                                                 slot="activator"
                                                 v-model="reservation.hourCarOut"
-                                                label="Las heure"
+                                                label="Heure"
                                                 prepend-icon="access_time"
                                                 readonly
                                                 :rules="requireRules"
