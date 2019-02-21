@@ -30,8 +30,7 @@ class GenerateContract
         User $user = null,
         Car $car = null,
         Reservation $reservation = null,
-        Tarif $tarif,
-        $onlinePaid = false
+        Tarif $tarif
     ) {
 
         if ($tarif->getActiveDescount()) {
@@ -70,7 +69,7 @@ class GenerateContract
         $document->setValue('date_car_out', $reservation->getDateCarOut()->format('d-m-Y h:i a'));
         $document->setValue('destination_back', utf8_decode($reservation->getAirport()->getName()));
         $document->setValue('fly_number_back', utf8_decode($reservation->getFly()));
-//        $document->setValue( 'baggage', $reservation[ 'baggage' ] );
+        $document->setValue( 'baggage', $reservation->getBaggage()?'Oui':'Nom' );
 
         // mathieu@ollea.ch
         if ($reservation->getPaymentType() === 1) {
