@@ -228,7 +228,9 @@ class ArenaParkController extends AbstractController
         $reservation->setUser($user);
         $reservation->setCar($car);
         $reservation->setAirport($entityManager->getRepository('App:Airport')->find($reservationData['airport']));
+        $reservation->setDateFlyIn(new \DateTime($reservationData['dateFlyIn'].' '.$reservationData['hourFlyIn']));
         $reservation->setDateCarIn(new \DateTime($reservationData['dateCarIn'].' '.$reservationData['hourCarIn']));
+        $reservation->setDateFlyOut(new \DateTime($reservationData['dateFlyOut'].' '.$reservationData['hourFlyOut']));
         $reservation->setDateCarOut(new \DateTime($reservationData['dateCarOut'].' '.$reservationData['hourCarOut']));
         $reservation->setFly($reservationData['fly']);
         $reservation->setBaggage($reservationData['baggage'] ?? false);

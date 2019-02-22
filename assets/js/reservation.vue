@@ -128,8 +128,69 @@
                         <div class="section">
                             <h6>Départ</h6>
                             <v-divider></v-divider>
+
                             <v-layout row wrap>
-                                <v-flex xs12 md7>
+                                <v-flex xs12 md9>
+                                    <v-menu
+                                            ref="dateFlyOutDialog"
+                                            v-model="dateFlyOutDialog"
+                                            :return-value.sync="dateFlyOutDialog"
+                                            lazy
+                                            full-width
+                                            width="290px"
+                                            :close-on-content-click="true"
+                                    >
+                                        <v-text-field
+                                                slot="activator"
+                                                v-model="reservation.dateFlyOut"
+                                                label="Date et heure de décollage"
+                                                prepend-icon="event"
+                                                readonly
+                                                :rules="requireRules"
+                                                required
+                                        ></v-text-field>
+                                        <v-date-picker v-model="reservation.dateFlyOut" no-title scrollable
+                                                       locale="Fr-fr" :min="currentDate">
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
+                                <v-flex xs12 md3>
+                                    <v-dialog
+                                            ref="hourFlyOutDialog"
+                                            v-model="hourFlyOutDialog"
+                                            :return-value.sync="hourFlyOutDialog"
+                                            persistent
+                                            lazy
+                                            full-width
+                                            width="290px"
+                                    >
+                                        <v-text-field
+                                                slot="activator"
+                                                v-model="reservation.hourFlyOut"
+                                                label="Heure"
+                                                prepend-icon="access_time"
+                                                readonly
+                                                :rules="requireRules"
+                                                required
+                                        ></v-text-field>
+                                        <v-time-picker
+                                                v-if="hourFlyOutDialog"
+                                                v-model="reservation.hourFlyOut"
+                                                format="24hr"
+                                                full-width
+                                        >
+                                            <v-spacer></v-spacer>
+                                            <v-btn flat color="primary" @click="hourFlyOutDialog = false">Cancel</v-btn>
+                                            <v-btn flat color="primary"
+                                                   @click="$refs.hourFlyOutDialog.save(reservation.hourFlyOut)">
+                                                OK
+                                            </v-btn>
+                                        </v-time-picker>
+                                    </v-dialog>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 md9>
                                     <v-menu
                                             ref="dateCarInDialog"
                                             v-model="dateCarInDialog"
@@ -142,18 +203,18 @@
                                         <v-text-field
                                                 slot="activator"
                                                 v-model="reservation.dateCarIn"
-                                                label="Prise en charge du véhicule"
+                                                label="Date et heure de prise en charge"
                                                 prepend-icon="event"
                                                 readonly
                                                 :rules="requireRules"
                                                 required
                                         ></v-text-field>
                                         <v-date-picker v-model="reservation.dateCarIn" no-title scrollable
-                                                       :min="currentDate" locale="Fr-fr">
+                                                       :max="reservation.dateFlyOut" locale="Fr-fr">
                                         </v-date-picker>
                                     </v-menu>
                                 </v-flex>
-                                <v-flex xs12 md5>
+                                <v-flex xs12 md3>
                                     <v-dialog
                                             ref="hourCarInDialog"
                                             v-model="hourCarInDialog"
@@ -176,6 +237,7 @@
                                                 v-if="hourCarInDialog"
                                                 v-model="reservation.hourCarIn"
                                                 :allowed-hours="allowedHours"
+                                                :max="reservation.hourFlyOut"
                                                 format="24hr"
                                                 full-width
                                         >
@@ -194,35 +256,11 @@
                             <h6>Arrivée</h6>
                             <v-divider></v-divider>
                             <v-layout row wrap>
-                                <v-flex xs12 md7>
+                                <v-flex xs12 md9>
                                     <v-menu
-                                            ref="dateCarOutDialog"
-                                            v-model="dateCarOutDialog"
-                                            :return-value.sync="dateCarOutDialog"
-                                            lazy
-                                            full-width
-                                            width="290px"
-                                            :close-on-content-click="true"
-                                    >
-                                        <v-text-field
-                                                slot="activator"
-                                                v-model="reservation.dateCarOut"
-                                                label="Restitution du véhicule"
-                                                prepend-icon="event"
-                                                readonly
-                                                :rules="requireRules"
-                                                required
-                                        ></v-text-field>
-                                        <v-date-picker v-model="reservation.dateCarOut" no-title scrollable
-                                                       locale="Fr-fr" :min="reservation.dateCarIn">
-                                        </v-date-picker>
-                                    </v-menu>
-                                </v-flex>
-                                <v-flex xs12 md5>
-                                    <v-dialog
-                                            ref="hourCarOutDialog"
-                                            v-model="hourCarOutDialog"
-                                            :return-value.sync="hourCarOutDialog"
+                                            ref="dateFlyInDialog"
+                                            v-model="dateFlyInDialog"
+                                            :return-value.sync="dateFlyInDialog"
                                             persistent
                                             lazy
                                             full-width
@@ -230,7 +268,31 @@
                                     >
                                         <v-text-field
                                                 slot="activator"
-                                                v-model="reservation.hourCarOut"
+                                                v-model="reservation.dateFlyIn"
+                                                label="Date et heure d’arrivée"
+                                                prepend-icon="event"
+                                                readonly
+                                                :rules="requireRules"
+                                                required
+                                        ></v-text-field>
+                                        <v-date-picker v-model="reservation.dateFlyIn" no-title scrollable
+                                                       locale="Fr-fr" :min="reservation.dateFlyOut">
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
+                                <v-flex xs12 md3>
+                                    <v-dialog
+                                            ref="hourFlyInDialog"
+                                            v-model="hourFlyInDialog"
+                                            :return-value.sync="hourFlyInDialog"
+                                            persistent
+                                            lazy
+                                            full-width
+                                            width="290px"
+                                    >
+                                        <v-text-field
+                                                slot="activator"
+                                                v-model="reservation.hourFlyIn"
                                                 label="Heure"
                                                 prepend-icon="access_time"
                                                 readonly
@@ -238,17 +300,15 @@
                                                 required
                                         ></v-text-field>
                                         <v-time-picker
-                                                v-if="hourCarOutDialog"
-                                                v-model="reservation.hourCarOut"
-                                                :allowed-hours="allowedHours"
+                                                v-if="hourFlyInDialog"
+                                                v-model="reservation.hourFlyIn"
                                                 format="24hr"
                                                 full-width
                                         >
                                             <v-spacer></v-spacer>
-                                            <v-btn flat color="primary" @click="hourCarOutDialog = false">Cancel</v-btn>
+                                            <v-btn flat color="primary" @click="hourFlyInDialog = false">Cancel</v-btn>
                                             <v-btn flat color="primary"
-                                                   @click="$refs.hourCarOutDialog.save(reservation.hourCarOut)">
-                                                OK
+                                                   @click="$refs.hourFlyInDialog.save(reservation.hourFlyIn)">OK
                                             </v-btn>
                                         </v-time-picker>
                                     </v-dialog>
@@ -282,6 +342,68 @@
                                             :rules="requireRules"
                                             required
                                     ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout row wrap>
+                                <v-flex xs12 md9>
+                                    <v-menu
+                                            ref="dateCarOutDialog"
+                                            v-model="dateCarOutDialog"
+                                            :return-value.sync="dateCarOutDialog"
+                                            lazy
+                                            full-width
+                                            width="290px"
+                                            :close-on-content-click="true"
+                                    >
+                                        <v-text-field
+                                                slot="activator"
+                                                v-model="reservation.dateCarOut"
+                                                label="Date et heure de restitution"
+                                                prepend-icon="event"
+                                                readonly
+                                                :rules="requireRules"
+                                                required
+                                        ></v-text-field>
+                                        <v-date-picker v-model="reservation.dateCarOut" no-title scrollable
+                                                       locale="Fr-fr" :min="reservation.dateFlyIn">
+                                        </v-date-picker>
+                                    </v-menu>
+                                </v-flex>
+                                <v-flex xs12 md3>
+                                    <v-dialog
+                                            ref="hourCarOutDialog"
+                                            v-model="hourCarOutDialog"
+                                            :return-value.sync="hourCarOutDialog"
+                                            persistent
+                                            lazy
+                                            full-width
+                                            width="290px"
+                                    >
+                                        <v-text-field
+                                                slot="activator"
+                                                v-model="reservation.hourCarOut"
+                                                label="Heure"
+                                                prepend-icon="access_time"
+                                                readonly
+                                                :rules="requireRules"
+                                                required
+                                        ></v-text-field>
+                                        <v-time-picker
+                                                v-if="hourCarOutDialog"
+                                                v-model="reservation.hourCarOut"
+                                                :allowed-hours="allowedHours"
+                                                :min="reservation.hourFlyIn"
+                                                format="24hr"
+                                                full-width
+                                        >
+                                            <v-spacer></v-spacer>
+                                            <v-btn flat color="primary" @click="hourCarOutDialog = false">Cancel</v-btn>
+                                            <v-btn flat color="primary"
+                                                   @click="$refs.hourCarOutDialog.save(reservation.hourCarOut)">
+                                                OK
+                                            </v-btn>
+                                        </v-time-picker>
+                                    </v-dialog>
                                 </v-flex>
                             </v-layout>
                             <v-layout row wrap>
@@ -507,8 +629,12 @@
                                 <div>
                                     <h6>Réservation</h6>
                                     <v-divider></v-divider>
-                                    <p>Prise en charge du véhicul: {{reservation.dateCarIn +' '+
+                                    <p>Date et heure de décollage: {{reservation.dateFlyOut +' '+
+                                        reservation.hourFlyOut}}</p>
+                                    <p>Date et heure de prise en charge: {{reservation.dateCarIn +' '+
                                         reservation.hourCarIn}}</p>
+                                    <p>Date et heure d’arrivée: {{reservation.dateFlyIn +' '+
+                                        reservation.hourFlyIn}}</p>
                                     <p>Restitution du véhicule: {{reservation.dateCarOut +' '+
                                         reservation.hourCarOut}}</p>
                                     <p>Aéroport de provenance: {{getAirportName()}}</p>
@@ -584,10 +710,15 @@
             reservation: {agree: true},
             car: {},
             menuSearchUser: false,
+            dateFlyInDialog: false,
+            hourFlyInDialog: null,
+            dateFlyOutDialog: false,
+            hourFlyOutDialog: null,
             dateCarInDialog: false,
             hourCarInDialog: null,
             dateCarOutDialog: null,
             hourCarOutDialog: null,
+
             currentDate: moment().format('YYYY-MM-DD'),
 
             valid: null,

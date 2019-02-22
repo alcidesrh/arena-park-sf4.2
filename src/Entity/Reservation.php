@@ -56,6 +56,18 @@ class Reservation implements \JsonSerializable
      * @ORM\Column(type="datetime")
      * @Groups("read_reservation")
      */
+    private $dateFlyIn;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups("read_reservation")
+     */
+    private $dateFlyOut;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups("read_reservation")
+     */
     private $dateCarIn;
 
     /**
@@ -170,6 +182,40 @@ class Reservation implements \JsonSerializable
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFlyIn()
+    {
+        return $this->dateFlyIn;
+    }
+
+    /**
+     * @param mixed $dateFlyIn
+     */
+    public function setDateFlyIn($dateFlyIn): void
+    {
+        $this->dateFlyIn = $dateFlyIn;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFlyOut()
+    {
+        return $this->dateFlyOut;
+    }
+
+    /**
+     * @param mixed $dateFlyOut
+     */
+    public function setDateFlyOut($dateFlyOut): void
+    {
+        $this->dateFlyOut = $dateFlyOut;
+    }
+
+
 
     public function getDateCarIn()
     {

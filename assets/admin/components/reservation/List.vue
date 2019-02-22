@@ -71,8 +71,15 @@
                 <template slot="items" slot-scope="props">
                     <td>{{ getDate(props.item.createAt) }}</td>
                     <td>{{  props.item.user.sex?'Mt ':'Ms '}}{{ props.item.user.name }}</td>
-                    <td>{{ getDate(props.item.dateCarIn, true) }}</td>
-                    <td>{{ getDate(props.item.dateCarOut, true) }}</td>
+                    <td>
+                        <v-icon color="teal">flight_takeoff</v-icon>
+                        {{ getDate(props.item.dateFlyOut, true) }}<br>
+                        {{ getDate(props.item.dateCarIn, true) }}
+                    </td>
+                    <td>
+                        <v-icon color="teal">flight_land</v-icon>
+                        {{ getDate(props.item.dateFlyIn, true) }}<br>
+                        {{ getDate(props.item.dateCarOut, true) }}</td>
                     <td style="text-align: center">{{ props.item.payment }}</td>
                     <td>
                         <v-btn icon class="mx-0"
@@ -130,8 +137,10 @@
                             <h4>Reserva</h4>
                             <v-divider class="mb-2"></v-divider>
                             <p class="my-1">Creada: {{ getDate(reservation.createAt) }}</p>
-                            <p class="my-1">Empieza: {{ getDate(reservation.dateCarIn, true) }}</p>
-                            <p class="my-1">Termina: {{ getDate(reservation.dateCarOut, true) }}</p>
+                            <p class="my-1">Vuelo salida: {{ getDate(reservation.dateFlyOut, true) }}</p>
+                            <p class="my-1">Entrega carro: {{ getDate(reservation.dateCarIn, true) }}</p>
+                            <p class="my-1">Vuelo llegada: {{ getDate(reservation.dateFlyIn, true) }}</p>
+                            <p class="my-1">Salida carro: {{ getDate(reservation.dateCarOut, true) }}</p>
                             <p class="my-1">Aereopuerto: {{reservation.airport.name}}</p>
                             <p class="my-1">Vuelo: {{reservation.fly}}</p>
                             <p class="my-1">Equipaje: {{reservation.baggage?'Si':'No'}}</p>

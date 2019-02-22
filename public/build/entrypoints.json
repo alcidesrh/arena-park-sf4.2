@@ -11,7 +11,7 @@
     "js/admin": {
       "js": [
         "/build/runtime.6cf710cd.js",
-        "/build/js/admin.065c68cc.js"
+        "/build/js/admin.54c2f85d.js"
       ],
       "css": [
         "/build/js/admin.9f91b3e8.css"
@@ -44,7 +44,7 @@
     "js/reservation": {
       "js": [
         "/build/runtime.6cf710cd.js",
-        "/build/js/reservation.8fd20742.js"
+        "/build/js/reservation.f2d7ec64.js"
       ]
     },
     "js/app": {

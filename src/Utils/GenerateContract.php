@@ -65,6 +65,8 @@ class GenerateContract
         $document->setValue('movil', $user->getPhone());
         $document->setValue('email', utf8_decode($user->getEmail()));
 
+        $document->setValue('date_fly_in', $reservation->getDateFlyIn()->format('d-m-Y H:i'));
+        $document->setValue('date_fly_out', $reservation->getDateFlyOut()->format('d-m-Y H:i'));
         $document->setValue('date_car_in', $reservation->getDateCarIn()->format('d-m-Y H:i'));
         $document->setValue('date_car_out', $reservation->getDateCarOut()->format('d-m-Y H:i'));
         $document->setValue('destination_back', utf8_decode($reservation->getAirport()->getName()));
