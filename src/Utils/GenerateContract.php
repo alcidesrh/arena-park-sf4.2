@@ -70,7 +70,7 @@ class GenerateContract
         $document->setValue('date_car_out2', $reservation->getDateCarOut()->format('d-m-Y'));
         $document->setValue('destination_back', utf8_decode($reservation->getAirport()->getName()));
         $document->setValue('fly_number_back', utf8_decode($reservation->getFly()));
-        $document->setValue('baggage', $reservation->getBaggage() ? 'Oui' : 'Nom');
+        $document->setValue('baggage', $reservation->getBaggage() ? 'Oui' : 'Non');
 
         // mathieu@ollea.ch
         if ($reservation->getPaymentType() === 1) {
