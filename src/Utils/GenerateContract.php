@@ -58,7 +58,7 @@ class GenerateContract
         $document->setValue('pCharge', number_format($tarif->getPriceCharge(), 2));
         $document->setValue('annulation', number_format($tarif->getAnnulation(), 2));
 
-        $sex = $user->getSex()?'Mr':'Mme';
+        $sex = $user->getSex()?'Monsieur: ':'Madame: ';
         $document->setValue('conductor', $sex.' '.utf8_decode($user->getName()));
         $document->setValue('movil', $user->getPhone());
         $document->setValue('email', utf8_decode($user->getEmail()));
