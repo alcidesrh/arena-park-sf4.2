@@ -50,10 +50,9 @@ class GenerateContract
 //            $document = $this->loadTemplate('doc/contract.docx');
 //        else
 //            $document = $this->loadTemplate('doc/contract-enterprise.docx');
-        $number = count($entityManager->getRepository('App:Reservation')->findAll());
 
 
-        $document->setValue('reservation', $number);
+        $document->setValue('reservation', $reservation->getId());
         $document->setValue('date', date('d/m/Y'));
         $document->setValue('date_actual', date('d/m/Y'));
         $document->setValue('dateM', date('d/m/Y'));
