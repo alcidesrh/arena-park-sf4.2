@@ -51,11 +51,9 @@ class GenerateContract
 //        else
 //            $document = $this->loadTemplate('doc/contract-enterprise.docx');
 
-
-        $document->setValue('reservation', '00'.$reservation->getId());
-        $document->setValue('date', date('d/m/Y'));
-        $document->setValue('date_actual', date('d/m/Y'));
-        $document->setValue('dateM', date('d/m/Y'));
+        $number = count($entityManager->getRepository('App:Reservation')->findAll()) + 1;
+        $document->setValue('reservation', '00'.$number);
+        $document->setValue('date', $reservation->getCreateAt()->format('d-m-Y'));
 
         $document->setValue('pCharge', number_format($tarif->getPriceCharge(), 2));
         $document->setValue('annulation', number_format($tarif->getAnnulation(), 2));
@@ -72,7 +70,7 @@ class GenerateContract
         $document->setValue('date_car_out2', $reservation->getDateCarOut()->format('d-m-Y'));
         $document->setValue('destination_back', utf8_decode($reservation->getAirport()->getName()));
         $document->setValue('fly_number_back', utf8_decode($reservation->getFly()));
-        $document->setValue( 'baggage', $reservation->getBaggage()?'Oui':'Nom' );
+        $document->setValue('baggage', $reservation->getBaggage() ? 'Oui' : 'Nom');
 
         // mathieu@ollea.ch
         if ($reservation->getPaymentType() === 1) {
