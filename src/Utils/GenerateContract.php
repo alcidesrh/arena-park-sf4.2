@@ -52,7 +52,7 @@ class GenerateContract
 //            $document = $this->loadTemplate('doc/contract-enterprise.docx');
 
 
-        $document->setValue('reservation', $reservation->getId());
+        $document->setValue('reservation', '00'.$reservation->getId());
         $document->setValue('date', date('d/m/Y'));
         $document->setValue('date_actual', date('d/m/Y'));
         $document->setValue('dateM', date('d/m/Y'));
@@ -68,6 +68,8 @@ class GenerateContract
         $document->setValue('date_fly_out', $reservation->getDateFlyOut()->format('d-m-Y H:i'));
         $document->setValue('date_car_in', $reservation->getDateCarIn()->format('d-m-Y H:i'));
         $document->setValue('date_car_out', $reservation->getDateCarOut()->format('d-m-Y H:i'));
+        $document->setValue('date_car_in2', $reservation->getDateCarIn()->format('d-m-Y'));
+        $document->setValue('date_car_out2', $reservation->getDateCarOut()->format('d-m-Y'));
         $document->setValue('destination_back', utf8_decode($reservation->getAirport()->getName()));
         $document->setValue('fly_number_back', utf8_decode($reservation->getFly()));
         $document->setValue( 'baggage', $reservation->getBaggage()?'Oui':'Nom' );
