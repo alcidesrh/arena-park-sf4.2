@@ -36,6 +36,7 @@ var tarifTest = new Vue({
         },
         setEndDate(){
             document.getElementById('end-date').value = "";
+            this.endDate.options.minDate = moment(this.startDate.date);
         }
     },
     created() {
@@ -83,6 +84,7 @@ var tarifTestMovil = new Vue({
         },
         setEndDate(){
             document.getElementById('end-date-movil').value = "";
+            this.endDate.options.minDate = moment(this.startDate.date);
         }
     },
     created() {
