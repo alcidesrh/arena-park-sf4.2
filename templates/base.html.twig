@@ -27,6 +27,13 @@
                         <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
                     </div>
                 </div>
+
+                <div class="hide-on-small-only show-on-medium-and-up" style="display: inline-block">
+                    <div class="heading-container">
+                        <h4 class="m-0 heading-title"><span style="color: #311b92">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
+                        <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
+                    </div>
+                </div>
                 <ul class="right hide-on-med-and-down menu-tab">
                     <li {% if home is defined %}class="active"{% endif %}><a href="/">Accueil</a></li>
                     <li {% if services is defined %}class="active"{% endif %}><a href="{{ path('service') }}">Services</a></li>
@@ -35,12 +42,6 @@
                     <li {% if contact is defined %}class="active"{% endif %}><a href="{{ path('contact') }}">Contact</a></li>
                     <li {% if reservation is defined %}class="active"{% endif %}><a href="{{ path('reservation') }}">Réservation</a></li>
                 </ul>
-                <div class="right hide-on-small-only show-on-medium-and-up" style="display: inline-block">
-                    <div class="heading-container">
-                        <h4 class="m-0 heading-title"><span style="color: #311b92">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
-                        <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
-                    </div>
-                </div>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons" style="color: white !important;">menu</i></a>
             </div>
 
