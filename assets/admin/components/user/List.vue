@@ -254,7 +254,7 @@
                 this.$store.dispatch('user/list/getItems', 'email=' + this.user.email);
             },
             searchUser() {
-                if (!this.searchUserLoading && this.user.email.length >= 4 && this.emailLength < this.user.email.length) {
+                if (!this.searchUserLoading && this.user.email.length >= 4) {
                     this.searchUserLoading = true;
                     fetch('/users?email=' + this.user.email)
                         .then(response => response.json())
@@ -270,16 +270,12 @@
                             console.log(e);
                         });
                 }
-                else if (this.emailLength > this.user.email.length && typeof this.user.id != typeof undefined) {
-                    this.user = {email: this.user.email};
-                    this.car = {};
-                }
                 this.menuSearchUser = false;
                 this.emailLength = this.user.email.length;
 
             },
             searchUserName() {
-                if (!this.searchUserLoading && this.user.name.length >= 4 && this.emailLength < this.user.name.length) {
+                if (!this.searchUserLoading && this.user.name.length >= 4) {
                     this.searchUserLoading = true;
                     fetch('/users?name=' + this.user.name)
                         .then(response => response.json())
@@ -295,16 +291,12 @@
                             console.log(e);
                         });
                 }
-                else if (this.emailLength > this.user.name.length && typeof this.user.id != typeof undefined) {
-                    this.user = {name: this.user.name};
-                    this.car = {};
-                }
                 this.menuSearchUserName = false;
                 this.emailLength = this.user.name.length;
 
             },
             searchUserPhone() {
-                if (!this.searchUserLoading && this.user.phone.length >= 4 && this.emailLength < this.user.phone.length) {
+                if (!this.searchUserLoading && this.user.phone.length >= 4) {
                     this.searchUserLoading = true;
                     fetch('/users?phone=' + this.user.phone)
                         .then(response => response.json())
@@ -320,10 +312,10 @@
                             console.log(e);
                         });
                 }
-                else if (this.emailLength > this.user.phone.length && typeof this.user.id != typeof undefined) {
-                    this.user = {phone: this.user.phone};
-                    this.car = {};
-                }
+                // else if (this.emailLength > this.user.phone.length && typeof this.user.id != typeof undefined) {
+                //     this.user = {phone: this.user.phone};
+                //     this.car = {};
+                // }
                 this.menuSearchUserPhone = false;
                 this.emailLength = this.user.phone.length;
 
