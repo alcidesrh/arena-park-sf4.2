@@ -97,10 +97,11 @@ i{
   }
 }
 .heading-container{
-  position: absolute;
+  //position: absolute;
   line-height: 10px;
-  left: 50%;
-  margin-left: -110px;
+  margin-right: 40px;
+  //left: 50%;
+  //margin-left: -110px;
 }
 .heading-container-small{
   position: absolute;
@@ -119,8 +120,8 @@ i{
 .heading-subtitle{
   font-size: 14px;
   float: right;
-  position: absolute;
-  right: 0px;
+  //position: absolute;
+  //right: 0px;
   margin-right: -29px;
   font-style: italic;
 }

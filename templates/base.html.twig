@@ -16,17 +16,11 @@
 {% block header %}
     <header>
         <div class="navbar-fixed">
-        <nav class="teal" role="navigation">
+        <nav class="teal lighten-2" role="navigation">
             <div class="nav-wrapper">
                 <a id="logo-container" href="#" class="brand-logo">
                     <img id="logo" src="{{ asset('img/Logo.png') }}" />
                 </a>
-                <div class="container hide-on-small-only show-on-medium-and-up">
-                    <div class="heading-container">
-                        <h4 class="m-0 heading-title"><span style="color: #565D96">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
-                        <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
-                    </div>
-                </div>
                 <div class="hide-on-med-and-up show-on-small container" style="width: min-content !important">
                     <div class="heading-container-small">
                         <h4 class="m-0 heading-title-small"><span style="color: #565D96">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
@@ -41,6 +35,12 @@
                     <li {% if contact is defined %}class="active"{% endif %}><a href="{{ path('contact') }}">Contact</a></li>
                     <li {% if reservation is defined %}class="active"{% endif %}><a href="{{ path('reservation') }}">Réservation</a></li>
                 </ul>
+                <div class="right hide-on-small-only show-on-medium-and-up" style="display: inline-block">
+                    <div class="heading-container">
+                        <h4 class="m-0 heading-title"><span style="color: #311b92">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
+                        <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
+                    </div>
+                </div>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons" style="color: white !important;">menu</i></a>
             </div>
 
@@ -66,10 +66,10 @@
 </main>
 
 {% block footer %}
-    <footer class="page-footer teal">
+    <footer class="page-footer teal lighten-2">
         <div class="footer-copyright">
             <div class="container center-align">
-                <h6>arena-park.ch | Copyright © 2014 | <a href="{{ path('conditions') }}" style="text-decoration: none; font-weight: bold   ">Conditions Générales</a></h6>
+                <h6>arena-park.ch | Copyright © 2014 | <a href="{{ path('conditions') }}" style="text-decoration: none; font-weight: bold; color: #004d40">Conditions Générales</a></h6>
             </div>
         </div>
     </footer>
