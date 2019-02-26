@@ -40,6 +40,14 @@
   font-size: 0.8em;
 }
 .btn-floating.btn-large.pulse{
+  //position: absolute;
+  width: 180px;
+  height: auto;
+  //margin-top: -27px;
+  //z-index: 998;
+  right: 0px;
+}
+.btn-floating.btn-large.pulse.small{
   position: absolute;
   width: 180px;
   height: auto;

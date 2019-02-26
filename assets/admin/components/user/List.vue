@@ -259,10 +259,10 @@
                     fetch('/users?email=' + this.user.email)
                         .then(response => response.json())
                         .then(data => {
+                            this.searchUserLoading = false;
                             if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
                                 this.users = data['hydra:member'];
                                 this.menuSearchUser = true;
-                                this.searchUserLoading = false;
                             }
                         })
                         .catch(e => {
@@ -280,10 +280,10 @@
                     fetch('/users?name=' + this.user.name)
                         .then(response => response.json())
                         .then(data => {
+                            this.searchUserLoading = false;
                             if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
                                 this.users = data['hydra:member'];
                                 this.menuSearchUserName = true;
-                                this.searchUserLoading = false;
                             }
                         })
                         .catch(e => {
@@ -301,10 +301,10 @@
                     fetch('/users?phone=' + this.user.phone)
                         .then(response => response.json())
                         .then(data => {
+                            this.searchUserLoading = false;
                             if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
                                 this.users = data['hydra:member'];
                                 this.menuSearchUserPhone = true;
-                                this.searchUserLoading = false;
                             }
                         })
                         .catch(e => {
