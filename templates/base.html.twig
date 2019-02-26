@@ -17,9 +17,22 @@
     <header>
         <div class="navbar-fixed">
         <nav class="teal" role="navigation">
-            <div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo">
+            <div class="nav-wrapper">
+                <a id="logo-container" href="#" class="brand-logo">
                     <img id="logo" src="{{ asset('img/Logo.png') }}" />
                 </a>
+                <div class="container hide-on-small-only show-on-medium-and-up">
+                    <div class="heading-container">
+                        <h4 class="m-0 heading-title"><span style="color: #565D96">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
+                        <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
+                    </div>
+                </div>
+                <div class="hide-on-med-and-up show-on-small container" style="width: min-content !important">
+                    <div class="heading-container-small">
+                        <h4 class="m-0 heading-title-small"><span style="color: #565D96">arena</span>-<span style="color: #DC0024">park</span>.ch</h4>
+                        <span class="m-0 heading-subtitle">voyagez l'esprit libre</span>
+                    </div>
+                </div>
                 <ul class="right hide-on-med-and-down menu-tab">
                     <li {% if home is defined %}class="active"{% endif %}><a href="/">Accueil</a></li>
                     <li {% if services is defined %}class="active"{% endif %}><a href="{{ path('service') }}">Services</a></li>
@@ -30,6 +43,7 @@
                 </ul>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons" style="color: white !important;">menu</i></a>
             </div>
+
         </nav>
         </div>
     </header>

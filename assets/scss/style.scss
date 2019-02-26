@@ -92,4 +92,33 @@ i{
     height: 56px !important;
     margin-left: 0px !important;
   }
+  nav .brand-logo{
+    left: 30% !important;
+  }
+}
+.heading-container{
+  position: absolute;
+  line-height: 10px;
+}
+.heading-container-small{
+  position: absolute;
+  line-height: 10px;
+  margin-left: -10px;
+}
+.heading-title{
+  margin-top: 5px;
+  font-weight: bold;
+}
+.heading-title-small{
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 24px;
+}
+.heading-subtitle{
+  font-size: 14px;
+  float: right;
+  position: absolute;
+  right: 0px;
+  margin-right: -29px;
+  font-style: italic;
 }

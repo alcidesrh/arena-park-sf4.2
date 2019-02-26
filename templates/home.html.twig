@@ -10,10 +10,10 @@
         <div class="section  no-pad-bot">
             <div class="row">
                 <div class="col s12 l3">
-                    {% if tarifs.descount and tarifs.activeDescount %}
-                        <a class="btn-floating btn-large pulse lime">{{ tarifs.descount ~ '% Descount' }}</a>
-                    {% endif %}
                     <div id="tarif-card" class="card purple darken-1 small z-depth-3">
+                        {% if tarifs.descount and tarifs.activeDescount %}
+                            <a class="btn-floating btn-large pulse lime">{{ tarifs.descount ~ '% Descount' }}</a>
+                        {% endif %}
                         <div class="card-content white-text">
                             <span class="card-title">Testez nos tarifs!</span>
                             <a class="teal btn-small btn-card waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
@@ -98,10 +98,10 @@
         <div class="section  no-pad-bot">
             <div class="row">
                 <div class="col s12 l3">
-                    {% if tarifs.descount and tarifs.activeDescount %}
-                        <a class="btn-floating btn-large pulse lime">{{ tarifs.descount ~ '% Descount' }}</a>
-                    {% endif %}
                     <div id="tarif-card-movil" class="card purple darken-1 small z-depth-3">
+                        {% if tarifs.descount and tarifs.activeDescount %}
+                            <a class="btn-floating btn-large pulse lime">{{ tarifs.descount ~ '% Descount' }}</a>
+                        {% endif %}
                         <div class="card-content white-text">
                             <span class="card-title">Testez nos tarifs!</span>
                             <a class="teal btn-small btn-card waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
