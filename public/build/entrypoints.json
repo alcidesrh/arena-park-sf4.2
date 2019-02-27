@@ -66,7 +66,7 @@
         "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/home.b5438142.css"
+        "/build/css/home.8a3ca859.css"
       ]
     },
     "css/services": {
@@ -74,7 +74,7 @@
         "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/services.5ef76ee2.css"
+        "/build/css/services.d09bb4f9.css"
       ]
     },
     "css/faq": {
@@ -82,7 +82,7 @@
         "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/faq.ea4713a6.css"
+        "/build/css/faq.85f1a60e.css"
       ]
     },
     "css/tarif": {
@@ -90,7 +90,7 @@
         "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/tarif.4b7dba25.css"
+        "/build/css/tarif.a14e3c3d.css"
       ]
     },
     "css/contact": {
@@ -98,7 +98,7 @@
         "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/contact.0ce5ef85.css"
+        "/build/css/contact.89001be7.css"
       ]
     },
     "css/reservation": {
@@ -106,7 +106,7 @@
         "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/reservation.6bac7933.css"
+        "/build/css/reservation.1dee5b2b.css"
       ]
     }
   }

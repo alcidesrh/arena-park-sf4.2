@@ -19,7 +19,6 @@
                     <div id="tarif-card" class="card purple darken-1 small z-depth-3">
                         <div class="card-content white-text">
                             <span class="card-title">Testez nos tarifs!</span>
-                            <a class="teal btn-small btn-card waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
                             <div class="row">
                                 <form class="col s12">
                                     <div class="row">
@@ -46,6 +45,8 @@
                                     <span>Assur. annulation vol</span><span class="right">{{ tarifs.annulation }} CHF</span>
                                 </div>
                             </div>
+
+                            <a class="teal btn-small waves-effect waves-light activator right" @click="testTarif($event)">Calculer</a>
                         </div>
                         <div class="card-reveal purple darken-1 white-text">
                             <span class="card-title"><i class="material-icons right">close</i></span>
@@ -59,14 +60,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="center my-3">
+                    <div class="center my-2">
                         <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 50px; position: relative;" />
                     </div>
                     <div class="card purple darken-1 small z-depth-3 card-2">
                         <div class="card-content white-text p-10">
                             <span class="card-title font-18" style="font-size: 18px">{{ sections['section1'].title }}</span>
-                            <a class="teal btn-small btn-card waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
                             {{ sections['section1'].content | raw}}
+                            <a class="teal btn-small right waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
                         </div>
                     </div>
                 </div>
@@ -104,16 +105,36 @@
         </div>
     </div>
     <div class="hide-on-med-and-up show-on-small">
+
         <div class="section  no-pad-bot">
             <div class="row">
-                <div class="col s12 l3">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title center bold font-22 mb-0">{{ sections['section3'].title }}</span>
+                            <span class="card-title center bold font-22">COUVERT & SÉCURISÉ</span><br>
+                            <div class="mb-2">
+                                <a class="waves-effect waves-light btn-small" href="#tarif-card-movil">Testez nos Tarifs</a>
+                                <a class="waves-effect waves-light btn-small"  href="{{ path('reservation') }}">Réservation</a>
+                            </div>
+                            <p>
+                                {{ sections['section3'].content | raw}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section  no-pad-bot">
+            <div class="row">
+                <div class="col s12">
                     <div id="tarif-card-movil" class="card purple darken-1 small z-depth-3">
                         {% if tarifs.descount and tarifs.activeDescount %}
                             <a class="btn-floating btn-large pulse red small">PROFITEZ {{ tarifs.descount ~ '%' }} RABAIS</a>
                         {% endif %}
                         <div class="card-content white-text">
                             <span class="card-title">Testez nos tarifs!</span>
-                            <a class="teal btn-small btn-card waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
                             <div class="row">
                                 <form class="col s12">
                                     <div class="row">
@@ -143,6 +164,8 @@
                                     <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
                                 </div>
                             </div>
+
+                            <a class="teal btn-small right waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
                         </div>
                         <div class="card-reveal purple darken-1 white-text">
                             <span class="card-title"><i class="material-icons right">close</i></span>
@@ -157,43 +180,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s12 l9">
-                    <div class="row ">
-                        <div class="col s12 l6">
-                            <div class="card blue-grey darken-1 small z-depth-3 card-2">
-                                <div class="card-content white-text">
-                                    <span class="card-title">{{ sections['section1'].title }}</span>
-                                    <a class="teal btn-small btn-card waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
-                                    {{ sections['section1'].content | raw}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s12 l6">
-                            <div class="card deep-orange darken-1 small z-depth-3">
-                                <div class="card-content white-text">
-                                    <span class="card-title">{{ sections['section2'].title }}</span>
-                                    {{ sections['section2'].content | raw}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section  no-pad-bot">
-            <div class="row">
                 <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">{{ sections['section3'].title }}</span><br>
-                            <p>
-                                {{ sections['section3'].content | raw}}
-                            </p>
+                    <div class="card blue-grey darken-1 small z-depth-3 card-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ sections['section1'].title }}</span>
+                            {{ sections['section1'].content | raw}}
+                            <a class="teal btn-small right waves-effect waves-light activator" href="{{ path('reservation') }}">Réservation</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="card deep-orange darken-1 small z-depth-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ sections['section2'].title }}</span>
+                            {{ sections['section2'].content | raw}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="section  no-pad-bot">
             <div class="row">
                 <div class="col s12">
