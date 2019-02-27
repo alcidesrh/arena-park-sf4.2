@@ -45,9 +45,6 @@
                                 <div class="tarif-card-price col s12">
                                     <span>Assur. annulation vol</span><span class="right">{{ tarifs.annulation }} CHF</span>
                                 </div>
-                                <div class="col s12">
-                                    <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
-                                </div>
                             </div>
                         </div>
                         <div class="card-reveal purple darken-1 white-text">
@@ -61,6 +58,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="center mb-2">
+                        <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
                     </div>
                     <div class="card blue-grey darken-1 small z-depth-3 card-2">
                         <div class="card-content white-text p-10">
@@ -83,10 +83,16 @@
                     <div class="card">
                         <div class="card-content">
                             <span class="card-title font-18 bold center">{{ sections['section4'].title }}</span><br>
-                            <div class="mb-2 p-10 deep-orange white-text">
-                                <br>
-                                {{ sections['section2'].title }}
-                                {{ sections['section2'].content | raw}}
+                            <div class="padding-attetion">
+                                <div class="mb-2 p-10 teal lighten-2 white-text padding-attetion">
+                                    <br>
+                                    <a class="btn-floating btn-large pulse red mb-1">{{ sections['section2'].title }}</a>
+                                    <br>
+                                    <div class="center">
+                                        {{ sections['section2'].content | raw}}
+                                    </div>
+                                    <br>
+                                </div>
                             </div>
                             <p>
                                 {{ sections['section4'].content | raw}}
