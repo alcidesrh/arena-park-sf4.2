@@ -161,9 +161,6 @@
                                 <div class="tarif-card-price col s12">
                                     <span>Assur. annulation vol</span><span class="right">{{ tarifs.annulation }} CHF</span>
                                 </div>
-                                <div class="col s12">
-                                    <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 23px; margin-left: 5px; position: relative;" />
-                                </div>
                             </div>
 
                             <a class="teal btn-small right waves-effect waves-light activator" @click="testTarif($event)">Calculer</a>
@@ -182,7 +179,7 @@
                     </div>
                 </div>
                 <div class="col s12">
-                    <div class="card blue-grey darken-1 small z-depth-3 card-2">
+                    <div class="card purple darken-1 small z-depth-3 card-2">
                         <div class="card-content white-text">
                             <span class="card-title">{{ sections['section1'].title }}</span>
                             {{ sections['section1'].content | raw}}
@@ -206,7 +203,7 @@
                 <div class="col s12">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title">{{ sections['section4'].title }}</span><br>
+                            <span class="card-title bold">{{ sections['section4'].title }}</span><br>
                             <p>
                                 {{ sections['section4'].content | raw}}
                             </p>
