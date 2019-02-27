@@ -20,7 +20,7 @@
                     <v-list>
                         <v-list-tile v-for="(item, index) in users" :key="index"
                                      @click="setUser(item)">
-                            <v-list-tile-title>{{item.phone}}</v-list-tile-title>
+                            <v-list-tile-title>{{item.phone}}: {{item.name}}, {{item.email}}</v-list-tile-title>
                         </v-list-tile>
                     </v-list>
                 </v-menu>
@@ -36,7 +36,7 @@
                     <v-list>
                         <v-list-tile v-for="(item, index) in users" :key="index"
                                      @click="setUser(item)">
-                            <v-list-tile-title>{{item.name}}</v-list-tile-title>
+                            <v-list-tile-title>{{item.name}}: {{item.email}}, {{item.phone}}</v-list-tile-title>
                         </v-list-tile>
                     </v-list>
                 </v-menu>
@@ -52,7 +52,7 @@
                     <v-list>
                         <v-list-tile v-for="(item, index) in users" :key="index"
                                      @click="setUser(item)">
-                            <v-list-tile-title>{{item.email}}</v-list-tile-title>
+                            <v-list-tile-title>{{item.email}}: {{item.name}}, {{item.phone}}</v-list-tile-title>
                         </v-list-tile>
                     </v-list>
                 </v-menu>
@@ -303,7 +303,7 @@
                         .then(data => {
                             this.searchUserLoading = false;
                             if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
-                                this.users = data['hydra:member'];
+                                this.users = data['hydra:member'];console.log(this.users);
                                 this.menuSearchUserPhone = true;
                             }
                         })
