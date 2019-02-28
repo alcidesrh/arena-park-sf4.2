@@ -68,7 +68,7 @@
                                 <v-flex xs12>
                                     <v-text-field
                                             v-model="user.name"
-                                            label="Nom"
+                                            label="Prénom et Nom"
                                             prepend-icon="person"
                                             :rules="requireRules"
                                             required
@@ -149,7 +149,7 @@
                                                 :rules="requireRules"
                                                 required
                                         ></v-text-field>
-                                        <v-date-picker v-model="reservation.dateFlyOut" no-title scrollable
+                                        <v-date-picker v-model="reservation.dateFlyOut" no-title scrollable @change="reservation.dateCarIn = reservation.dateFlyOut"
                                                        locale="Fr-fr" :min="currentDate">
                                         </v-date-picker>
                                     </v-menu>
@@ -209,7 +209,7 @@
                                                 :rules="requireRules"
                                                 required
                                         ></v-text-field>
-                                        <v-date-picker v-model="reservation.dateCarIn" no-title scrollable
+                                        <v-date-picker v-model="reservation.dateCarIn" no-title scrollable disabled
                                                        :max="reservation.dateFlyOut" locale="Fr-fr">
                                         </v-date-picker>
                                     </v-menu>
@@ -276,7 +276,7 @@
                                                 :rules="requireRules"
                                                 required
                                         ></v-text-field>
-                                        <v-date-picker v-model="reservation.dateFlyIn" no-title scrollable
+                                        <v-date-picker v-model="reservation.dateFlyIn" no-title scrollable  @change="reservation.dateCarOut = reservation.dateFlyIn"
                                                        locale="Fr-fr" :min="reservation.dateFlyOut">
                                         </v-date-picker>
                                     </v-menu>
@@ -394,7 +394,7 @@
                                                 v-model="reservation.hourCarOut"
                                                 :allowed-hours="allowedHours"
                                                 :allowed-minutes="(val) => !(val%5)"
-                                                :min="reservation.hourFlyIn"
+                                                :min="reservation.dateCarOut == reservation.dateFlyIn ? reservation.hourFlyIn : undefined"
                                                 format="24hr"
                                                 full-width
                                         >
