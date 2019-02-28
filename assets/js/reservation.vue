@@ -237,6 +237,7 @@
                                                 v-if="hourCarInDialog"
                                                 v-model="reservation.hourCarIn"
                                                 :allowed-hours="allowedHours"
+                                                :allowed-minutes="(val) => !(val%5)"
                                                 :max="reservation.hourFlyOut"
                                                 format="24hr"
                                                 full-width
@@ -392,6 +393,7 @@
                                                 v-if="hourCarOutDialog"
                                                 v-model="reservation.hourCarOut"
                                                 :allowed-hours="allowedHours"
+                                                :allowed-minutes="(val) => !(val%5)"
                                                 :min="reservation.hourFlyIn"
                                                 format="24hr"
                                                 full-width
