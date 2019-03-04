@@ -103,7 +103,7 @@ class PostFinanceController extends AbstractController
             array_merge(
                 $paymentData,
                 array(
-                    'ECOM_BILLTO_POSTAL_NAME_FIRST' => $reservation->getUser()->getName(),
+//                    'ECOM_BILLTO_POSTAL_NAME_FIRST' => $reservation->getUser()->getName(),
                     // Optional customer first name
 //            'ECOM_BILLTO_POSTAL_NAME_LAST' => utf8_decode($user['last_name']), // Optional customer last name
                     'EMAIL' => $reservation->getUser()->getEmail(),
@@ -139,7 +139,7 @@ class PostFinanceController extends AbstractController
 //echo "<p>Signature => " . $signature . "</p>"; echo '<p>GET => <pre>'; print_r($_GET); echo '</pre></p>'; exit;
 
 // Erreur, les parametres on ete alteres
-        if ($_GET['STATUS'] == 9) {
+        if ($_GET['STATUS'] == 9 || $_GET['STATUS'] == 91 || $_GET['STATUS'] == 92 || $_GET['STATUS'] == 99 || $_GET['STATUS'] == 95) {
 
             // Get reservation and user data
             $reservation = $entityManager->find(
