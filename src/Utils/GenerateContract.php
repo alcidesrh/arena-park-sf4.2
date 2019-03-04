@@ -80,9 +80,21 @@ class GenerateContract
             $document->setValue('tva', '');
             $document->setValue('tva2', '');
         } else {
+            if($reservation->getPaymentType() == 2){
+                $paymode = 'Visa';
+            }
+            else if($reservation->getPaymentType() == 3){
+                $paymode = 'MasterCard';
+            }
+            else if($reservation->getPaymentType() == 4){
+                $paymode = 'PostFinance Card';
+            }
+            else{
+                $paymode = 'PostFinance e-finance';
+            }
             $document->setValue(
                 'paymode',
-                utf8_decode("Payé en ligne par ").ucwords($reservation->getPaymentType() == 2 ? 'Visa' : 'MasterCard')
+                utf8_decode("Payé en ligne par ").ucwords($paymode)
             );
             if ($tarif->getTva()) {
                 $document->setValue('tva', 'TVA');
