@@ -353,7 +353,9 @@
             <div class="content">
                 <table bgcolor="#009688">
                     <tr>
-                        <td><img src="{{ asset('img/templatemo_banner.jpg') }}"/></td>
+                        <td>
+                            <img src="{{ app.request.getSchemeAndHttpHost()~asset('img/templatemo_banner.jpg') }}"/>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -376,14 +378,19 @@
                         <td>
                             <h3>Bonjour, {{ user }}</h3>
                             <p class="lead">
-                                Ci-joint vous trouvez votre contrat. Le document doit
-                                être imprimé et présenté au voiturier le jour de la prise en charge.
+                                Ci - joint vous trouvez votre contrat. Le documents doit être imprimé et présenté au voiturier le jour de la prise en charge.
                             </p>
                             <p>
-                                Vous avez besoin d`informations complémentaires? Vous pouvez contacter notre
-                                service par téléphone au +41(0)22 840 83 50 ou par e-mail à l`adresse
-                                suivante: info@arena-park.chCordialement, Votre équipe ARENA-PARK.CH4, rue du
-                                Grand-Pré CP/localité 1202. Genève
+                                Vous avez besoin d’informations complémentaires ? Vous pouvez nous contacter au Service Clientèle par téléphone au + 41 22 840 8350 ou soit par e-mail : info@arena-park.ch
+                            </p>
+                            <p>
+                                Merci d’avance
+                            </p>
+                            <p>
+                                Cordialement,
+                            </p>
+                            <p>
+                                SERVICE DE PARKING PRIVÉ
                             </p>
                         </td>
                     </tr>

@@ -274,13 +274,16 @@ class ArenaParkController extends AbstractController
 
             }
 
+            $userName = $user->getSex()?'Monsieur ':'Madame ';
+            $userName .= $user->getName();
+
             $message = (new \Swift_Message('Bienvenue chez Arena-Park'))
                 ->setFrom('noreply@arena-park.ch')
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
                         'emails/reservation.html.twig',
-                        array('user' => $user->getName())
+                        array('user' => $userName)
                     ),
                     'text/html'
                 )->attach(\Swift_Attachment::fromPath($contract->getPath()));
@@ -293,7 +296,7 @@ class ArenaParkController extends AbstractController
                 ->setBody(
                     $this->renderView(
                         'emails/reservation.html.twig',
-                        array('user' => $user->getName())
+                        array('user' => $userName)
                     ),
                     'text/html'
                 )->attach(\Swift_Attachment::fromPath($contract->getPath()));
