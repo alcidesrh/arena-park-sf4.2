@@ -147,6 +147,8 @@ class GenerateContract
 
         $dStart = $reservation->getDateCarIn();
         $dEnd = $reservation->getDateCarOut();
+        $dStart->setTime(0, 0, 0);
+        $dEnd->setTime(23, 59, 59);
         $dDiff = $dStart->diff($dEnd);
 
 
