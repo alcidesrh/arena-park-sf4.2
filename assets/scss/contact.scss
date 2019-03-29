@@ -1,14 +1,17 @@
 @import "app.scss";
-
-@import "node_modules/materialize-css/sass/components/buttons.scss";
-@import "node_modules/materialize-css/sass/components/forms/forms.scss";
-@import "node_modules/materialize-css/sass/components/toast.scss";
-
 @import "style.scss";
 
-.material-icons{
-  color: $primary-color;
+.theme--light.application{
+  background: white;
 }
-.input-field label{
-  pointer-events: all !important;
+.material-icons{
+  color: $primary-color !important;
+}
+.loading-div{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left:0px;
+  z-index: 9999;
 }

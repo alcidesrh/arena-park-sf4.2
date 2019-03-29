@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
+    {{ encore_entry_link_tags('css/vuetify') }}
     {{ encore_entry_link_tags('css/contact') }}
 {% endblock %}
 {% block title %}{% endblock %}
@@ -43,34 +44,8 @@
                                 {% endif %}
                             </div>
                             <div class="col s12 l6">
-                                <form id="contact">
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">email</i>
-                                            <input id="email" type="email" name="email" class="validate" v-model="contact.email" v-validate="'required|email'">
-                                            <label for="email">Votre email</label>
-                                            <span class="red-text">${ errors.first('email') }</span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">subject</i>
-                                            <input id="sujet" type="text" class="validate" v-model="contact.subject">
-                                            <label for="sujet">Sujet</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">message</i>
-                                            <textarea class="materialize-textarea" v-model="contact.message" v-validate="'required'" name="message"></textarea>
-                                            <label for="Message">Message</label>
-                                            <span class="red-text">${ errors.first('message') }</span>
-                                        </div>
-                                    </div>
-                                    <a class="teal btn-small btn-card waves-effect waves-light right" @click="send">envoyer
-                                        <i class="material-icons right" style="color: white">send</i>
-                                    </a>
-                                </form>
+                                <div id="contact">
+                                </div>
                             </div>
                         </div>
                     </div>

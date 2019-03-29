@@ -745,9 +745,9 @@
                 v => !!v || 'Ce champ est obligatoire'
             ],
             emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+/.test(v) || 'E-mail must be valid'
-            ],
+                v => !!v || 'Ce champ est obligatoire',
+                v => /.+@.+/.test(v) || "L'email doit être valide"
+            ]
         }),
 
         methods: {
