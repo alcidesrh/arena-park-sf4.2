@@ -159,10 +159,22 @@ class GenerateContract
         $total = $reservation->getPayment();// + $percent;
         if ($tarif->getActiveDescount()) {
             $descount = $tarif->getDescount();
+            $document->setValue('chf', 'CHF');
+            $document->setValue('subtotal', 'SOUS-TOTAL');
             $document->setValue('total', number_format($subtotal, 2));
             $document->setValue('percent', "-$descount%");
             $document->setValue('totalp', number_format($total, 2));
         } else {
+            if($reservation->getPaymentType() === 1){
+                $document->setValue('chf', '');
+                $document->setValue('subtotal', '');
+                $document->setValue('total', '');
+            }
+            else{
+                $document->setValue('chf', 'CHF');
+                $document->setValue('subtotal', 'SOUS-TOTAL');
+                $document->setValue('total', number_format($subtotal, 2));
+            }
             $document->setValue('totalp', number_format($total, 2));
         }
 
