@@ -145,8 +145,8 @@ class GenerateContract
             $document->setValue('servicec'.$i, ' ');
         }
 
-        $dStart = $reservation->getDateCarIn();
-        $dEnd = $reservation->getDateCarOut();
+        $dStart = clone $reservation->getDateCarIn();
+        $dEnd = clone $reservation->getDateCarOut();
         $dStart->setTime(0, 0, 0);
         $dEnd->setTime(23, 59, 59);
         $dDiff = $dStart->diff($dEnd);
