@@ -174,7 +174,7 @@ class PostFinanceController extends AbstractController
             $mailer->send($message);
 
             $message = (new \Swift_Message('Reserva para:'.$reservation->getDateCarIn()->format('d-m-Y H:i')))
-                ->setFrom('noreply@arena-park.ch')
+                ->setFrom($user->getEmail())
                 ->setTo('reservation@arena-park.ch')
                 ->setBody(
                     $this->renderView(
