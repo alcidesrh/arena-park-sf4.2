@@ -278,7 +278,7 @@ class ArenaParkController extends AbstractController
             $userName .= $user->getName();
 
             $message = (new \Swift_Message('Bienvenue chez Arena-Park'))
-                ->setFrom('noreply@arena-park.ch')
+                ->setFrom('reservation@arena-park.ch')
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
@@ -291,7 +291,7 @@ class ArenaParkController extends AbstractController
             $mailer->send($message);
 
             $message = (new \Swift_Message('Reserva para:'. $reservation->getDateCarIn()->format('d-m-Y H:i')))
-                ->setFrom($user->getEmail())
+                ->setFrom('noreply@arena-park.ch')
                 ->setTo('reservation@arena-park.ch')
                 ->setBody(
                     $this->renderView(
