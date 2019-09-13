@@ -12,23 +12,13 @@
     <div>
         <v-card>
             <v-card-title>
-                <!--<v-progress-linear style="max-width: 200px; margin-left: 15px"-->
-                <!--v-if="loading"-->
-                <!--:indeterminate="true"></v-progress-linear>-->
                 <v-layout justify-center aling-center class="loading-div" v-if="loading"
                           style="width: 100%;height: 100%;position: fixed;top: 50%;left:0px;z-index: 9999;">
                     <v-progress-linear style="max-width: 300px"
                                        :indeterminate="true"></v-progress-linear>
                 </v-layout>
-                <!--<v-toolbar v-if="numbers">-->
                 <v-container pa-0>
-
                     <v-layout justify-end row>
-                        <!--<v-chip outline>-->
-                            <!--<v-icon left>person</v-icon>-->
-                            <!--Usuarios-->
-                            <!--<v-chip color="green" text-color="white">{{numbers.users}}</v-chip>-->
-                        <!--</v-chip>-->
                         <v-chip outline>
                             <v-icon left>time_to_leave</v-icon>
                             Reservaciones
@@ -45,7 +35,6 @@
                             <v-chip color="green" text-color="white">PostFinance e-finance {{numbers.postFinanceEfinance}}</v-chip>
                         </v-chip>
                     </v-layout>
-
                     <v-layout row mt-5 wrap>
                         <v-flex xs6 md3 class="pr-2">
                             <v-date-picker
@@ -98,10 +87,7 @@
                             </div>
                         </v-flex>
                     </v-layout>
-
                 </v-container>
-
-
             </v-card-title>
             <v-card-text>
 

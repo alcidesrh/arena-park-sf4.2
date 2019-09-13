@@ -184,7 +184,6 @@
     import {mapGetters} from 'vuex';
     import moment from 'moment';
     import {API_HOST} from '../../config/_entrypoint';
-    import fetch from '../../utils/fetch';
 
     export default {
         data: () => ({
@@ -322,8 +321,9 @@
             pagination: {
                 handler() {
                     this.$vuetify.goTo(0, 3000);
-                    if (this.pagination.rowsPerPage != -1)
-                        this.$store.dispatch('reservation/list/setItemsPerPage', this.pagination.rowsPerPage);
+                    if (this.pagination.rowsPerPage != -1){
+                        this.$store.dispatch('reservation/list/setItemsPerPage', this.pagination.rowsPerPage)
+                    }
                     else
                         this.$store.dispatch('reservation/list/setItemsPerPage', 1000000);
                     this.$store.dispatch('reservation/list/setPage', this.pagination.page);

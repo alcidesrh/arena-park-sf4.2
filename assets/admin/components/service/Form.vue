@@ -87,6 +87,14 @@
             </v-layout>
             <v-layout wrap>
                 <v-flex xs6 md2>
+                    <v-text-field
+                            v-model="item.priority"
+                            label="Priority"
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+            <v-layout wrap>
+                <v-flex xs6 md2>
                     <v-checkbox
                             v-model="item.active"
                             label="Activar servicio"
@@ -125,7 +133,7 @@
                 if (typeof this.item.prices == typeof undefined)
                     this.item.prices = [];
                 this.services.push({price: this.priceService, type: this.carType});
-                // this.item.prices.push({price: this.priceService, type: this.carType});
+
                 if (this.carType == 0) {
                     this.disabledPrice = true;
                 }
@@ -153,7 +161,6 @@
             item: function () {
                 if(this.initialValues && typeof this.initialValues.prices != typeof undefined){
                     this.services = this.initialValues.prices;
-                    // Object.assign(this.services, this.initialValues.prices);
                 }
                 return this.initialValues ? this.initialValues : this.values;
             }

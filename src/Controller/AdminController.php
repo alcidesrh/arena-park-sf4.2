@@ -6,6 +6,8 @@ use App\Entity\Page;
 use App\Entity\Section;
 use App\Utils\Util;
 use Doctrine\ORM\EntityManagerInterface;
+use Mpdf\Mpdf;
+use Mpdf\Output\Destination;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -174,5 +176,28 @@ class AdminController extends AbstractController
 
         return new JsonResponse($reservations ?? null);
 
+    }
+
+    /**
+     * @Route(
+     *     name="pdf-report",
+     *     path="/pdf-report",
+     *     methods={"POST"}
+     * )
+     */
+    public function pdfReport(EntityManagerInterface $entityManager)
+    {
+
+        $date = new \DateTime(Util::decodeBody());
+        $date2 = clone $date;
+        $date->setTime(0, 0, 0);
+        $date2->setTime(23, 59, 59);
+        $reservations = $entityManager->getRepository('App:Reservation')->findByDay($date, $date2);
+
+        $mpdf = new Mpdf(['tempDir' => 'pdf/temp/']);
+
+        $mpdf->WriteHTML($this->renderView('pdf-resumen.html.twig', ['reservations' => $reservations,  'date' => $date->format('d/m/Y')]));
+        $mpdf->Output('pdf/reservaciones.pdf', Destination::FILE);
+        return new JsonResponse('pdf/reservaciones.pdf');
     }
 }

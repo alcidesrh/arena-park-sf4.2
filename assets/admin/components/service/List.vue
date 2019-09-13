@@ -26,7 +26,7 @@
           </td>
           <td>{{ props.item.description }}</td>
           <td><v-icon :color="props.item.active?'teal':'red'">check</v-icon></td>
-          <td>
+          <td class="pa-0" style="min-width: 90px">
             <v-btn icon class="mx-0" @click="$router.push({name: 'ServiceUpdate', params: {id: props.item['id']}})">
               <v-icon color="teal">edit</v-icon>
             </v-btn>

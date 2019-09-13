@@ -113,9 +113,11 @@ class GenerateContract
 
         $cont = 1;
         $subtotal = $tarif->getAnnulation() + $tarif->getPriceCharge();
+        $aux = false;//Para el control visual
         if ($services = $reservation->getServices()) {
             foreach ($services as $value) {
 
+                if($value['id'] == 7)$aux = true;
                 $service = $entityManager->getRepository('App:Service')->find($value['id']);
 
                 $document->setValue('s'.$cont, 1);
@@ -136,13 +138,25 @@ class GenerateContract
 
         for ($i = 1; $i < 7; $i++) {
 
-            $document->setValue('chf'.$i, '');
+            if(!$aux && $i == 1){
+                $document->setValue('chf'.$i, 'CHF');
 
-            $document->setValue('s'.$i, ' ');
+                $document->setValue('s'.$i, 1);
 
-            $document->setValue('service'.$i, ' ');
+                $document->setValue('service'.$i, 'Voulez-vous faire le contrôle');
 
-            $document->setValue('servicec'.$i, ' ');
+                $document->setValue('servicec'.$i, '0');
+            }
+            else{
+                $document->setValue('chf'.$i, '');
+
+                $document->setValue('s'.$i, ' ');
+
+                $document->setValue('service'.$i, ' ');
+
+                $document->setValue('servicec'.$i, ' ');
+            }
+
         }
 
         $dStart = clone $reservation->getDateCarIn();
@@ -156,7 +170,7 @@ class GenerateContract
 
         $charge = ($dDiff->days + 1) * $tarif->getDay();
         $subtotal += $charge;
-        $document->setValue('charge', $charge, number_format($charge, 2));
+        $document->setValue('charge', number_format($charge, 2));
 
         $total = $reservation->getPayment();// + $percent;
         if ($tarif->getActiveDescount()) {

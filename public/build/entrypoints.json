@@ -11,7 +11,7 @@
     "js/admin": {
       "js": [
         "/build/runtime.6cf710cd.js",
-        "/build/js/admin.36728262.js"
+        "/build/js/admin.f837baa4.js"
       ],
       "css": [
         "/build/js/admin.9f91b3e8.css"
@@ -38,13 +38,13 @@
     "js/contact": {
       "js": [
         "/build/runtime.6cf710cd.js",
-        "/build/js/contact.2d21faec.js"
+        "/build/js/contact.e4b44b95.js"
       ]
     },
     "js/reservation": {
       "js": [
         "/build/runtime.6cf710cd.js",
-        "/build/js/reservation.e163f86b.js"
+        "/build/js/reservation.03d3d134.js"
       ]
     },
     "js/app": {

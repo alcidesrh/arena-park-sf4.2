@@ -32,6 +32,7 @@
         ]),
         methods: {
             create: function (item) {
+                item.priority = parseInt(item.priority);
                 this.$store.dispatch('service/create/create', item);
             }
         },

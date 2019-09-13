@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(attributes={"order"={"priority": "ASC"}})
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
  */
 class Service
@@ -37,6 +37,11 @@ class Service
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $active;
+
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $priority;
 
     public function getId(): ?int
     {
@@ -79,15 +84,16 @@ class Service
         return $this;
     }
 
-    public function getActive(): ?bool
+    public function getPriority()
     {
-        return $this->active;
+        return $this->priority ?? 0;
     }
 
-    public function setActive(?bool $active): self
+    public function setPriority($priority): self
     {
-        $this->active = $active;
+        $this->priority = $priority;
 
         return $this;
     }
+
 }

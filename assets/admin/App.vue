@@ -68,6 +68,31 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-menu
+                    ref="menu"
+                    :close-on-content-click="false"
+                    v-model="menu"
+                    :nudge-right="40"
+                    persistent
+                    lazy
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    min-width="290px"
+            >
+                <v-text-field
+                        style="max-width: 170px"
+                        slot="activator"
+                        v-model="date"
+                        label="A partir de"
+                        prepend-icon="event"
+                        readonly
+                ></v-text-field>
+                <v-date-picker v-model="date" @input="menu = false" no-title>
+                </v-date-picker>
+            </v-menu>
+            <v-btn small color="primary" @click="getReport" v-if="!loading">Descargar PDF</v-btn>
+            <v-progress-circular indeterminate color="primary" v-else></v-progress-circular>
         </v-toolbar>
         <v-content>
             <v-container>
@@ -84,25 +109,40 @@
 </template>
 
 <script>
-
+    import fetch from './utils/fetch';
     import $ from 'jquery';
+    import moment from 'moment';
+    import {API_HOST} from './config/_entrypoint';
     export default {
         data: () => ({
             drawer: true,
             miniVariant: false,
             right: true,
             title: 'Arena Park',
-            admins: [
-                ['Management', 'people_outline'],
-                ['Settings', 'settings']
-            ],
-            cruds: [
-                ['Create', 'add'],
-                ['Read', 'insert_drive_file'],
-                ['Update', 'update'],
-                ['Delete', 'delete']
-            ]
+            loading: false,
+            menu: false,
+            modal: false,
+            menu2: false,
+            date: null
         }),
+
+        methods: {
+            getReport(){
+                this.loading = true;
+                fetch('/pdf-report', {method: 'POST', body: JSON.stringify(this.date)})
+                    .then(response => response.json())
+                    .then(data => {
+                        this.loading = false;
+                        window.open(API_HOST+'/'+data);
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                    });
+            }
+        },
+        created(){
+            this.date = moment().add(1, 'days').format('YYYY-MM-DD');
+        },
         mounted() {
             $('body').on('click', '.admin-link', function(){
                 $('.section-focus').removeClass('section-focus');
@@ -131,11 +171,7 @@
                         this.$router.push({path: path});
                     }
                 }
-//----------------------------------------------------------
-
-//---------------------------------------------------------------------------
             })
-            // this.$router.push({name: 'PageList'});
         }
     }
 </script>

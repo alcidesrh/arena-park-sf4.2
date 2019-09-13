@@ -325,6 +325,8 @@
                                             label="Aéroport de provenance"
                                             persistent-hint
                                             prepend-icon="local_airport"
+                                            :rules="requireRules"
+                                            required
                                     >
                                         <v-slide-x-reverse-transition
                                                 slot="append-outer"
@@ -495,11 +497,26 @@
                             <div v-if="services2.length" class="mt-5">
                                 <v-layout row wrap v-for="service,index in services2" :key="index">
                                     <v-flex xs12 md6>{{service.name}}</v-flex>
-                                    <v-flex xs12 md6>
+                                    <v-flex xs12 md6 v-if="service.id == 7">
+                                        <v-radio-group v-model="serviceSelected[index]"
+                                                       :rules="requireRules"
+                                                       required>
+                                            <v-radio
+                                                    :label="'Oui, '+service.prices[0].price+' CHF'"
+                                                    :value="service.id"
+                                            ></v-radio>
+                                            <v-radio
+                                                    label="Nom"
+                                                    value="Nom">
+                                            ></v-radio>
+                                        </v-radio-group>
+                                    </v-flex>
+                                    <v-flex xs12 md6 v-else>
                                         <v-checkbox v-model="serviceSelected[index]"
                                                     :label="service.prices[0].price+' CHF'"
                                                     :value="service.id"></v-checkbox>
                                     </v-flex>
+                                        <v-flex v-if="service.id == 7" xs12 style="font-weight: bold">{{service.description}}</v-flex>
                                 </v-layout>
                             </div>
 
@@ -661,7 +678,7 @@
                                     <div>Prise en charge:<span class="right">{{tarif.priceCharge}} CHF</span></div>
                                     <div>Assurance annulation de vol:<span class="right">{{tarif.annulation}} CHF</span>
                                     </div>
-                                    <div v-for="service in reservation.services">{{getServiceName(service.id)}}:<span
+                                    <div v-for="service in reservation.services" v-if="service.id != 7 || (service.id == 7 && service.price != 'Nom')">{{getServiceName(service.id)}}:<span
                                             class="right">{{getServicePrice(service.id, service.price)}} CHF</span>
                                     </div>
                                     <div>Gardiennage:<span class="right">{{tarif.gardiennage}} CHF</span></div>
@@ -875,7 +892,7 @@
             },
             getServiceName(id) {
                 let service = this.services.filter(item => item.id == id);
-                return service[0].name;
+                return service[0].id == 7?'Contrôle visuel':service[0].name;
             },
             getServicePrice(id, index) {
                 let service = this.services.filter(item => item.id == id);

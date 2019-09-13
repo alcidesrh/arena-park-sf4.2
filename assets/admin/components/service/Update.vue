@@ -40,6 +40,7 @@
         },
         methods: {
             update(values) {
+                values.priority = parseInt(values.priority);
                 this.$store.dispatch('service/update/update', {item: this.retrieved, values: values});
             },
             reset() {
