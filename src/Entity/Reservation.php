@@ -357,6 +357,7 @@ class Reservation implements \JsonSerializable
             'createAt' => $this->createAt->format('Y-m-d'),
             'user' => $this->user,
             'payment' => $this->payment,
+			'date' => $this->dateCarIn->format('Y-m-d'),
             'dateCarIn' => $this->dateCarIn->format('Y-m-d'),
             'dateCarOut' => $this->dateCarOut->format('Y-m-d'),
             'dateFlyOut' => $this->dateFlyOut->format('Y-m-d'),
