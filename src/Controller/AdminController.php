@@ -127,10 +127,6 @@ class AdminController extends AbstractController
      */
     public function statistics(EntityManagerInterface $entityManager)
     {
-//        $return['users'] = $entityManager->createQuery('SELECT COUNT(u.id) FROM App:User u')->getSingleScalarResult();
-//        $return['usersR'] = $entityManager->createQuery(
-//            'SELECT u, COUNT(r.user) FROM App:User u JOIN App:Reservation r WHERE r.user = u.id GROUP BY u ORDER BY COUNT(r.user) DESC'
-//        )->setMaxResults(10)->getResult();
         $return['reservations'] = $entityManager->createQuery(
             'SELECT COUNT(r.id) FROM App:Reservation r'
         )->getSingleScalarResult();
@@ -167,10 +163,9 @@ class AdminController extends AbstractController
     public function reservationStatistics(EntityManagerInterface $entityManager, Request $request)
     {
         $date = $request->get('dates');
-
-        $reservations = $entityManager->createQuery(
-                'SELECT r FROM App:Reservation r WHERE r.dateCarIn >= :start AND r.dateCarIn < :end ORDER BY r.dateCarIn ASC'
-            )->setParameters(
+        $start = new \DateTime($date['start']); $end = new \DateTime($date['end']);
+        $query = $request->get('in')?'SELECT r FROM App:Reservation r WHERE r.dateCarIn >= :start AND r.dateCarIn < :end ORDER BY r.dateCarIn ASC':'SELECT r FROM App:Reservation r WHERE r.dateCarOut >= :start AND r.dateCarOut < :end ORDER BY r.dateCarOut ASC';
+        $reservations = $entityManager->createQuery($query)->setParameters(
                 ['start' => new \DateTime($date['start']), 'end' => new \DateTime($date['end'])]
             )->getResult();
 

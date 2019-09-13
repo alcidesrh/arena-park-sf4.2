@@ -60,6 +60,16 @@
                                 </div>
                             </div>
                         </v-flex>
+                    </v-layout>
+                    <v-layout row mt-5 wrap>
+                        <v-flex xs6>
+                            <strong>Entrada del carro:</strong>
+                        </v-flex>
+                        <v-flex xs6>
+                            <strong>Salida del carro:</strong>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row mt-2 wrap>
                         <v-flex xs6 md3>
                             <v-date-picker
                                     width="230"
@@ -81,6 +91,32 @@
                                     <label class="subheading">Usuarios:</label>
                                     <div style="overflow-y: auto; max-height: 170px">
                                         <div v-for="(item) in dayData.users" v-html="item"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </v-flex>
+                        <v-flex xs6 md3>
+                            <v-date-picker
+                                    width="230"
+                                    no-title
+                                    v-model="date2"
+                                    color="teal"
+                                    :picker-date.sync="date2"
+                                    :events="dayReservations2"
+                                    event-color="green lighten-1"
+                            ></v-date-picker>
+                        </v-flex>
+                        <v-flex xs6 md3 style="background: teal; color: white; padding: 5px 0px 0px 10px;">
+                            <h4>Datos del día ({{ date2 }})</h4>
+                            <v-divider></v-divider>
+                            <div class="mt-3">
+                                <div>Reservaciones: {{dayData2.cant || 0}}</div>
+                                <div>Facturación: {{dayData2.total || 0}} CHF</div>
+                                <div class="mt-2" v-show="dayData2.users">
+                                    <label class="subheading">Usuarios:</label>
+                                    <div style="overflow-y: auto; max-height: 170px">
+                                        <div v-for="(item) in dayData2.users" v-html="item"></div>
 
                                     </div>
                                 </div>
@@ -109,8 +145,10 @@
             monthData: {},
             dayData: {},
             date: "",
-            pickerDate: null,
-            dayReservations: []
+            dayReservations: [],
+            dayData2: {},
+            date2: "",
+            dayReservations2: []
 
         }),
         computed: mapGetters({}),
@@ -125,9 +163,10 @@
                 }
                 ;
                 this.date = moment(val).format('YYYY-MM-DD');
-                let page = page = '/reservation-statistics?month=true&dates[start]=' + date.format('YYYY-MM-DD') + '&dates[end]=' + date.add(1, 'M').format('YYYY-MM-DD');
+                this.date2 = moment(val).format('YYYY-MM-DD');
+                let page = page = '/reservation-statistics?in=true&month=true&dates[start]=' + date.format('YYYY-MM-DD') + '&dates[end]=' + date.add(1, 'M').format('YYYY-MM-DD');
                 this.loading = true;
-                return fetch(page)
+                fetch(page)
                     .then(response => response.json())
                     .then(data => {
                         this.loading = false;
@@ -144,9 +183,26 @@
                         this.loading = false;
                         alert(e.message)
                     });
+                date = moment(val);
+                page = '/reservation-statistics?out=true&month=true&dates[start]=' + date.format('YYYY-MM-DD') + '&dates[end]=' + date.add(1, 'M').format('YYYY-MM-DD');
+                this.loading = true;
+                fetch(page)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.loading = false;
+                        $this.dayReservations2 = [];
+                        data.forEach(item => {
+                            $this.dayReservations2.push(moment(item.date).format('YYYY-MM-DD'));
+                        });
+                        console.log($this.dayReservations2);
+                    })
+                    .catch(e => {
+                        this.loading = false;
+                        alert(e.message)
+                    });
             },
             date(val) {
-                let page = page = '/reservation-statistics?dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
+                let page = page = '/reservation-statistics?in=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
                 this.loading = true;
                 return fetch(page)
                     .then(response => response.json())
@@ -166,6 +222,28 @@
                         this.loading = false;
                         alert(e.message)
                     });
+            },
+            date2(val) {
+                let page = page = '/reservation-statistics?out=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
+                this.loading = true;
+                return fetch(page)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.dayData2 = [];
+                        this.loading = false;
+                        if (!data.length)
+                            return;
+                        let total = 0, users = [];
+                        data.forEach(item => {
+                            total = total + item.payment;
+                            users.push(item.user.sex? 'Sr '+item.user.name:'Sra '+item.user.name);
+                        });
+                        this.dayData2 = {cant: data.length || 0, total: parseFloat(total).toFixed(2), users: users};
+                    })
+                    .catch(e => {
+                        this.loading = false;
+                        alert(e.message)
+                    });
             }
         },
         created() {
@@ -174,7 +252,6 @@
             fetch('/statistics')
                 .then(response => response.json())
                 .then(data => {
-                    // console.log(data);
                     this.numbers = data;
                     this.loading = false;
                 })
