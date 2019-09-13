@@ -84,7 +84,7 @@
                         style="max-width: 170px"
                         slot="activator"
                         v-model="date"
-                        label="A partir de"
+                        label="Reservaciones para"
                         prepend-icon="event"
                         readonly
                 ></v-text-field>
