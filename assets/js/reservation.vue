@@ -418,7 +418,7 @@
                                             <v-radio-group v-model="reservation.baggage" row class="d-inline">
                                                 <v-radio label="Oui"
                                                          :value="true"></v-radio>
-                                                <v-radio label="Non"
+                                                <v-radio label="No"
                                                          :value="false"></v-radio>
                                             </v-radio-group>
                                         </v-flex>
@@ -506,7 +506,7 @@
                                                     :value="service.id"
                                             ></v-radio>
                                             <v-radio
-                                                    label="Nom"
+                                                    label="Non"
                                                     value="Nom">
                                             ></v-radio>
                                         </v-radio-group>
@@ -658,7 +658,7 @@
                                         reservation.hourCarOut}}</p>
                                     <p>Aéroport de provenance: {{getAirportName()}}</p>
                                     <p>Numéro de vol: {{reservation.fly}}</p>
-                                    <p>Bagages: {{reservation.baggage?'Qui':'Nom'}}</p>
+                                    <p>Bagages: {{reservation.baggage?'Qui':'Non'}}</p>
                                 </div>
                             </v-card-title>
                             <v-card-actions>
