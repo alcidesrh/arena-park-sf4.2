@@ -6,13 +6,13 @@
 
 <h4 style="margin-bottom: 10px">Depart: {{ reservations.carIn | length  }}</h4>
 {% if reservations.carIn is not empty %}
-<table>
+<table style="width: 100%">
     <thead>
      <tr>
-        <td></td>
         <td><strong>Nom</strong></td>
         <td><strong>Téléphone</strong></td>
         <td><strong>Décollage</strong></td>
+         <td><strong>Vol</strong></td>
          <td><strong>Prise en charge</strong></td>
         <td><strong>Plate</strong></td>
         <td><strong>Marque</strong></td>
@@ -20,10 +20,10 @@
     </thead>
     {% for key, data in reservations.carIn %}
      <tr>
-         <td>{{ key + 1 }}.-</td>
-        <td>{{ data.user.name }}</td>
+        <td>{{ key + 1 }}.-{{ data.user.name }}</td>
          <td>{{ data.user.phone }}</td>
         <td>{{ data.dateFlyOut | date('m/d/Y H:i') }}</td>
+        <td>{{ data.fly }}</td>
          <td>{{ data.dateCarIn | date('m/d/Y H:i') }}</td>
         <td>{{ data.car.plate }}</td>
         <td>{{ data.car.mark }}</td>
@@ -32,17 +32,17 @@
 </table>
     </br></br></br>
 {% endif %}
-
+ 
 <h4 style="margin-bottom: 10px">Arrivée: {{ reservations.carOut | length  }}</h4>
 {% if reservations.carOut is not empty %}
 
-    <table>
+    <table style="width: 100%">
         <thead>
         <tr>
-            <td></td>
             <td><strong>Nom</strong></td>
             <td><strong>Téléphone</strong></td>
             <td><strong>Arrivée</strong></td>
+            <td><strong>Vol</strong></td>
             <td><strong>Restitution</strong></td>
             <td><strong>Plate</strong></td>
             <td><strong>Marque</strong></td>
@@ -50,10 +50,10 @@
         </thead>
         {% for key, data in reservations.carOut %}
             <tr>
-                <td>{{ key + 1 }}.-</td>
-                <td>{{ data.user.name }}</td>
+                <td>{{ key + 1 }}.-{{ data.user.name }}</td>
                 <td>{{ data.user.phone }}</td>
                 <td>{{ data.dateFlyIn | date('m/d/Y H:i') }}</td>
+                <td>{{ data.fly }}</td>
                 <td>{{ data.dateCarOut | date('m/d/Y H:i') }}</td>
                 <td>{{ data.car.plate }}</td>
                 <td>{{ data.car.mark }}</td>
