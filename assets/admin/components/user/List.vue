@@ -303,7 +303,7 @@
                         .then(data => {
                             this.searchUserLoading = false;
                             if (data['hydra:member'].length && typeof this.user.id == typeof undefined) {
-                                this.users = data['hydra:member'];console.log(this.users);
+                                this.users = data['hydra:member'];
                                 this.menuSearchUserPhone = true;
                             }
                         })

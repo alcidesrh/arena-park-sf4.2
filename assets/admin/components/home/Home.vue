@@ -194,7 +194,6 @@
                         data.forEach(item => {
                             $this.dayReservations2.push(moment(item.dateCarOut).format('YYYY-MM-DD'));
                         });
-                        console.log($this.dayReservations2);
                     })
                     .catch(e => {
                         this.loading = false;
