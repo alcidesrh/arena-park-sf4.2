@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiFilter(SearchFilter::class, properties={"email": "partial", "name": "partial", "phone": "partial"})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements \JsonSerializable
+class User //implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -192,12 +192,17 @@ class User implements \JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
-    {
-        return [
-            'name' => $this->name,
-            'sex' => $this->sex,
-        ];
-    }
+//     public function jsonSerialize()
+//     {
+//         return [
+//             'id' => $this->id,
+//             'name' => $this->name,
+//             'sex' => $this->sex,
+//             'email' => $this->email,
+//             'phone' => $this->phone,
+//             'car' => $this->getCar(),
+//             'reservations' => $this->getReservations()
+//         ];
+//     }
 
 }

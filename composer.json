@@ -9,6 +9,7 @@
         "leogout/seo-bundle": "^1.2",
         "mpdf/mpdf": "^8.0",
         "phpoffice/phpword": "^0.16.0",
+        "psr/simple-cache": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",

@@ -148,7 +148,7 @@
             dayReservations: [],
             dayData2: {},
             date2: "",
-            dayReservations2: []
+            dayReservations2: [],
 
         }),
         computed: mapGetters({}),
@@ -175,13 +175,13 @@
                         data.forEach(item => {
                             total = total + item.payment;
                             users.push({user: item.user.sex? 'Sr '+item.user.name:'Sra '+item.user.name, date: moment(item.date).format('DD')});
-                            $this.dayReservations.push(moment(item.date).format('YYYY-MM-DD'));
+                            $this.dayReservations.push(moment(item.dateCarIn).format('YYYY-MM-DD'));
                         });
                         this.monthData = {cant: data.length || 0, total: parseFloat(total).toFixed(2), users: users};
                     })
                     .catch(e => {
                         this.loading = false;
-                        alert(e.message)
+                        console.log(e.message)
                     });
                 date = moment(val);
                 page = '/reservation-statistics?out=true&month=true&dates[start]=' + date.format('YYYY-MM-DD') + '&dates[end]=' + date.add(1, 'M').format('YYYY-MM-DD');
@@ -192,17 +192,17 @@
                         this.loading = false;
                         $this.dayReservations2 = [];
                         data.forEach(item => {
-                            $this.dayReservations2.push(moment(item.date).format('YYYY-MM-DD'));
+                            $this.dayReservations2.push(moment(item.dateCarOut).format('YYYY-MM-DD'));
                         });
                         console.log($this.dayReservations2);
                     })
                     .catch(e => {
                         this.loading = false;
-                        alert(e.message)
+                        console.log(e.message)
                     });
             },
             date(val) {
-                let page = page = '/reservation-statistics?in=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
+                let page = page = '/reservation-statistics?in=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'M').format('YYYY-MM-DD');
                 this.loading = true;
                 return fetch(page)
                     .then(response => response.json())
@@ -220,11 +220,11 @@
                     })
                     .catch(e => {
                         this.loading = false;
-                        alert(e.message)
+                        console.log(e.message)
                     });
             },
             date2(val) {
-                let page = page = '/reservation-statistics?out=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
+                let page = page = '/reservation-statistics?out=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'M').format('YYYY-MM-DD');
                 this.loading = true;
                 return fetch(page)
                     .then(response => response.json())
@@ -242,7 +242,7 @@
                     })
                     .catch(e => {
                         this.loading = false;
-                        alert(e.message)
+                        console.log(e.message)
                     });
             }
         },
@@ -257,7 +257,7 @@
                 })
                 .catch(e => {
                     this.loading = false;
-                    alert(e.message)
+                    console.log(e.message)
                 });
         },
     }

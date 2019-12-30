@@ -163,8 +163,9 @@ class AdminController extends AbstractController
     public function reservationStatistics(EntityManagerInterface $entityManager, Request $request)
     {
         $date = $request->get('dates');
-        $start = new \DateTime($date['start']); $end = new \DateTime($date['end']);
-        $query = $request->get('in')?'SELECT r FROM App:Reservation r WHERE r.dateCarIn >= :start AND r.dateCarIn < :end ORDER BY r.dateCarIn ASC':'SELECT r FROM App:Reservation r WHERE r.dateCarOut >= :start AND r.dateCarOut < :end ORDER BY r.dateCarOut ASC';
+        $query = $request->get('in')?
+            'SELECT r FROM App:Reservation r WHERE r.dateCarIn >= :start AND r.dateCarIn < :end ORDER BY r.dateCarIn ASC':
+            'SELECT r FROM App:Reservation r WHERE r.dateCarOut >= :start AND r.dateCarOut < :end ORDER BY r.dateCarOut ASC';
         $reservations = $entityManager->createQuery($query)->setParameters(
                 ['start' => new \DateTime($date['start']), 'end' => new \DateTime($date['end'])]
             )->getResult();
@@ -177,21 +178,21 @@ class AdminController extends AbstractController
      * @Route(
      *     name="pdf-report",
      *     path="/pdf-report",
-     *     methods={"POST"}
      * )
      */
     public function pdfReport(EntityManagerInterface $entityManager)
     {
 
-        $date = new \DateTime(Util::decodeBody());
+        $date = $date = new \DateTime("2019-07-15");//new \DateTime(Util::decodeBody());
         $date2 = clone $date;
         $date->setTime(0, 0, 0);
         $date2->setTime(23, 59, 59);
         $reservations = $entityManager->getRepository('App:Reservation')->findByDay($date, $date2);
 
         $mpdf = new Mpdf(['tempDir' => 'pdf/temp/']);
-
+// return $this->render('pdf-resumen.html.twig', ['reservations' => $reservations,  'date' => $date->format('d/m/Y')]);
         $mpdf->WriteHTML($this->renderView('pdf-resumen.html.twig', ['reservations' => $reservations,  'date' => $date->format('d/m/Y')]));
+        // return  $mpdf->Output();
         $mpdf->Output('pdf/reservaciones.pdf', Destination::FILE);
         return new JsonResponse('pdf/reservaciones.pdf');
     }

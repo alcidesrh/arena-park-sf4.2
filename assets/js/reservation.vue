@@ -842,7 +842,7 @@
                             if (response.data['hydra:member'].length && typeof $this.user.id == typeof undefined) {
                                 $this.users = response.data['hydra:member'];
                                 $this.menuSearchUser = true;
-                            }
+                            }console.log($this.users);
                         })
                         .catch(function (error) {
                             $this.searchUserLoading = false;
@@ -949,3 +949,5 @@
         }
     }
 </script>
+<style>
+
