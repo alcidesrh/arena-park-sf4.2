@@ -116,7 +116,7 @@
                                 <div class="mt-2" v-show="dayData2.users">
                                     <label class="subheading">Usuarios:</label>
                                     <div style="overflow-y: auto; max-height: 170px">
-                                        <div v-for="(item) in dayData2.users" v-html="item"></div>
+                                        <div v-for="(item) in dayData2.users" :key="item" v-html="item"></div>
 
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                     });
             },
             date(val) {
-                let page = page = '/reservation-statistics?in=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'M').format('YYYY-MM-DD');
+                let page = page = '/reservation-statistics?in=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
                 this.loading = true;
                 return fetch(page)
                     .then(response => response.json())
@@ -223,7 +223,7 @@
                     });
             },
             date2(val) {
-                let page = page = '/reservation-statistics?out=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'M').format('YYYY-MM-DD');
+                let page = page = '/reservation-statistics?out=true&dates[start]=' + moment(val).format('YYYY-MM-DD') + '&dates[end]=' + moment(val).add(1, 'days').format('YYYY-MM-DD');
                 this.loading = true;
                 return fetch(page)
                     .then(response => response.json())
