@@ -183,7 +183,7 @@ class AdminController extends AbstractController
     public function pdfReport(EntityManagerInterface $entityManager)
     {
 
-        $date = $date = new \DateTime("2019-07-15");//new \DateTime(Util::decodeBody());
+        $date = new \DateTime(Util::decodeBody());
         $date2 = clone $date;
         $date->setTime(0, 0, 0);
         $date2->setTime(23, 59, 59);
