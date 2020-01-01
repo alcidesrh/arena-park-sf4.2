@@ -292,7 +292,7 @@ class ArenaParkController extends AbstractController
 
             $message = (new \Swift_Message("Reserva para:". $reservation->getDateCarIn()->format('d-m-Y H:i')))
                 ->setFrom($user->getEmail())
-                ->setTo('alcidesrh@gmail.com')//reservation@arena-park.ch
+                ->setTo('reservation@arena-park.ch')
                 ->setBody(
                     $this->renderView(
                         'emails/reservation.html.twig',
