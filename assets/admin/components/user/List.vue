@@ -353,10 +353,6 @@
                 }
             },
         },
-        created() {
-            this.$store.dispatch('user/list/getItems');
-        },
-
         watch: {
             pagination: {
                 handler() {

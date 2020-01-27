@@ -34,15 +34,29 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-    /*
-    public function findOneBySomeField($value): ?User
+    
+    public function getUsersByIds($ids, $exclude = false)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+        $where = '';
+        $count = count($ids);
+        for($i = 0; $i < $count; $i++){
+            if($i == 0){
+             if(!$exclude)
+              $where = "u.id = ".$ids[$i];
+             else $where = "u.id != ".$ids[$i];
+            }
+            else{
+             if(!$exclude)   
+              $where .= " OR u.id = ".$ids[$i];
+             else 
+             $where .= " AND u.id != ".$ids[$i]; 
+            }
+        }
+        return $this->createQueryBuilder('u')->select('u.email')
+            ->where($where)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
+    
 }

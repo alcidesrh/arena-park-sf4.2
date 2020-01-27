@@ -11,7 +11,6 @@ const state = {
     loading: false,
     error: '',
     items: [],
-    all: [],
     view: [],
     itemsPerPage: 20,
     totalItems: 0,
@@ -34,18 +33,13 @@ function view(items) {
     return {type: USER_LIST_VIEW, items};
 }
 
-function all(items) {
-    return {type: 'all', items};
-}
-
 const getters = {
     error: state => state.error,
     items: state => state.items,
     loading: state => state.loading,
     view: state => state.view,
     itemsPerPage: state => state.itemsPerPage,
-    totalItems: state => state.totalItems,
-    all: state => state.all
+    totalItems: state => state.totalItems
 };
 
 const actions = {
@@ -58,9 +52,6 @@ const actions = {
             .then(response => response.json())
             .then(data => {
                 commit(loading(false));
-                data['hydra:member'].forEach(element => {
-                    element.selected = false;
-                });
                 commit(success(data['hydra:member']));
                 commit(view(data['hydra:view']));
                 let total = data['hydra:totalItems'];
@@ -79,44 +70,7 @@ const actions = {
     },
     setTotalItems({commit}, total) {
         commit({type: 'setTotalItems', total});
-    },
-    getUsersByIds({commit}, ids) {
-        commit(loading(true));
-        let page = page = '/users-by-ids';
-        return fetch(page, {
-        method: 'POST',
-        headers: new Headers({'Content-Type': 'application/ld+json'}),
-        body: JSON.stringify(ids),
-      }
-    )
-            .then(response => response.json())
-            .then(data => {
-                commit(loading(false));
-                commit(all(data));
-            })
-            .catch(e => {
-                commit(loading(false));
-                commit(error(e.message));
-            });
-    },
-    sendEmail({commit}, param) {
-        commit(loading(true));
-        let page = page = '/send-email';
-        return fetch(page, {
-        method: 'POST',
-        headers: new Headers({'Content-Type': 'application/ld+json'}),
-        body: JSON.stringify(param),
-      }
-    )
-            .then(response => response.json())
-            .then(data => {
-                commit(loading(false));
-            })
-            .catch(e => {
-                commit(loading(false));
-                commit(error(e.message));
-            });
-    },
+    }
 };
 
 const mutations = {
@@ -143,9 +97,6 @@ const mutations = {
     },
     setPage(state, payload) {
         state.page = payload.page;
-    },
-    all(state, payload) {
-        state.all = payload.items;
     }
 };
 

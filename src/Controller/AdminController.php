@@ -196,4 +196,50 @@ class AdminController extends AbstractController
         $mpdf->Output('pdf/reservaciones.pdf', Destination::FILE);
         return new JsonResponse('pdf/reservaciones.pdf');
     }
+
+    /**
+     * @Route(
+     *     name="users_by_ids",
+     *     path="/users-by-ids",
+     *     methods={"POST"}
+     * )
+     */
+    public function getUsersByIds(EntityManagerInterface $entityManager)
+    {
+        return new JsonResponse( $entityManager->getRepository('App:User')->getUsersByIds(Util::decodeBody()) );
+    }
+
+    /**
+     * @Route(
+     *     name="send_enail",
+     *     path="/send-email",
+     *     methods={"POST"}
+     * )
+     */
+    public function sendEmail(EntityManagerInterface $entityManager, \Swift_Mailer $mailer)
+    {
+        $data = Util::decodeBody();
+        if(isset($data['all'])){
+            $users = $entityManager->getRepository('App:User')->getUsersByIds($data['ids'], true);
+        }
+        else $users = $entityManager->getRepository('App:User')->getUsersByIds($data['ids']);
+
+        foreach($users as $user){
+
+            $message = (new \Swift_Message('Asunto'))
+                ->setFrom('reservation@arena-park.ch')
+                ->setTo($user['email'])
+                ->setBody(
+                    // $this->renderView(
+                    //     'emails/reservation.html.twig',
+                    //     array('user' => $userName)
+                    // )
+                    $data['message'],
+                    'text/html'
+                );
+
+            $mailer->send($message);
+        }
+        return new JsonResponse();
+    }
 }

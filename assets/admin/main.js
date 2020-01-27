@@ -32,6 +32,9 @@ import airportRoutes from './routes/airport';
 
 import car from './store/modules/car/';
 
+import email from './store/modules/email/';
+import emailRoutes from './routes/email';
+
 Vue.use(Vuex);
 Vue.use(VueRouter);
 
@@ -54,7 +57,8 @@ const store = new Vuex.Store({
         reservation,
         user,
         car,
-        airport
+        airport,
+        email
     }
 });
 
@@ -68,7 +72,8 @@ const router = new VueRouter({
         ...contactRoutes,
         ...reservationRoutes,
         ...userRoutes,
-        ...airportRoutes
+        ...airportRoutes,
+        ...emailRoutes
     ]
 });
 
