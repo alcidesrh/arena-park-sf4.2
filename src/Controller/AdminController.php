@@ -236,7 +236,7 @@ class AdminController extends AbstractController
             [
                 'message' => $data['message'],
                 'user' => $user['name'],
-                'unsubscribe' => $router->generate('unsubscribe', [ 'id' => $user['name']], UrlGeneratorInterface::ABSOLUTE_URL) ]
+                'unsubscribe' => $router->generate('unsubscribe', [ 'id' => $user['id']], UrlGeneratorInterface::ABSOLUTE_URL) ]
                     ),
                     'text/html'
                 );
