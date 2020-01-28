@@ -269,7 +269,7 @@ export default {
   }),
   methods: {
     sendEmail() {
-      if (!this.message || !this.subject) return;
+      if (!this.message || !this.subject || !this.selectedUsers) return;
       let param = {};
       if (this.all) {
         param.all = true;

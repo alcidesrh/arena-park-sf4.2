@@ -37,13 +37,13 @@ class UserRepository extends ServiceEntityRepository
     
     public function getUsersByIds($ids, $exclude = false)
     {
-        $where = 'user.unsubscribe != 1 AND (';
+        $where = 'u.unsubscribe != 1 AND (';
         $count = count($ids);
         for($i = 0; $i < $count; $i++){
             if($i == 0){
              if(!$exclude)
-              $where = "u.id = ".$ids[$i];
-             else $where = "u.id != ".$ids[$i];
+              $where .= "u.id = ".$ids[$i];
+             else $where .= "u.id != ".$ids[$i];
             }
             else{
              if(!$exclude)   
