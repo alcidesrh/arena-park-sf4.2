@@ -67,7 +67,7 @@ class User //implements \JsonSerializable
     private $sex;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Groups({"read_reservation", "read_user"})
      */
     private $unsubscribe;
