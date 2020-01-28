@@ -153,7 +153,11 @@
               ></v-progress-linear>
             </v-flex>
           </v-layout>
-
+          <v-layout align-center wrap class="mb-5">
+            <v-flex xs12>
+              <v-text-field v-model="subject" label="Asunto" single-line outline></v-text-field>
+            </v-flex>
+          </v-layout>
           <v-layout align-center wrap class="mb-5">
             <v-flex xs12>
               <v-textarea outline name="input-7-4" label="Mensaje" v-model="message"></v-textarea>
@@ -218,6 +222,7 @@ import fetch from "../../utils/fetch";
 export default {
   data: () => ({
     snackbar: false,
+    subject: null,
     message: null,
     exclude: [],
     all: false,
@@ -264,13 +269,14 @@ export default {
   }),
   methods: {
     sendEmail() {
-      if (!this.message) return;
+      if (!this.message || !this.subject) return;
       let param = {};
       if (this.all) {
         param.all = true;
         param.ids = this.exclude;
       } else param.ids = this.selected;
       param.message = this.message;
+      param.subject = this.subject;
       this.$store.dispatch("user/list/sendEmail", param).then(() => {
         this.snackbar = true;
       });

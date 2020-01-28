@@ -324,4 +324,20 @@ class ArenaParkController extends AbstractController
          return $this->render(
             'reservation.html.twig', $params);
     }
+
+    /**
+     * @Route("/unsubscribe/{id}", name="unsubscribe")
+     */
+    public function unsubscribe(User $user, EntityManagerInterface $entityManager)
+    {
+        $user->setUnsubscribe(true);
+
+        $entityManager->persist($user);
+
+        $entityManager->flush();
+
+        return $this->render(
+            'unsubscribe.html.twig'
+        );
+    }
 }

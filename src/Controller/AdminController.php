@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/api")
@@ -211,12 +212,12 @@ class AdminController extends AbstractController
 
     /**
      * @Route(
-     *     name="send_enail",
+     *     name="send_email",
      *     path="/send-email",
      *     methods={"POST"}
      * )
      */
-    public function sendEmail(EntityManagerInterface $entityManager, \Swift_Mailer $mailer)
+    public function sendEmail(EntityManagerInterface $entityManager, \Swift_Mailer $mailer, UrlGeneratorInterface $router)
     {
         $data = Util::decodeBody();
         if(isset($data['all'])){
@@ -226,15 +227,17 @@ class AdminController extends AbstractController
 
         foreach($users as $user){
 
-            $message = (new \Swift_Message('Asunto'))
-                ->setFrom('reservation@arena-park.ch')
+            $message = (new \Swift_Message($data['subject']))
+                ->setFrom('info@arena-park.ch')
                 ->setTo($user['email'])
                 ->setBody(
-                    // $this->renderView(
-                    //     'emails/reservation.html.twig',
-                    //     array('user' => $userName)
-                    // )
-                    $data['message'],
+                    $this->renderView(
+                        'emails/promotion.html.twig',
+            [
+                'message' => $data['message'],
+                'user' => $user->getName(),
+                'unsubscribe' => $router->generate('unsubscribe', [ 'id' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL) ]
+                    ),
                     'text/html'
                 );
 

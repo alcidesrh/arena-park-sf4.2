@@ -66,6 +66,12 @@ class User //implements \JsonSerializable
      */
     private $sex;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"read_reservation", "read_user"})
+     */
+    private $unsubscribe;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -188,6 +194,18 @@ class User //implements \JsonSerializable
     public function setSex(bool $sex): self
     {
         $this->sex = $sex;
+
+        return $this;
+    }
+
+    public function getUnsubscribe()
+    {
+        return $this->unsubscribe;
+    }
+
+    public function setUnsubscribe(bool $unsubscribe): self
+    {
+        $this->unsubscribe = $unsubscribe;
 
         return $this;
     }

@@ -37,7 +37,7 @@ class UserRepository extends ServiceEntityRepository
     
     public function getUsersByIds($ids, $exclude = false)
     {
-        $where = '';
+        $where = 'user.unsubscribe != 1 AND (';
         $count = count($ids);
         for($i = 0; $i < $count; $i++){
             if($i == 0){
@@ -52,6 +52,7 @@ class UserRepository extends ServiceEntityRepository
              $where .= " AND u.id != ".$ids[$i]; 
             }
         }
+        $where .= ')';
         return $this->createQueryBuilder('u')->select('u.email')
             ->where($where)
             ->getQuery()
