@@ -235,8 +235,8 @@ class AdminController extends AbstractController
                         'emails/promotion.html.twig',
             [
                 'message' => $data['message'],
-                'user' => $user->getName(),
-                'unsubscribe' => $router->generate('unsubscribe', [ 'id' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL) ]
+                'user' => $user['name'],
+                'unsubscribe' => $router->generate('unsubscribe', [ 'id' => $user['name']], UrlGeneratorInterface::ABSOLUTE_URL) ]
                     ),
                     'text/html'
                 );

@@ -53,7 +53,7 @@ class UserRepository extends ServiceEntityRepository
             }
         }
         $where .= ')';
-        return $this->createQueryBuilder('u')->select('u.email')
+        return $this->createQueryBuilder('u')->select('u.email, u.id, u.name')
             ->where($where)
             ->getQuery()
             ->getResult()
