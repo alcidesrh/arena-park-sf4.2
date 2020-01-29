@@ -219,6 +219,11 @@ class AdminController extends AbstractController
      */
     public function sendEmail(EntityManagerInterface $entityManager, \Swift_Mailer $mailer, UrlGeneratorInterface $router)
     {
+        foreach($entityManager->getRepository('App:User')->findAll() as $user){
+            $user->setName(trim($user->getName()));
+            $entityManager->persist($user);            
+        }
+        $entityManager->flush();
         $data = Util::decodeBody();
         if(isset($data['all'])){
             $users = $entityManager->getRepository('App:User')->getUsersByIds($data['ids'], true);

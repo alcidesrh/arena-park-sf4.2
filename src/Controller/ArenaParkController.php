@@ -209,9 +209,9 @@ class ArenaParkController extends AbstractController
         $user = (isset($userData['id']) && $userData['id']) ? $entityManager->getRepository('App:User')->find(
             $userData['id']
         ) : new User();
-        $user->setName($userData['name']);
-        $user->setEmail($userData['email']);
-        $user->setPhone($userData['phone']);
+        $user->setName(trim($userData['name']));
+        $user->setEmail(trim($userData['email']));
+        $user->setPhone(trim($userData['phone']));
         $user->setSex($userData['sex']);
         $entityManager->persist($user);
 
