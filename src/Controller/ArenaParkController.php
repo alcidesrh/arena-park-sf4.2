@@ -309,11 +309,12 @@ class ArenaParkController extends AbstractController
 
 
     /**
-     * @Route("/reservation-park", name="reservation")
+     * @Route("/reservation-park/{id}", name="reservation")
      */
-    public function reservation(Request $request)
+    public function reservation(Request $request, $id = null, EntityManagerInterface $entityManager)
     {
-        $params = ['reservation' => true];
+        
+        $params = ['reservation' => true, 'id' => $id];        
 
         if($error = $request->get('errorPayment'))
             $params['errorPayment'] = $error;

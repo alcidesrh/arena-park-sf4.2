@@ -15,6 +15,7 @@
     <script>
                 {% if errorPayment is defined %}var errorPayment = '{{ errorPayment }}'{% endif %}
                 {% if reservationConfirmed is defined %}var reservationConfirmed = true{% endif %}
+                var id = '{{id}}'
     </script>
     {{ parent() }}
     {{ encore_entry_script_tags('js/reservation') }}
