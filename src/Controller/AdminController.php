@@ -221,9 +221,9 @@ class AdminController extends AbstractController
     {
         $data = Util::decodeBody();
         if(isset($data['all'])){
-            $users = $entityManager->getRepository('App:User')->getUsersByIds($data['ids'], true);
+            $users = $entityManager->getRepository('App:User')->getUsersByIds($data, true);
         }
-        else $users = $entityManager->getRepository('App:User')->getUsersByIds($data['ids']);
+        else $users = $entityManager->getRepository('App:User')->getUsersByIds($data);
 
         foreach($users as $user){
 

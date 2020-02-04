@@ -35,10 +35,18 @@ class UserRepository extends ServiceEntityRepository
 
 
     
-    public function getUsersByIds($ids, $exclude = false)
+    public function getUsersByIds($param, $exclude = false)
     {
-        $where = 'u.unsubscribe != 1 AND (';
-        $count = count($ids);
+        $query = $this->createQueryBuilder('u')->select('u.email, u.id, u.name');
+
+        $where = 'u.unsubscribe != 1';
+        $ids = $param['ids'];
+
+        if( $count = count($ids) ){
+
+        $where .= ' AND (';
+
+            
         for($i = 0; $i < $count; $i++){
             if($i == 0){
              if(!$exclude)
@@ -52,9 +60,17 @@ class UserRepository extends ServiceEntityRepository
              $where .= " AND u.id != ".$ids[$i]; 
             }
         }
+
         $where .= ')';
-        return $this->createQueryBuilder('u')->select('u.email, u.id, u.name')
-            ->where($where)
+
+        $query->where($where);
+        }
+                    
+        if(isset($param['page'])){
+           $from = ($param['page'] * $param['perPage']) - $param['perPage'];
+           $query->setFirstResult($from)->setMaxResults($from + $param['perPage']);
+        }
+        return $query
             ->getQuery()
             ->getResult()
         ;

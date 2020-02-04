@@ -99,7 +99,7 @@
               :items="items"
               :pagination.sync="pagination"
               :total-items="totalItems"
-              :rows-per-page-items="[20,50,100,{'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]"
+              :rows-per-page-items="[20,50,100,500,{'text':'$vuetify.dataIterator.rowsPerPageAll','value':-1}]"
             >
               <template slot="items" slot-scope="props">
                 <td>
@@ -271,8 +271,11 @@ export default {
     sendEmail() {
       if (!this.message || !this.subject || !this.selectedUsers) return;
       let param = {};
+ 
       if (this.all) {
         param.all = true;
+        param.perPage = this.pagination.rowsPerPage;
+        param.page = this.pagination.page
         param.ids = this.exclude;
       } else param.ids = this.selected;
       param.message = this.message;
