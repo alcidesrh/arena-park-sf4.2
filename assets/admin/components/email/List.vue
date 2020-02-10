@@ -294,7 +294,7 @@ export default {
           .filter(i => !i.selected)
           .map(i => i.id)
           .forEach(id => {
-            if (!this.exclude.includes(i)) this.exclude.push(i);
+            if (!this.exclude.includes(id)) this.exclude.push(id);
           });
       } else
         this.items
@@ -306,9 +306,9 @@ export default {
 
       if (this.selected.length == 0 && !this.all) return;
       this.e1 = 2;
-      if (this.selected) {
+      if (!this.all && this.selected.length) {
         this.$store
-          .dispatch("user/list/getUsersByIds", this.selected)
+          .dispatch("user/list/getUsersByIds", {ids: this.selected})
           .then(() => console.log(this.selectedUsers));
       }
     },

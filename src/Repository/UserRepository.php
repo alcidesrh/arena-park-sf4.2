@@ -44,10 +44,10 @@ class UserRepository extends ServiceEntityRepository
 
         if( $count = count($ids) ){
 
-        $where .= ' AND (';
+         $where .= ' AND (';
 
             
-        for($i = 0; $i < $count; $i++){
+         for($i = 0; $i < $count; $i++){
             if($i == 0){
              if(!$exclude)
               $where .= "u.id = ".$ids[$i];
@@ -59,11 +59,11 @@ class UserRepository extends ServiceEntityRepository
              else 
              $where .= " AND u.id != ".$ids[$i]; 
             }
-        }
+         }
 
-        $where .= ')';
+         $where .= ')';
 
-        $query->where($where);
+         $query->where($where);
         }
                     
         if(isset($param['page'])){
