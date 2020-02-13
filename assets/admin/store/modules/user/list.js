@@ -100,7 +100,6 @@ const actions = {
             });
     },
     sendEmail({commit}, param) {
-        commit(loading(true));
         let page = page = '/send-email';
         return fetch(page, {
         method: 'POST',
@@ -110,7 +109,6 @@ const actions = {
     )
             .then(response => response.json())
             .then(data => {
-                commit(loading(false));
             })
             .catch(e => {
                 commit(loading(false));

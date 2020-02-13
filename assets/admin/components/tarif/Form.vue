@@ -2,7 +2,7 @@
   <div>
     <v-form>
       <v-layout wrap>
-        <v-flex xs6 md2>
+        <v-flex xs12 md6>
           <v-text-field
                   v-model="item.day"
                   type="number"
@@ -12,7 +12,7 @@
         </v-flex>
       </v-layout>
       <v-layout wrap>
-        <v-flex xs6 md2>
+        <v-flex xs12 md6>
           <v-text-field
                   v-model="item.priceCharge"
                   label="Prise en charge du véhicule"
@@ -22,7 +22,7 @@
         </v-flex>
       </v-layout>
       <v-layout wrap>
-        <v-flex xs6 md2>
+        <v-flex xs12 md6>
           <v-text-field
                   v-model="item.annulation"
                   label="Assurance annulation vol"
@@ -32,7 +32,17 @@
         </v-flex>
       </v-layout>
       <v-layout wrap>
-        <v-flex xs6 md2>
+        <v-flex xs12 md6>
+          <v-text-field
+                  v-model="item.smsConfirmation"
+                  label="Confirmación SMS"
+                  type="number"
+                  required
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
+      <v-layout wrap>
+        <v-flex xs12 md6>
           <v-text-field
                   v-model="item.tva"
                   label="TVA"
@@ -42,7 +52,7 @@
         </v-flex>
       </v-layout>
       <v-layout wrap>
-        <v-flex xs6 md2>
+        <v-flex xs12 md6>
           <v-text-field
                   v-model="item.descount"
                   label="Descuento en %"
@@ -50,7 +60,7 @@
                   required
           ></v-text-field>
         </v-flex>
-        <v-flex xs6 md2>
+        <v-flex xs12 md6>
           <v-checkbox
                   v-model="item.activeDescount"
                   label="Activar Descuento"
@@ -66,6 +76,7 @@
 
 <script>
   export default {
+    
     props: {
       handleSubmit: {
         type: Function,

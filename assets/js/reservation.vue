@@ -426,16 +426,22 @@
                 </v-flex>
               </v-layout>
               <v-layout row wrap>
-                <v-flex xs12>
-                  <v-layout row wrap>
-                    <v-flex>Bagages en soute?</v-flex>
-                    <v-flex>
-                      <v-radio-group v-model="reservation.baggage" row class="d-inline">
-                        <v-radio label="Oui" :value="true"></v-radio>
-                        <v-radio label="No" :value="false"></v-radio>
-                      </v-radio-group>
-                    </v-flex>
-                  </v-layout>
+                <v-flex class="d-flex">
+                  <label>Bagages en soute?</label>
+                  <v-radio-group v-model="reservation.baggage" row class="d-inline mt-0">
+                    <v-radio label="Oui" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
+                  </v-radio-group>
+                </v-flex>
+              </v-layout>
+              <v-layout row wrap v-if="tarif.smsConfirmation">
+                <v-flex class="d-flex">
+                  <label>Recevoir un SMS de confirmation:</label>
+                  <v-checkbox
+                    class="mt-0 ml-2"
+                    v-model="reservation.smsConfirmation"
+                    :label="tarif.smsConfirmation+' CHF'"
+                  ></v-checkbox>
                 </v-flex>
               </v-layout>
             </div>
@@ -722,6 +728,13 @@
                     class="text-xs-right"
                     style="color: red;"
                   >TVA +{{tarif.tva+'%'}}</div>
+                  <div v-if="discount">
+                    Félicitations!! Plus de {{discount.reservations}} réservations au cours des 12 derniers mois
+                    <span
+                      class="right"
+                      style="color: red;"
+                    >{{'-'+discount.discount+'%'}}</span>
+                  </div>
                   <div>
                     TOTAL À PAYER:
                     <span class="right">{{reservation.total}} CHF</span>
@@ -760,6 +773,8 @@ import { API_HOST, API_PATH } from "../admin/config/_entrypoint";
 
 export default {
   data: () => ({
+    discount: false,
+    tarif: {},
     user: {},
     email: null,
     users: [],
@@ -804,11 +819,7 @@ export default {
 
   methods: {
     ValidateEmail(mail) {
-      if (
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-          mail
-        )
-      ) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
         return true;
       }
       return false;
@@ -892,10 +903,34 @@ export default {
           }
         }
         if (services.length) this.reservation.services = services;
-        this.calculePrice();
 
-        this.confirm = true;
-        this.$vuetify.goTo(0, 3000);
+        this.loading = true;
+        let $this = this;
+        axios
+          .get(
+            this.getEndPoint("/check-discount?email=" + this.user.email, true)
+          )
+          .then(function(response) {
+            $this.loading = false;
+            $this.confirm = true;
+            if (response.data.id) {
+              $this.discount = response.data;
+              $this.reservation.discount = response.data.discount;
+            } else {
+              $this.discount = false;
+              $this.reservation.discount = null;
+            }
+            $this.calculePrice();
+            $this.$vuetify.goTo(0, 3000);
+          })
+          .catch(function(error) {
+            $this.loading = false;
+            $this.confirm = true;
+            $this.calculePrice();
+            $this.$vuetify.goTo(0, 3000);
+            console.log(error);
+          });
+
         return;
       } else {
         this.validationError = true;
@@ -910,8 +945,8 @@ export default {
     searchUser(val) {
       if (
         !this.searchUserLoading &&
-        this.user.email.length >= 6 &&
-        this.emailLength < this.user.email.length && this.ValidateEmail(this.user.email)
+        this.emailLength < this.user.email.length &&
+        this.ValidateEmail(this.user.email)
       ) {
         let $this = this;
         this.searchUserLoading = true;
@@ -973,14 +1008,18 @@ export default {
         this.reservation.total =
           this.reservation.total -
           this.reservation.total * (this.tarif.descount / 100);
+      if (this.discount)
+        this.reservation.total =
+          this.reservation.total -
+          this.reservation.total * (this.discount.discount / 100);
       if (this.payment > 1)
         this.reservation.total = parseFloat(
           this.reservation.total +
             this.reservation.total * (parseFloat(this.tarif.tva) / 100)
         ).toFixed(2);
     },
-    getEndPoint(resource) {
-      return API_HOST + API_PATH + resource;
+    getEndPoint(resource, noapi = false) {
+      return !noapi ? API_HOST + API_PATH + resource : API_HOST + resource;
     },
     getAirportName() {
       let airport = this.airports.filter(

@@ -19,7 +19,8 @@ const state = {
   updated: null,
   updateError: '',
   updateLoading: false,
-  violations: null
+  violations: null,
+  discounts: [],
 };
 
 function retrieveError(retrieveError) {
@@ -49,6 +50,9 @@ function updateSuccess(updated) {
 function violations(violations) {
   return {type: TARIF_UPDATE_UPDATE_VIOLATIONS, violations};
 }
+function discounts(discounts) {
+  return {type: 'discounts', discounts};
+}
 
 function reset() {
   return {type: TARIF_UPDATE_RESET};
@@ -62,10 +66,37 @@ const getters = {
   updated: state => state.updated,
   updateError: state => state.updateError,
   updateLoading: state => state.updateLoading,
-  violations: state => state.violations
+  violations: state => state.violations,
+  discounts: state => state.discounts
 };
 
 const actions = {
+  delete({ commit }, item) {
+    commit(retrieveLoading(true));
+
+    return fetch(item['@id'], {method: 'DELETE'})
+      .then(() => {
+        commit(retrieveLoading(false));
+      })
+      .catch(e => {
+        commit(retrieveLoading(false));
+        commit(retrieveError(e.message));
+      });
+  },
+  getDiscount({ commit }, page = '/discounts') {
+      commit(retrieveLoading(true));
+
+      return fetch(page)
+        .then(response => response.json())
+        .then(data => {
+          commit(retrieveLoading(false));
+          commit(discounts(data['hydra:member']));
+        })
+        .catch(e => {
+          commit(retrieveLoading(false));
+          commit(retrieveError(e.message));
+        });
+    },
   retrieve({ commit }, id) {
     commit(retrieveLoading(true));
 
@@ -78,6 +109,56 @@ const actions = {
       .catch(e => {
         commit(retrieveLoading(false));
         commit(retrieveError(e.message));
+      });
+  },
+  create({ commit }, values) {
+    commit(retrieveLoading(true));
+
+    return fetch('/discounts', {method: 'POST', body: JSON.stringify(values)})
+      .then(response => {
+        commit(retrieveLoading(false));
+
+        return response.json();
+      })
+      .then(data => {
+        return data
+      })
+      .catch(e => {
+        commit(retrieveLoading(false));
+
+        if (e instanceof SubmissionError) {
+          commit(violations(e.errors));
+          commit(error(e.errors._error));
+          return;
+        }
+
+        commit(error(e.message));
+      });
+  },
+  updateDiscount({ commit, state }, { item, values }) {
+    commit(updateError(null));
+    commit(updateLoading(true));
+
+    return fetch(item['@id'], {
+        method: 'PUT',
+        headers: new Headers({'Content-Type': 'application/ld+json'}),
+        body: JSON.stringify(values),
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        commit(updateLoading(false));
+      })
+      .catch(e => {
+        commit(updateLoading(false));
+
+        if (e instanceof SubmissionError) {
+          commit(violations(e.errors));
+          commit(updateError(e.errors._error));
+          return;
+        }
+
+        commit(updateError(e.message));
       });
   },
   update({ commit, state }, { item, values }) {
@@ -113,6 +194,9 @@ const actions = {
 };
 
 const mutations = {
+     discounts(state, payload) {
+      state.discounts = payload.discounts;
+    },
     [TARIF_UPDATE_RETRIEVE_ERROR] (state, payload) {
       state.retrieveError = payload.retrieveError;
     },

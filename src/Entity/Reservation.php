@@ -294,7 +294,9 @@ class Reservation implements \JsonSerializable
      */
     public function setDescount($descount): void
     {
-        $this->descount = $descount;
+        if($this->descount)
+        $this->descount += $descount;
+        else $this->descount = $descount;
     }
 
 

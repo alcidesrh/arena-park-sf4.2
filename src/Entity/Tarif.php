@@ -48,6 +48,11 @@ class Tarif
      */
     private $tva;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $smsConfirmation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -131,6 +136,22 @@ class Tarif
     public function setTva($tva): void
     {
         $this->tva = $tva;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSmsConfirmation()
+    {
+        return $this->smsConfirmation ?? 0  ;
+    }
+
+    /**
+     * @param mixed $tva
+     */
+    public function setSmsConfirmation($smsConfirmation): void
+    {
+        $this->smsConfirmation = $smsConfirmation;
     }
 
 

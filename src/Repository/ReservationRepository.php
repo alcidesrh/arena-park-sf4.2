@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Reservation;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -41,15 +42,17 @@ class ReservationRepository extends ServiceEntityRepository
     }
 
 
-    /*
-    public function findOneBySomeField($value): ?Reservation
+    
+    public function getLastYear($user_id)
     {
+        $date = new \DateTime();
+        date_sub($date, date_interval_create_from_date_string('1 years'));
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->select('COUNT(r.id)')
+   ->where('r.user = ?1')->andWhere('r.createAt > ?2')
+   ->setParameter(1, $user_id)->setParameter(2, $date)
+        ->getQuery()
+        ->getSingleScalarResult();         
     }
-    */
+    
 }

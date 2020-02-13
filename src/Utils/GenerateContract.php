@@ -33,7 +33,7 @@ class GenerateContract
         Tarif $tarif
     ) {
 
-        if ($tarif->getActiveDescount()) {
+        if ($discount = $reservation->getDescount()) {
             $document = new TemplateProcessor(self::CONTRACT_TEMPLATE_DESCOUNT);
         } else {
             $document = new TemplateProcessor(self::CONTRACT_TEMPLATE);
@@ -173,12 +173,11 @@ class GenerateContract
         $document->setValue('charge', number_format($charge, 2));
 
         $total = $reservation->getPayment();// + $percent;
-        if ($tarif->getActiveDescount()) {
-            $descount = $tarif->getDescount();
+        if ($discount) {
             $document->setValue('chf', 'CHF');
             $document->setValue('subtotal', 'SOUS-TOTAL');
             $document->setValue('total', number_format($subtotal, 2));
-            $document->setValue('percent', "-$descount%");
+            $document->setValue('percent', "-$discount%");
             $document->setValue('totalp', number_format($total, 2));
         } else {
             if($reservation->getPaymentType() === 1){

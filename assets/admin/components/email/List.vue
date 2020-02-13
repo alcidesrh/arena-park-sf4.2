@@ -166,7 +166,7 @@
 
           <v-btn color="primary" @click="e1 = 1">Atras</v-btn>
 
-          <v-btn color="primary" @click="sendEmail">Enviar</v-btn>
+          <v-btn color="primary" @click="sendEmail" :loading="sending">Enviar</v-btn>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -221,6 +221,7 @@ import fetch from "../../utils/fetch";
 
 export default {
   data: () => ({
+    sending: false,
     snackbar: false,
     subject: null,
     message: null,
@@ -280,8 +281,10 @@ export default {
       } else param.ids = this.selected;
       param.message = this.message;
       param.subject = this.subject;
+      this.sending = true;
       this.$store.dispatch("user/list/sendEmail", param).then(() => {
         this.snackbar = true;
+        this.sending = false;
       });
     },
     setpOneClick() {
@@ -454,18 +457,9 @@ export default {
     },
     pagination: {
       handler() {
-        if (this.all) {
-          this.items
-            .filter(i => !i.selected)
-            .forEach(i => {
-              if (!this.exclude.includes(i.id)) this.exclude.push(i.id);
-            });
-        } else
-          this.items
-            .filter(i => i.selected)
-            .forEach(i => {
-              if (!this.selected.includes(i.id)) this.selected.push(i.id);
-            });
+        this.all = false;
+        this.selected = [];
+        this.exclude = [];
 
         this.$vuetify.goTo(0, 3000);
         if (this.pagination.rowsPerPage != -1)
@@ -476,13 +470,6 @@ export default {
         else this.$store.dispatch("user/list/setItemsPerPage", 1000000);
         this.$store.dispatch("user/list/setPage", this.pagination.page);
         this.$store.dispatch("user/list/getItems").then(() => {
-          this.items.forEach(i => {
-            if (this.selected.includes(i.id) || this.all) {
-              if (this.all && this.exclude.length) {
-                if (!this.exclude.includes(i.id)) i.selected = true;
-              } else i.selected = true;
-            }
-          });
         });
       },
       deep: true

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Discount;
 use App\Entity\Reservation;
 use App\Entity\User;
 use App\Utils\GenerateContract;
@@ -11,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArenaParkController extends AbstractController
@@ -35,6 +37,7 @@ class ArenaParkController extends AbstractController
                 'sections' => $data,
                 'home' => true,
                 'tarifs' => $tarif,
+                'discounts' => $entityManager->getRepository('App:Discount')->findBy([], ['min' => 'asc'])
             ]
         );
     }
@@ -123,6 +126,7 @@ class ArenaParkController extends AbstractController
                 'sections' => $page->getSections()->toArray(),
                 'tarif' => true,
                 'tarifs' => $tarif,
+                'discounts' => $entityManager->getRepository('App:Discount')->findBy([], ['min' => 'asc'])
             ]
         );
     }
@@ -238,6 +242,9 @@ class ArenaParkController extends AbstractController
         if ($tarif->getActiveDescount()) {
             $reservation->setDescount($tarif->getDescount());
         }
+        if(isset($reservationData['discount'])){
+           $reservation->setDescount($reservationData['discount']); 
+        }
         $reservation->setPaymentType($reservationData['payment']);
         $reservation->setPayment($reservationData['total']);
         $reservation->setServices($reservationData['services'] ?? null);
@@ -340,5 +347,24 @@ class ArenaParkController extends AbstractController
         return $this->render(
             'unsubscribe.html.twig'
         );
+    }
+
+    /**
+     * @Route("/check-discount", name="check_discount")
+     */
+    public function checkDiscount(Request $request, EntityManagerInterface $entityManager)
+    {
+        if(!($user = $entityManager->getRepository('App:User')->findOneBy(['email' => $request->get('email')])))
+        return new JsonResponse(null);
+
+        $reservations = $entityManager->getRepository('App:Reservation')->getLastYear($user->getId());
+
+        if($result = $entityManager->getRepository(Discount::class)->createQueryBuilder('d')
+        ->select('d.id', 'd.discount')
+        ->where('d.min <= ?1 AND (d.max >= ?1 OR d.max is null)')
+        ->setParameter(1, $reservations)
+        ->getQuery()->getOneOrNullResult())
+        return new JsonResponse( array_merge($result, ['reservations' => $reservations]) );
+        return new JsonResponse( null );
     }
 }
