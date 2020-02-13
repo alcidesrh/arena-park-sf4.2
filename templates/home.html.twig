@@ -63,6 +63,26 @@
                     <div class="center my-2">
                         <img class="responsive-img" src="{{ asset('img/cards.png') }}" style=" height: 50px; position: relative;" />
                     </div>
+                    {% if discounts is not empty %}
+                    <div class="card">
+                    <div class="card-content">
+                            <table class="responsive-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Réservations sur 12 mois</td>
+                                        <td>Taux de récompense</td>
+                                    </tr>
+                                    {% for discount in discounts %}
+                                      <tr >
+                                        <td>{{discount.min }}{{discount.max ? '-'~ discount.max : '+'}}</td>
+                                        <td>{{ discount.discount }}%</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                    {% endif %}
+                </div>
                     <div class="card purple darken-1 small z-depth-3 card-2">
                         <div class="card-content white-text p-10">
                             <span class="card-title font-18" style="font-size: 18px">{{ sections['section1'].title }}</span>

@@ -45,6 +45,26 @@
 
                     </div>
                 </div>
+
+                {% if discounts is not empty %}
+                    <div class="card">
+                    <div class="card-content">
+                            <table class="responsive-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Réservations sur 12 mois</td>
+                                        <td>Taux de récompense</td>
+                                    </tr>
+                                    {% for discount in discounts %}
+                                      <tr >
+                                        <td>{{discount.min }}{{discount.max ? '-'~ discount.max : '+'}}</td>
+                                        <td>{{ discount.discount }}%</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                    {% endif %}
             </div>
         </div>
     </div>
