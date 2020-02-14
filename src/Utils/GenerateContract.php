@@ -30,7 +30,9 @@ class GenerateContract
         User $user = null,
         Car $car = null,
         Reservation $reservation = null,
-        Tarif $tarif
+        Tarif $tarif,
+        $sms = false,
+        $discountType = false
     ) {
 
         if ($discount = $reservation->getDescount()) {
@@ -173,13 +175,32 @@ class GenerateContract
         $document->setValue('charge', number_format($charge, 2));
 
         $total = $reservation->getPayment();// + $percent;
+
+        if($sms){
+            $document->setValue('chfsms', 'CHF');
+            $document->setValue('sms', $tarif->getSmsConfirmation());
+            $document->setValue('smsText', 'SMS de confirmation');
+        }
+        else{
+            $document->setValue('chfsms', '');
+            $document->setValue('sms', '');
+            $document->setValue('smsText', '');
+        }
+
         if ($discount) {
             $document->setValue('chf', 'CHF');
             $document->setValue('subtotal', 'SOUS-TOTAL');
             $document->setValue('total', number_format($subtotal, 2));
             $document->setValue('percent', "-$discount%");
             $document->setValue('totalp', number_format($total, 2));
+            if($discountType){
+                $reservations = $entityManager->getRepository('App:Reservation')->getLastYear($user->getId(), $user->getDateDiscount()); 
+                $document->setValue('discountText', "Félicitations!! Plus de $reservations réservations au cours des 12 derniers mois" );
+            }
+            else
+               $document->setValue('discountText', '');
         } else {
+            $document->setValue('discountText', '');
             if($reservation->getPaymentType() === 1){
                 $document->setValue('chf', '');
                 $document->setValue('subtotal', '');

@@ -8,6 +8,7 @@ use App\Entity\Reservation;
 use App\Entity\User;
 use App\Utils\GenerateContract;
 use App\Utils\Util;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,7 +38,7 @@ class ArenaParkController extends AbstractController
                 'sections' => $data,
                 'home' => true,
                 'tarifs' => $tarif,
-                'discounts' => $entityManager->getRepository('App:Discount')->findBy([], ['min' => 'asc'])
+                'discounts' => $tarif->getDiscount() ? $entityManager->getRepository('App:Discount')->findBy([], ['min' => 'asc']) : []
             ]
         );
     }
@@ -126,7 +127,7 @@ class ArenaParkController extends AbstractController
                 'sections' => $page->getSections()->toArray(),
                 'tarif' => true,
                 'tarifs' => $tarif,
-                'discounts' => $entityManager->getRepository('App:Discount')->findBy([], ['min' => 'asc'])
+                'discounts' => $tarif->getDiscount() ? $entityManager->getRepository('App:Discount')->findBy([], ['min' => 'asc']) : []
             ]
         );
     }
@@ -239,18 +240,20 @@ class ArenaParkController extends AbstractController
         $reservation->setFly($reservationData['fly']);
         $reservation->setBaggage($reservationData['baggage'] ?? false);
         $tarif = $entityManager->getRepository('App:Tarif')->findOneBy([]);
+
         if ($tarif->getActiveDescount()) {
             $reservation->setDescount($tarif->getDescount());
         }
         if(isset($reservationData['discount'])){
            $reservation->setDescount($reservationData['discount']); 
         }
+
         $reservation->setPaymentType($reservationData['payment']);
         $reservation->setPayment($reservationData['total']);
         $reservation->setServices($reservationData['services'] ?? null);
         $reservation->setMessage($reservationData['message'] ?? null);
 
-        if ($contract = $phpDoc->generateContract($entityManager, $user, $car, $reservation, $tarif)) {
+        if ($contract = $phpDoc->generateContract($entityManager, $user, $car, $reservation, $tarif, $reservationData['smsConfirmation'] ?? false, $reservationData['discount'] ?? false)) {
             $entityManager->persist($contract);
             $reservation->setContract($contract);
             $entityManager->persist($reservation);
@@ -357,7 +360,24 @@ class ArenaParkController extends AbstractController
         if(!($user = $entityManager->getRepository('App:User')->findOneBy(['email' => $request->get('email')])))
         return new JsonResponse(null);
 
-        $reservations = $entityManager->getRepository('App:Reservation')->getLastYear($user->getId());
+        if(!($date = $user->getDateDiscount())){
+         $user->setDateDiscount(new \DateTime());
+         $entityManager->persist($user);
+         $entityManager->flush();   
+         return new JsonResponse(null);
+        }
+
+        $date2 = new \DateTime();
+        date_sub($date2, date_interval_create_from_date_string('1 years'));
+
+        if($date < $date2){
+         $user->setDateDiscount(new \DateTime());
+         $entityManager->persist($user);
+         $entityManager->flush();   
+         return new JsonResponse(null);
+        }
+
+        $reservations = $entityManager->getRepository('App:Reservation')->getLastYear($user->getId(), $date);        
 
         if($result = $entityManager->getRepository(Discount::class)->createQueryBuilder('d')
         ->select('d.id', 'd.discount')

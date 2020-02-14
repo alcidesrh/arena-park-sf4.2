@@ -44,6 +44,11 @@
             </v-btn>
           </v-flex>
         </v-layout>
+        <v-layout wrap v-if="retrieved">
+          <v-flex xs12>
+            <v-checkbox v-model="discount" label="Activar Descuento"></v-checkbox>
+          </v-flex>
+        </v-layout>
         <v-layout wrap>
           <v-flex xs12>
             <v-btn small color="teal mx-0" @click="saveDiscount">Guardar</v-btn>
@@ -60,7 +65,9 @@ import { mapGetters } from "vuex";
 
 export default {
   created() {
-    this.$store.dispatch("tarif/update/retrieve", "/tarifs/1");
+    this.$store
+      .dispatch("tarif/update/retrieve", "/tarifs/1")
+      .then(() => {this.discount = this.retrieved.discount});
 
     this.$store.dispatch("tarif/update/getDiscount").then(() => {
       this.discountsList = this.discounts;
@@ -84,17 +91,22 @@ export default {
   data: function() {
     return {
       item: {},
-      discountsList: []
+      discountsList: [],
+      discount: false
     };
   },
   methods: {
-    update(values) {
-      values.day = parseInt(values.day);
-      values.annulation = parseInt(values.annulation);
-      values.descount = parseInt(values.descount);
-      values.priceCharge = parseInt(values.priceCharge);
-      values.tva = parseFloat(values.tva);
-      values.smsConfirmation = parseFloat(values.smsConfirmation);
+    update(values, discount = false) {
+      if (discount) {      
+        values.discount = this.discount;
+      } else {
+        values.day = parseInt(values.day);
+        values.annulation = parseInt(values.annulation);
+        values.descount = parseInt(values.descount);
+        values.priceCharge = parseInt(values.priceCharge);
+        values.tva = parseFloat(values.tva);
+        values.smsConfirmation = parseFloat(values.smsConfirmation);
+      }
       this.$store.dispatch("tarif/update/update", {
         item: this.retrieved,
         values: values
@@ -104,19 +116,19 @@ export default {
       this.$store.dispatch("tarif/update/reset");
     },
     saveDiscount() {
-        let values = {};
-      this.discountsList.forEach((i,index) => {
-          values.min = parseInt(i.min);
-          values.max = i.max ? parseInt(i.max) : 0;
-          values.discount = parseFloat(i.discount);
+      this.update(this.retrieved, true);
+      let values = {};
+      this.discountsList.forEach((i, index) => {
+        values.min = parseInt(i.min);
+        values.max = i.max ? parseInt(i.max) : 0;
+        values.discount = parseFloat(i.discount);
         if (i["@id"]) {
           this.$store.dispatch("tarif/update/update", {
             item: i,
             values: values
           });
-        }
-        else {
-          this.$store.dispatch("tarif/update/create", values).then((response) =>{
+        } else {
+          this.$store.dispatch("tarif/update/create", values).then(response => {
             this.discountsList[index] = response;
           });
         }

@@ -53,6 +53,11 @@ class Tarif
      */
     private $smsConfirmation;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $discount;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,6 +157,18 @@ class Tarif
     public function setSmsConfirmation($smsConfirmation): void
     {
         $this->smsConfirmation = $smsConfirmation;
+    }
+
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount($discount): self
+    {
+        $this->discount = $discount;
+
+        return $this;
     }
 
 

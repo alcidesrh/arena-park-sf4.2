@@ -72,6 +72,12 @@ class User //implements \JsonSerializable
      */
     private $unsubscribe;
 
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read_reservation", "read_user"})
+     */
+    private $dateDiscount;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -208,6 +214,22 @@ class User //implements \JsonSerializable
         $this->unsubscribe = $unsubscribe;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateDiscount()
+    {
+        return $this->dateDiscount;
+    }
+
+    /**
+     * @param mixed $dateFlyIn
+     */
+    public function setDateDiscount($dateDiscount): void
+    {
+        $this->dateDiscount = $dateDiscount;
     }
 
 //     public function jsonSerialize()

@@ -43,10 +43,9 @@ class ReservationRepository extends ServiceEntityRepository
 
 
     
-    public function getLastYear($user_id)
+    public function getLastYear($user_id, $date)
     {
-        $date = new \DateTime();
-        date_sub($date, date_interval_create_from_date_string('1 years'));
+        
         return $this->createQueryBuilder('r')
             ->select('COUNT(r.id)')
    ->where('r.user = ?1')->andWhere('r.createAt > ?2')

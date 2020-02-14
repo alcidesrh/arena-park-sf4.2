@@ -11,6 +11,12 @@
       <v-alert class="white-text reservation-success" v-if="success" :value="true" type="success">
         Votre réservation a été bien traitée. Vous recevrez un e-mail avec votre confirmation. Le document doit
         être imprimé et présenté au voiturier le jour de la prise en charge.
+
+        <a href="/reservation-park">
+          <v-btn class="right"
+                        color="primary"
+                      >réserver à nouveau</v-btn>
+        </a>
       </v-alert>
       <v-alert v-if="errorMessage" :value="true" type="error">{{errorMessage}}</v-alert>
       <v-form id="form" v-model="valid" ref="form" v-show="!confirm && !success && !errorMessage">
@@ -704,6 +710,14 @@
                   <div>
                     Assurance annulation de vol:
                     <span class="right">{{tarif.annulation}} CHF</span>
+                  </div>                  
+                  <div>
+                    Gardiennage:
+                    <span class="right">{{tarif.gardiennage}} CHF</span>
+                  </div>                  
+                  <div v-if="reservation.smsConfirmation">
+                    SMS de confirmation:
+                    <span class="right">{{tarif.smsConfirmation}} CHF</span>
                   </div>
                   <div
                     v-for="service in reservation.services"
@@ -713,10 +727,6 @@
                     <span
                       class="right"
                     >{{getServicePrice(service.id, service.price)}} CHF</span>
-                  </div>
-                  <div>
-                    Gardiennage:
-                    <span class="right">{{tarif.gardiennage}} CHF</span>
                   </div>
                   <div
                     v-if="tarif.activeDescount"
@@ -864,7 +874,7 @@ export default {
             window.location.href = response.data.urlRedirect;
           else {
             $this.success = true;
-            $this.$vuetify.goTo(0, 3000);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         })
         .catch(function(error) {
@@ -990,6 +1000,9 @@ export default {
       this.tarif.gardiennage = days * this.tarif.day;
       this.reservation.total =
         this.tarif.gardiennage + this.tarif.priceCharge + this.tarif.annulation;
+
+      if(this.reservation.smsConfirmation)
+       this.reservation.total = this.reservation.total + this.tarif.smsConfirmation;   
 
       if (typeof this.reservation.services != typeof undefined) {
         for (let i = 0, service; i < this.reservation.services.length; i++) {
