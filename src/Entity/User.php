@@ -73,7 +73,7 @@ class User //implements \JsonSerializable
     private $unsubscribe;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"read_reservation", "read_user"})
      */
     private $dateDiscount;

@@ -628,7 +628,7 @@
                 <div>
                   <h6>Informations personnelles</h6>
                   <v-divider></v-divider>
-                  <p>Nom: {{user.sex?'Mr ':+'Mme '}}{{user.name}}</p>
+                  <p>{{user.sex?'Mr ': 'Mme '}}{{user.name}}</p>
                   <p>Email: {{user.email}}</p>
                   <p>Téléphone: {{user.phone}}</p>
                 </div>

@@ -218,6 +218,8 @@ class ArenaParkController extends AbstractController
         $user->setEmail(trim($userData['email']));
         $user->setPhone(trim($userData['phone']));
         $user->setSex($userData['sex']);
+        if(!$user->getId())
+          $user->setDateDiscount(new \DateTime());
         $entityManager->persist($user);
 
         $carData = json_decode(stripslashes($request->get('car')), true);
