@@ -739,7 +739,7 @@
                     style="color: red;"
                   >TVA +{{tarif.tva+'%'}}</div>
                   <div v-if="discount">
-                    Félicitations!! Plus de {{discount.reservations}} réservations au cours des 12 derniers mois
+                    Félicitations!! Plus de {{discount.reservations}} réservations au cours des 12 mois
                     <span
                       class="right"
                       style="color: red;"

@@ -195,7 +195,7 @@ class GenerateContract
             $document->setValue('totalp', number_format($total, 2));
             if($discountType){
                 $reservations = $entityManager->getRepository('App:Reservation')->getLastYear($user->getId(), $user->getDateDiscount()); 
-                $document->setValue('discountText', "Félicitations!! Plus de $reservations réservations au cours des 12 derniers mois" );
+                $document->setValue('discountText', "Félicitations!! Plus de $reservations réservations au cours des 12 mois" );
             }
             else
                $document->setValue('discountText', '');
