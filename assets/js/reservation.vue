@@ -514,7 +514,7 @@
                 <v-layout row wrap v-for="service,index in services2" :key="index">
                   <v-flex xs12 md6>
                     <div>{{service.name}}</div>
-                    <div v-if="serviceSelected[index] && index + 1 == services2.length">
+                    <div v-if="serviceSelected[index] && service.description == 'parking'">
                       <p style="margin-bottom: 5px; margin-top: 10px;">
                         La prise en charge de votre véhicule sera à l’adresse suivante:
                       </p>
@@ -533,6 +533,7 @@ Parking privé situé à 3 minutes de l’Aéroport de Genève
                   </v-flex>
                   <v-flex xs12 md6 v-else>
                     <v-checkbox
+                      :disabled="service.description != 'parking' && disabledKey"           
                       v-model="serviceSelected[index]"
                       :label="service.prices[0].price+' CHF'"
                       :value="service.id"
@@ -836,9 +837,22 @@ export default {
     emailRules: [
       v => !!v || "Ce champ est obligatoire",
       v => /.+@.+/.test(v) || "L'email doit être valide"
-    ]
+    ],
+    disabledKey: true
   }),
-
+  watch:{
+    serviceSelected(val){
+      let aux = true;
+      let aux2 = {};
+      val.forEach(item => {
+        aux2 = this.services2.filter(i => i.id == item);
+        if(aux2.length)
+        if(aux2[0].description == 'parking')
+         aux = false;
+      })
+      this.disabledKey = aux;
+    }
+  },
   methods: {
     ValidateEmail(mail) {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
