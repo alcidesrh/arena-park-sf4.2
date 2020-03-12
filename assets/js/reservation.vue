@@ -514,7 +514,7 @@
                 <v-layout row wrap v-for="service,index in services2" :key="index">
                   <v-flex xs12 md6>
                     <div>{{service.name}}</div>
-                    <div v-if="serviceSelected[index] && index == 0">
+                    <div v-if="serviceSelected[index] && index + 1 == services2.length">
                       <p style="margin-bottom: 5px; margin-top: 10px;">
                         La prise en charge de votre véhicule sera à l’adresse suivante:
                       </p>
