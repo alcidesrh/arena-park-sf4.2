@@ -31,7 +31,7 @@
             'violations'
         ]),
         methods: {
-            create: function (item) {
+            create: function (item) {console.log(item);
                 item.priority = parseInt(item.priority);
                 this.$store.dispatch('service/create/create', item);
             }

@@ -115,12 +115,18 @@ class GenerateContract
 
         $cont = 1;
         $subtotal = $tarif->getAnnulation() + $tarif->getPriceCharge();
-        $aux = false;//Para el control visual
+        $aux = false;//check control visual
+        $parkingCouvert = false;//check Parking couvert
         if ($services = $reservation->getServices()) {
             foreach ($services as $value) {
 
                 if($value['id'] == 7)$aux = true;
                 $service = $entityManager->getRepository('App:Service')->find($value['id']);
+
+                if($service->getName() == 'Parking couvert'){                    
+                 $parkingCouvert = true;
+                 $document->setValue('parking', "La prise en charge de votre véhicule sera à l’adresse suivante: Chemin du Pavillon 2, (Bâtiment 211) CP 1218, Le Grand Saconnex. Genève Parking privé situé à 3 minutes de l’Aéroport de Genève");
+                }
 
                 $document->setValue('s'.$cont, 1);
 
@@ -137,8 +143,9 @@ class GenerateContract
 //                $chargeService += $value[ 'charge' ];
             }
         }
-
-        for ($i = 1; $i < 7; $i++) {
+        if(!$parkingCouvert) $document->setValue('parking','');
+          
+        for ($i = 1; $i < 8; $i++) {
 
             if(!$aux && $i == 1){
                 $document->setValue('chf'.$i, 'CHF');

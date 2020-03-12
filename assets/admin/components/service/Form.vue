@@ -123,7 +123,9 @@
         }),
         methods: {
             deletePrice(item) {
-                this.services.splice(this.services.indexOf(item), 1);
+                const index = this.services.indexOf(item);
+                this.services.splice(index, 1);
+                this.item.prices.splice(index, 1);
             },
             textCarType(value) {
                 let type = this.cars.filter(item => value == item.value);
@@ -132,6 +134,7 @@
             addService() {
                 if (typeof this.item.prices == typeof undefined)
                     this.item.prices = [];
+                this.item.prices.push({price: this.priceService, type: this.carType});
                 this.services.push({price: this.priceService, type: this.carType});
 
                 if (this.carType == 0) {

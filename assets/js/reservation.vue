@@ -512,7 +512,19 @@
               <v-divider></v-divider>
               <div v-if="services2.length" class="mt-5">
                 <v-layout row wrap v-for="service,index in services2" :key="index">
-                  <v-flex xs12 md6>{{service.name}}</v-flex>
+                  <v-flex xs12 md6>
+                    <div>{{service.name}}</div>
+                    <div v-if="serviceSelected[index] && index == 0">
+                      <p style="margin-bottom: 5px; margin-top: 10px;">
+                        La prise en charge de votre véhicule sera à l’adresse suivante:
+                      </p>
+                      <p style="margin-bottom: 0px; font-style: italic;">                
+Chemin du Pavillon 2, (Bâtiment 211) CP 1218, Le Grand Saconnex. Genève
+
+Parking privé situé à 3 minutes de l’Aéroport de Genève
+                      </p> 
+                    </div>
+                  </v-flex>
                   <v-flex xs12 md6 v-if="service.id == 7">
                     <v-radio-group v-model="serviceSelected[index]" :rules="requireRules" required>
                       <v-radio :label="'Oui, '+service.prices[0].price+' CHF'" :value="service.id"></v-radio>

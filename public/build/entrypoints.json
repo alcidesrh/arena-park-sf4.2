@@ -3,7 +3,7 @@
     "js/admin": {
       "js": [
         "/build/runtime.08beddea.js",
-        "/build/js/admin.23c36820.js"
+        "/build/js/admin.2bd59106.js"
       ],
       "css": [
         "/build/js/admin.9f91b3e8.css"
@@ -42,7 +42,7 @@
     "js/reservation": {
       "js": [
         "/build/runtime.08beddea.js",
-        "/build/js/reservation.7621d942.js"
+        "/build/js/reservation.f85531e1.js"
       ]
     },
     "css/admin": {
