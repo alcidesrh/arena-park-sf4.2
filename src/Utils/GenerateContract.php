@@ -125,7 +125,7 @@ class GenerateContract
 
                 if($service->getName() == 'Parking couvert'){                    
                  $parkingCouvert = true;
-                 $document->setValue('parking', "La prise en charge de votre véhicule sera à l’adresse suivante: Chemin du Pavillon 2, (Bâtiment 211) CP 1218, Le Grand Saconnex. Genève Parking privé situé à 3 minutes de l’Aéroport de Genève");
+                 $document->setValue('parking', "Chemin du Pavillon 2, (Bâtiment 211) CP 1218, Le Grand Saconnex. Genève Parking privé situé à 3 minutes de l’Aéroport de Genève");
                 }
 
                 $document->setValue('s'.$cont, 1);
