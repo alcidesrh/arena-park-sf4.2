@@ -112,8 +112,18 @@ class GenerateContract
             $document->setValue('remarques', '');
             $document->setValue('remarquesV', '');
         }
-
-        $cont = 1;
+        if($sms){
+            $document->setValue('chf0', 'CHF');
+            $document->setValue('servicec0', $tarif->getSmsConfirmation());
+            $document->setValue('service0', 'SMS de confirmation');
+            $cont = 1;
+            $i = 1;
+        }
+        else{
+            $cont = 0;
+            $i = 0;
+        }
+        
         $subtotal = $tarif->getAnnulation() + $tarif->getPriceCharge();
         $aux = false;//check control visual
         $parkingCouvert = false;//check Parking couvert
@@ -143,18 +153,29 @@ class GenerateContract
 //                $chargeService += $value[ 'charge' ];
             }
         }
-        if(!$parkingCouvert) $document->setValue('parking','');
+        if(!$parkingCouvert) $document->setValue('parking','');                  
           
-        for ($i = 1; $i < 8; $i++) {
+        for (; $i < 8; $i++) {
 
-            if(!$aux && $i == 1){
-                $document->setValue('chf'.$i, 'CHF');
+            if(!$aux){
+                if(!$sms && $i == 0){
+                 $document->setValue('chf'.$i, 'CHF');
 
-                $document->setValue('s'.$i, 1);
+                 $document->setValue('s'.$i, 1);
 
-                $document->setValue('service'.$i, 'Voulez-vous faire le contrôle');
+                 $document->setValue('service'.$i, 'Voulez-vous faire le contrôle');
 
-                $document->setValue('servicec'.$i, '0');
+                 $document->setValue('servicec'.$i, '0');
+                }
+                else if($sms && $i == 1){
+                 $document->setValue('chf'.$i, 'CHF');
+
+                 $document->setValue('s'.$i, 1);
+
+                 $document->setValue('service'.$i, 'Voulez-vous faire le contrôle');
+
+                 $document->setValue('servicec'.$i, '0');
+                }
             }
             else{
                 $document->setValue('chf'.$i, '');
@@ -182,17 +203,6 @@ class GenerateContract
         $document->setValue('charge', number_format($charge, 2));
 
         $total = $reservation->getPayment();// + $percent;
-
-        if($sms){
-            $document->setValue('chfsms', 'CHF');
-            $document->setValue('sms', $tarif->getSmsConfirmation());
-            $document->setValue('smsText', 'SMS de confirmation');
-        }
-        else{
-            $document->setValue('chfsms', '');
-            $document->setValue('sms', '');
-            $document->setValue('smsText', '');
-        }
 
         if ($discount) {
             $document->setValue('chf', 'CHF');
