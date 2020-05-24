@@ -2,8 +2,8 @@
   "entrypoints": {
     "js/admin": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/admin.2bd59106.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/admin.07c10a77.js"
       ],
       "css": [
         "/build/js/admin.9f91b3e8.css"
@@ -11,102 +11,105 @@
     },
     "js/app": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/app.aabce4f8.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/app.dbf04637.js"
       ]
     },
     "js/base": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/base.83c6882a.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/base.87da4760.js"
       ]
     },
     "js/home": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/home.6a5022f2.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/home.86a6f1c0.js"
       ]
     },
     "js/faq": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/faq.283a96a6.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/faq.56e918db.js"
       ]
     },
     "js/contact": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/contact.0abcb4b8.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/contact.2c2ab0cb.js"
       ]
     },
     "js/reservation": {
       "js": [
-        "/build/runtime.08beddea.js",
-        "/build/js/reservation.b3a0c0c5.js"
+        "/build/runtime.6cf710cd.js",
+        "/build/js/reservation.8f32d410.js"
+      ],
+      "css": [
+        "/build/js/reservation.bc2fd298.css"
       ]
     },
     "css/admin": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/admin.abafb2b2.css"
+        "/build/css/admin.d492cb25.css"
       ]
     },
     "css/vuetify": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/vuetify.0ec3077b.css"
+        "/build/css/vuetify.d2b3eda3.css"
       ]
     },
     "css/home": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/home.d78b1b03.css"
+        "/build/css/home.69e37963.css"
       ]
     },
     "css/services": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/services.dbd02512.css"
+        "/build/css/services.292e1f9f.css"
       ]
     },
     "css/faq": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/faq.e4641c38.css"
+        "/build/css/faq.9195d2ea.css"
       ]
     },
     "css/tarif": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/tarif.dfcf9cfd.css"
+        "/build/css/tarif.99b8b73e.css"
       ]
     },
     "css/contact": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/contact.b26e18be.css"
+        "/build/css/contact.31b6ec10.css"
       ]
     },
     "css/reservation": {
       "js": [
-        "/build/runtime.08beddea.js"
+        "/build/runtime.6cf710cd.js"
       ],
       "css": [
-        "/build/css/reservation.108616f1.css"
+        "/build/css/reservation.822fef6d.css"
       ]
     }
   }

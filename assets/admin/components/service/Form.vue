@@ -134,7 +134,6 @@
             addService() {
                 if (typeof this.item.prices == typeof undefined)
                     this.item.prices = [];
-                this.item.prices.push({price: this.priceService, type: this.carType});
                 this.services.push({price: this.priceService, type: this.carType});
 
                 if (this.carType == 0) {
