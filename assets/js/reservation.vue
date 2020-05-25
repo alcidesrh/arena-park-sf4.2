@@ -1118,7 +1118,7 @@ export default {
         $this.loading = false;
       });
     axios
-      .get(this.getEndPoint("/services"))
+      .get(this.getEndPoint("/services?active=true"))
       .then(function(response) {
         $this.services = response.data["hydra:member"];
         $this.services1 = $this.services.filter(

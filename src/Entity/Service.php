@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(attributes={"order"={"priority": "ASC"}})
+ * @ApiFilter(BooleanFilter::class, properties={"active"})
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
  */
 class Service
@@ -92,6 +95,18 @@ class Service
     public function setPriority($priority): self
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
