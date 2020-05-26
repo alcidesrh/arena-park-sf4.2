@@ -575,9 +575,9 @@ Parking privé situé à 3 minutes de l’Aéroport de Genève
               <v-layout row wrap>
                 <v-flex xs12>
                   <v-radio-group v-model="payment" row>
-                    <v-flex xs12 mb-2>
+                    <!-- <v-flex xs12 mb-2>
                       <v-radio label="Cash" :value="1"></v-radio>
-                    </v-flex>
+                    </v-flex> -->
                     <v-flex xs12 mb-2>
                       <v-radio label="Visa" :value="2"></v-radio>
                     </v-flex>
