@@ -178,6 +178,16 @@ class GenerateContract
 
                  $document->setValue('servicec'.$i, '0');
                 }
+                else{
+                    $document->setValue('chf'.$i, '');
+    
+                    $document->setValue('s'.$i, ' ');
+    
+                    $document->setValue('service'.$i, ' ');
+    
+                    $document->setValue('servicec'.$i, ' ');
+                }
+                
             }
             else{
                 $document->setValue('chf'.$i, '');
