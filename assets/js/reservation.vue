@@ -1145,7 +1145,7 @@ export default {
       });
   },
   mounted() {
-    this.payment = 1;
+    this.payment = 2;
   }
 };
 </script>
