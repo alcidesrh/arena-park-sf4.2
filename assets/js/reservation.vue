@@ -527,8 +527,8 @@ Parking privé situé à 3 minutes de l’Aéroport de Genève
                   </v-flex>
                   <v-flex xs12 md6 v-if="service.id == 7">
                     <v-radio-group v-model="serviceSelected[index]" :rules="requireRules" required>
-                      <v-radio :label="'Oui, '+service.prices[0].price+' CHF'" :value="service.id"></v-radio>
-                      <v-radio label="Non" value="Nom">></v-radio>
+                      <v-radio :label="'Oui, '+service.prices[0].price+' CHF supplémentaire,  Aller à la Rue des Coopératives 27, Cp 1217, Meyrin. (Parking des Arbères).'" :value="service.id"></v-radio>
+                      <v-radio label="Clé avec le voiture." value="Nom">></v-radio>
                     </v-radio-group>
                   </v-flex>
                   <v-flex xs12 md6 v-else>
