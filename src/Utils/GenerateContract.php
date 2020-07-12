@@ -133,9 +133,9 @@ class GenerateContract
                 if($value['id'] == 7)$aux = true;
                 $service = $entityManager->getRepository('App:Service')->find($value['id']);
 
-                if($service->getName() == 'Parking couvert'){                    
+                if($service->getId() == 8){                    
                  $parkingCouvert = true;
-                //  $document->setValue('parking', "Chemin du Pavillon 2, (Bâtiment 211) CP 1218, Le Grand Saconnex. Genève Parking privé situé à 3 minutes de l’Aéroport de Genève");
+                $document->setValue('parking', "Aller à la Rue des Coopératives 27, Cp 1217, Meyrin. (Parking des Arbères).");
                 }
 
                 $document->setValue('s'.$cont, 1);
@@ -153,9 +153,9 @@ class GenerateContract
 //                $chargeService += $value[ 'charge' ];
             }
         }
-        // if(!$parkingCouvert) $document->setValue('parking','');                  
+        if(!$parkingCouvert) $document->setValue('parking','');                  
 
-        $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");  
+        // $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");  
           
         for (; $i < 8; $i++) {
 
