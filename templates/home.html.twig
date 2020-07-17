@@ -214,9 +214,11 @@
                 </div>
                 <div class="col s12">
                     <div class="card deep-orange darken-1 small z-depth-3">
-                        <div class="card-content white-text">
+                        <div class="card-content white-text" style="text-align: center;">
                             <span class="card-title">{{ sections['section2'].title }}</span>
-                            {{ sections['section2'].content | raw}}
+                            <div style="font-size: 18px">
+                             {{ sections['section2'].content | raw}}
+                            </div>
                         </div>
                     </div>
                 </div>
