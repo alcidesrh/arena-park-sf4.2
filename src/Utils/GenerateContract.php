@@ -135,7 +135,7 @@ class GenerateContract
 
                 if($service->getDescription() == 'parking'){                  
                  $parkingCouvert = true;
-                 $document->setValue('parking', "Rue des Coopératives 27 - CP 1217, Meyrin. ( Parking des Arbères ).");
+                 $document->setValue('parking', "Rue des Coopératives 27, CP 1217, Meyrin. (Parking des Arbères)");
                  $document->setValue('service'.$cont, 'Parking Couvert');
                 }
                 else {
