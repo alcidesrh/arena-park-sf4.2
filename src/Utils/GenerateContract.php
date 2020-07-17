@@ -133,14 +133,13 @@ class GenerateContract
                 if($value['id'] == 7)$aux = true;
                 $service = $entityManager->getRepository('App:Service')->find($value['id']);
 
-                if($service->getDescription() == 'parking'){                    
+                if($service->getDescription() == 'parking'){                  
                  $parkingCouvert = true;
                  $document->setValue('parking', "Rue des Coopératives 27 - CP 1217, Meyrin. ( Parking des Arbères ).");
                  $document->setValue('service'.$cont, 'Parking Couvert');
                 }
                 else {
                     
-
                 $document->setValue('service'.$cont, $service->getName());
                 }
 
@@ -157,7 +156,7 @@ class GenerateContract
 //                $chargeService += $value[ 'charge' ];
             }
         }
-        if(!$parkingCouvert) $document->setValue('parking','');                  
+        if(!$parkingCouvert) $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");                  
 
         // $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");  
           
