@@ -743,7 +743,7 @@ Parking privé situé à 3 minutes de l’Aéroport de Genève
                     v-for="service in reservation.services"
                     v-if="service.id != 7 || (service.id == 7 && service.price != 'Nom')"
                   >
-                    {{getServiceName(service.id)}}:
+                    <div style="max-width: 315px; display: inline-block;">{{getServiceName(service.id)}}:</div>
                     <span
                       class="right"
                     >{{getServicePrice(service.id, service.price)}} CHF</span>

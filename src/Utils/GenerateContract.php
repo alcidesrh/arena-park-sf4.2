@@ -133,7 +133,7 @@ class GenerateContract
                 if($value['id'] == 7)$aux = true;
                 $service = $entityManager->getRepository('App:Service')->find($value['id']);
 
-                if($service->getId() == 8){                    
+                if($service->getDescription() == 'parking'){                    
                  $parkingCouvert = true;
                 $document->setValue('parking', "Aller à la Rue des Coopératives 27, Cp 1217, Meyrin. (Parking des Arbères).");
                 }
