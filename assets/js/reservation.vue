@@ -530,7 +530,7 @@ Parking privé situé à 3 minutes de l’Aéroport de Genève
                       <v-radio :label="'Oui, '+service.prices[0].price+' CHF.'" :value="service.id"></v-radio>
                       <div v-if="serviceSelected[index] == service.id" style="padding-bottom: 10px">
                         <label style="color:red;">Attention!!</label>
-                        <label style="color: rgba(0,0,0,0.54);">La prise en charge de votre véhicule sera à l’adresse suivante: Rue des Coopératives 27, Cp 1217, Meyrin. (Parking des Arbères).</label>
+                        <label style="color: rgba(0,0,0,0.54);">La prise en charge de votre véhicule sera à l’adresse suivante: Rue des Coopératives 27, CP 1217, Meyrin. ( Parking des Arbères ). <br> Parking situé à 7 minutes de l’Aéroport Genève.</label>
                       </div>
                       <v-radio label="Non. Clé avec le voiturier" value="Nom">></v-radio>
                     </v-radio-group>
