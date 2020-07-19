@@ -527,7 +527,11 @@ Parking privé situé à 3 minutes de l’Aéroport de Genève
                   </v-flex>
                   <v-flex xs12 md6 v-if="service.id == 8">
                     <v-radio-group v-model="serviceSelected[index]" :rules="requireRules" required>
-                      <v-radio :label="'Oui, '+service.prices[0].price+' CHF.' + ' Supplémentaire, Aller à la Rue des Coopératives 27, Cp 1217, Meyrin. (Parking des Arbères).'" :value="service.id"></v-radio>
+                      <v-radio :label="'Oui, '+service.prices[0].price+' CHF.'" :value="service.id"></v-radio>
+                      <div v-if="serviceSelected[index] == service.id" style="padding-bottom: 10px">
+                        <label style="color:red;">Attention!!</label>
+                        <label style="color: rgba(0,0,0,0.54);">La prise en charge de votre véhicule sera à l’adresse suivante: Rue des Coopératives 27, Cp 1217, Meyrin. (Parking des Arbères).</label>
+                      </div>
                       <v-radio label="Non. Clé avec le voiturier" value="Nom">></v-radio>
                     </v-radio-group>
                   </v-flex>
@@ -845,7 +849,8 @@ export default {
       v => !!v || "Ce champ est obligatoire",
       v => /.+@.+/.test(v) || "L'email doit être valide"
     ],
-    disabledKey: true
+    disabledKey: true,
+    parking: false
   }),
   watch:{
     serviceSelected(val){

@@ -42,10 +42,10 @@
     "js/reservation": {
       "js": [
         "/build/runtime.6cf710cd.js",
-        "/build/js/reservation.7cb501c4.js"
+        "/build/js/reservation.a5aba0d8.js"
       ],
       "css": [
-        "/build/js/reservation.43cddc6a.css"
+        "/build/js/reservation.6ef7dba7.css"
       ]
     },
     "css/admin": {
