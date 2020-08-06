@@ -952,6 +952,11 @@ export default {
         }
         if (services.length) this.reservation.services = services;
 
+        this.calculePrice();
+        this.confirm = true;
+        this.$vuetify.goTo(0, 3000);
+        this.reservation.discount = null;
+        return;
         this.loading = true;
         let $this = this;
         axios
