@@ -47,6 +47,7 @@ const actions = {
           commit(loading(false));
           commit(success(data['hydra:member']));
           commit(view(data['hydra:view']));
+          return data;
         })
         .catch(e => {
           commit(loading(false));

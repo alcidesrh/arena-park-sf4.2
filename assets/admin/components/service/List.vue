@@ -71,7 +71,7 @@
             deleted: 'service/del/deleted',
         }),
         methods: {
-            getCarType(value) {
+            getCarType(value) {console.log(this.items)
                 let type = this.cars.filter(item => value == item.value);
                 return type[0];
             },

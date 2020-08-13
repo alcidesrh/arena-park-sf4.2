@@ -132,6 +132,7 @@
                 return type[0].text;
             },
             addService() {
+                if(this.carType === null || !this.priceService) return;
                 if (typeof this.item.prices == typeof undefined)
                     this.item.prices = [];
                 this.services.push({price: this.priceService, type: this.carType});
