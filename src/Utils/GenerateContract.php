@@ -156,7 +156,7 @@ class GenerateContract
 //                $chargeService += $value[ 'charge' ];
             }
         }
-        if(!$parkingCouvert) $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");                  
+        if(!$parkingCouvert) $document->setValue('parking', "Rue des Coopératives 27 - CP 1217 Meyrin ( Parking des Arbères )");                  
 
         // $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");  
           
