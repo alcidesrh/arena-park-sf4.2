@@ -135,7 +135,8 @@ class GenerateContract
 
                 if($service->getDescription() == 'parking'){                  
                  $parkingCouvert = true;
-                 $document->setValue('parking', "Rue des Coopératives 27, CP 1217, Meyrin. (Parking des Arbères)");
+                //  $document->setValue('parking', "Rue des Coopératives 27, CP 1217, Meyrin. (Parking des Arbères)");
+                 $document->setValue('parking', "Route de Pré - Bois 16 - CP: 1216 Cointrin ( Hôtel Holidays Inn )");
                  $document->setValue('service'.$cont, 'Parking Couvert');
                 }
                 else {
@@ -156,7 +157,8 @@ class GenerateContract
 //                $chargeService += $value[ 'charge' ];
             }
         }
-        if(!$parkingCouvert) $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");                  
+        // if(!$parkingCouvert) $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");
+           if(!$parkingCouvert) $document->setValue('parking', "Route de Pré - Bois 16 - CP: 1216 Cointrin ( Hôtel Holidays Inn )");              
 
         // $document->setValue('parking', "Chemin de l'Avanchet 26 - CP 1216 - Cointrin Genève");  
           
