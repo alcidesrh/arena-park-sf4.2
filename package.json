@@ -22,7 +22,7 @@
         "axios": "^0.18.0",
         "babel-plugin-transform-builtin-extend": "^1.1.2",
         "cash-dom": "^2.3.9",
-        "gsap": "^2.0.2",
+        "gsap": "^3.6.0",
         "jquery": "^3.3.1",
         "material-icons": "^0.2.3",
         "materialize-css": "^1.0.0-rc.2",
