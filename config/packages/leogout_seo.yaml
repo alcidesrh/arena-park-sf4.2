@@ -4,8 +4,9 @@ leogout_seo:
     # See https://github.com/leogout/SeoBundle#configuration-reference to configure them.
     # See https://github.com/leogout/SeoBundle#setting-values-dynamically to use them directly in your controller.
     general:
-            title: ARENA-PARK. CH - Service de Parking à l’aéroport Genève
-            description: 'arena-park.ch - Parking Officiel Aéroport Genève pas cher situé à 3 minutes de l’aéroport Genève vous propose toutes les solutions pour garer, gardienner et soigner votre véhicule pendant vos voyages et voyager en toute tranquillité.'
+            title: Service de Parking à l’aéroport Genève arena-park.ch 
+        #     description: 'arena-park.ch - Parking Officiel Aéroport Genève pas cher situé à 3 minutes de l’aéroport Genève vous propose toutes les solutions pour garer, gardienner et soigner votre véhicule pendant vos voyages et voyager en toute tranquillité.'
+            description: 'Vous propose la meilleure solution pour garer votre voiture à meilleur prix pour tous vos voyages. Parking Couvert & Sécurisé avec Service Navette. Voituriers qualifiés spécialement dédiée pour vous. Service irréprochable. Ouvert 24h sur 24h.'
             image: https://www.arena-park.ch/img/Logo.png # This one is shared by open graph and twitter only
     basic:
             keywords: 'genève, parking, aéroport, voiture, véhicule, automobile, réservation'
